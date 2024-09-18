@@ -1,5 +1,5 @@
 extends CharacterBody3D
-
+#adda ost idk
 #-----------------------------------------------------------------------------------------------------#
 
 @onready var cam_origin = $CamOrigin
