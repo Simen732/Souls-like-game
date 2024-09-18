@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cwm1bghm8o1by"
+path="res://.godot/imported/06. Tunnels.mp3-361d714da2d189e6337cf210f2b1bdc1.mp3str"
+
+[deps]
+
+source_file="res://Sound-Effect and music/06. Tunnels.mp3"
+dest_files=["res://.godot/imported/06. Tunnels.mp3-361d714da2d189e6337cf210f2b1bdc1.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

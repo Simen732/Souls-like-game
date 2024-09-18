@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgg4hahiwclxx"]
+
+[ext_resource type="AudioStream" uid="uid://cwm1bghm8o1by" path="res://Sound-Effect and music/06. Tunnels.mp3" id="1_4oou1"]
+
+[node name="Music" type="AudioStreamPlayer"]
+stream = ExtResource("1_4oou1")
+volume_db = -21.55
+autoplay = true

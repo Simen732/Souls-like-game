@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ci6717seh6nkl"
+path="res://.godot/imported/dark-souls-'-you-died-'-sound-effect-made-with-Voicemod.mp3-831b08e965bd46891b450b7422fc0066.mp3str"
+
+[deps]
+
+source_file="res://Sound-Effect and music/dark-souls-'-you-died-'-sound-effect-made-with-Voicemod.mp3"
+dest_files=["res://.godot/imported/dark-souls-'-you-died-'-sound-effect-made-with-Voicemod.mp3-831b08e965bd46891b450b7422fc0066.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

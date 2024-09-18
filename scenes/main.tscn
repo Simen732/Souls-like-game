@@ -1,0 +1,95 @@
+[gd_scene load_steps=11 format=3 uid="uid://cnijba7hn7opy"]
+
+[ext_resource type="PackedScene" uid="uid://rf85mfsp141o" path="res://scenes/pillar.tscn" id="2_i73u5"]
+[ext_resource type="PackedScene" uid="uid://dmlpab6m7foju" path="res://scenes/deathBox.tscn" id="3_2sxlr"]
+[ext_resource type="PackedScene" uid="uid://c3opd7ufh7nps" path="res://scenes/spawn_point.tscn" id="4_50kp5"]
+[ext_resource type="PackedScene" uid="uid://dgg4hahiwclxx" path="res://scenes/main_background_music.tscn" id="4_c61on"]
+[ext_resource type="PackedScene" uid="uid://bm1tkh7x1d3cl" path="res://scenes/mainDude.tscn" id="5_0gych"]
+[ext_resource type="PackedScene" uid="uid://uaf3lmjkeoqg" path="res://scenes/main_dude.tscn" id="6_cbmvc"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_s6foj"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vt2pr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_uvcdg"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mvu4d"]
+
+[node name="Main" type="Node3D"]
+
+[node name="Terrain" type="Node" parent="."]
+
+[node name="Ground" type="StaticBody3D" parent="Terrain"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Ground"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_s6foj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Ground"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_vt2pr")
+
+[node name="sun" type="DirectionalLight3D" parent="Terrain"]
+transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612373, 0, 25, 0)
+
+[node name="Pillars" type="Node" parent="."]
+
+[node name="Pillar1" parent="Pillars" instance=ExtResource("2_i73u5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.162654, 1, -6.86743)
+
+[node name="Area3D" parent="." instance=ExtResource("3_2sxlr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.91227, 0.493558, 5.41171)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+mesh = SubResource("BoxMesh_uvcdg")
+
+[node name="Music" parent="." instance=ExtResource("4_c61on")]
+
+[node name="spawnPoints" type="Node" parent="."]
+
+[node name="spawnPoint" parent="spawnPoints" instance=ExtResource("4_50kp5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, 8)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawnPoints/spawnPoint"]
+mesh = SubResource("BoxMesh_mvu4d")
+
+[node name="spawnPoint2" parent="spawnPoints" instance=ExtResource("4_50kp5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.85718, 0.5, 11.3991)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawnPoints/spawnPoint2"]
+mesh = SubResource("BoxMesh_mvu4d")
+
+[node name="spawnPoint3" parent="spawnPoints" instance=ExtResource("4_50kp5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.80655, 0.5, 14.2146)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawnPoints/spawnPoint3"]
+mesh = SubResource("BoxMesh_mvu4d")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("5_0gych")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Health" type="ProgressBar" parent="CharacterBody3D"]
+modulate = Color(1, 0, 0, 1)
+self_modulate = Color(1, 0.0980392, 0, 1)
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 185.0
+offset_bottom = 24.0
+show_percentage = false
+
+[node name="Stamina" type="ProgressBar" parent="CharacterBody3D"]
+modulate = Color(0, 0.360784, 0, 1)
+self_modulate = Color(0, 0.360784, 0, 1)
+offset_left = 10.0
+offset_top = 30.0
+offset_right = 185.0
+offset_bottom = 43.0
+show_percentage = false
+
+[node name="mainDude" parent="." instance=ExtResource("6_cbmvc")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 4.95765)
+
+[connection signal="body_entered" from="Area3D" to="CharacterBody3D" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="spawnPoints/spawnPoint" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
+[connection signal="body_entered" from="spawnPoints/spawnPoint2" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
+[connection signal="body_entered" from="spawnPoints/spawnPoint3" to="CharacterBody3D" method="_on_spawn_point_body_entered"]

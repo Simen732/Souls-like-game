@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1p5s5b27flir"]
+
+[ext_resource type="Script" path="res://Scripts/CharacterBody3D.gd" id="1_5ft5w"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_83vv1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhb74"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_5ft5w")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_83vv1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_jhb74")
+
+[node name="CamOrigin" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CamOrigin"]
+spring_length = 5.0
+margin = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="CamOrigin/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
