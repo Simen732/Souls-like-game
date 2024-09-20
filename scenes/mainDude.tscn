@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bm1tkh7x1d3cl"]
+[gd_scene load_steps=13 format=3 uid="uid://bm1tkh7x1d3cl"]
 
 [ext_resource type="Script" path="res://Scripts/CharacterBody3D.gd" id="1_5ft5w"]
 [ext_resource type="FontFile" uid="uid://b1cueuu1ntugv" path="res://Fonts/Times New Roman.ttf" id="2_a7juk"]
 [ext_resource type="AudioStream" uid="uid://ci6717seh6nkl" path="res://Sound-Effect and music/dark-souls-'-you-died-'-sound-effect-made-with-Voicemod.mp3" id="3_y6gpd"]
 [ext_resource type="PackedScene" uid="uid://uaf3lmjkeoqg" path="res://scenes/main_dude.tscn" id="4_mbgjp"]
+[ext_resource type="PackedScene" uid="uid://8cj4yntvqgt4" path="res://scenes/menu.tscn" id="5_fnvqp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhb74"]
 height = 2.10372
@@ -57,6 +58,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = false
+tracks/4/path = NodePath("Menu:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_a5fro"]
@@ -114,11 +127,43 @@ tracks/2/keys = {
 "values": [Vector3(0, 0, 0), Vector3(1.5708, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_x0vj4"]
+resource_name = "Menu"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Menu:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_x8p6e"]
+resource_name = "menuClose"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Menu:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q26w4"]
 _data = {
+"Menu": SubResource("Animation_x0vj4"),
 "RESET": SubResource("Animation_noais"),
 "death": SubResource("Animation_a5fro"),
-"deathScreen": SubResource("Animation_tkp4n")
+"deathScreen": SubResource("Animation_tkp4n"),
+"menuClose": SubResource("Animation_x8p6e")
 }
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
@@ -177,5 +222,7 @@ offset_left = -130.0
 offset_bottom = 27.0
 grow_horizontal = 0
 text = "Deaths: 0"
+
+[node name="Menu" parent="." instance=ExtResource("5_fnvqp")]
 
 [connection signal="timeout" from="deathTimer" to="." method="_on_death_timer_timeout"]

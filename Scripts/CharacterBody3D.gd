@@ -11,6 +11,7 @@ extends CharacterBody3D
 @onready var currentHealth = $Health
 @onready var currentStamina = $Stamina
 @onready var death_counter = $deathCounter
+@onready var menu = $Menu
 
 #-----------------------------------------------------------------------------------------------------#
 
@@ -40,6 +41,7 @@ var dashDirection = Vector3.ZERO
 #-----------------------------------------------------------------------------------------------------#
 
 func _ready():
+	menu.visible = false
 	currentStamina.max_value = maxStamina
 	currentStamina.value = currentStamina.max_value
 
@@ -75,9 +77,12 @@ func _physics_process(delta):
 		if Menu_open == false:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			Menu_open = true
+			animation_player.play("Menu")
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			Menu_open = false
+			animation_player.play("menuClose")
+			
 
 	# Handle movement and dodging
 	var input_dir = Input.get_vector("left", "right", "up", "down")
@@ -156,6 +161,7 @@ func _on_death_timer_timeout():
 	animation_player.play("RESET")
 	currentHealth.value = maxHealth
 	playerIsDying = false
+	menu.visible = false	
 
 #-----------------------------------------------------------------------------------------------------#
 
