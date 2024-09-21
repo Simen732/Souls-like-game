@@ -33,6 +33,11 @@ size_flags_horizontal = 4
 layout_mode = 2
 text = "Options"
 
+[node name="Skill tree" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Skill tree
+"
+
 [node name="Main menu" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Main Menu"
@@ -41,5 +46,6 @@ text = "Main Menu"
 layout_mode = 2
 text = "Quit Game?"
 
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Skill tree" to="." method="_on_skill_tree_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Main menu" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit Game" to="." method="_on_quit_game_pressed"]
