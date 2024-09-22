@@ -1,5 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://cnijba7hn7opy"]
 
+[ext_resource type="Texture2D" uid="uid://ccq8rwy18sim3" path="res://Textures/696.jpg" id="1_m2yxv"]
 [ext_resource type="PackedScene" uid="uid://rf85mfsp141o" path="res://scenes/pillar.tscn" id="2_i73u5"]
 [ext_resource type="PackedScene" uid="uid://dmlpab6m7foju" path="res://scenes/deathBox.tscn" id="3_2sxlr"]
 [ext_resource type="PackedScene" uid="uid://c3opd7ufh7nps" path="res://scenes/spawn_point.tscn" id="4_50kp5"]
@@ -7,9 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://bm1tkh7x1d3cl" path="res://scenes/mainDude.tscn" id="5_0gych"]
 [ext_resource type="PackedScene" uid="uid://uaf3lmjkeoqg" path="res://scenes/main_dude.tscn" id="6_cbmvc"]
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_s6foj"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_vt2pr"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ap0yy"]
+albedo_texture = ExtResource("1_m2yxv")
+uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_uvcdg"]
 
@@ -19,18 +20,44 @@
 
 [node name="Terrain" type="Node" parent="."]
 
-[node name="Ground" type="StaticBody3D" parent="Terrain"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Ground"]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
-shape = SubResource("WorldBoundaryShape3D_s6foj")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Ground"]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
-mesh = SubResource("PlaneMesh_vt2pr")
-
 [node name="sun" type="DirectionalLight3D" parent="Terrain"]
 transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612373, 0, 25, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.69598, -0.5, -4.12769)
+use_collision = true
+size = Vector3(19.5438, 1, 65.2554)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 0.978917, -0.204257, 0, 0.204257, 0.978917, 1.69598, -2.84157, 39.7468)
+use_collision = true
+size = Vector3(19.5438, 1, 24.1782)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 10.7918, 4.49164, -4.12769)
+use_collision = true
+size = Vector3(11.87, 1, 65.2554)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -6.51804, 4.97939, -4.12769)
+use_collision = true
+size = Vector3(13.1282, 1, 65.2554)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.46471, 10.296, -4.12769)
+use_collision = true
+size = Vector3(18.2458, 1, 65.2554)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 0.978148, -0.207912, 0, 0.207912, 0.978148, 2.46471, 8.06099, 38.2407)
+use_collision = true
+size = Vector3(18.2458, 1, 24.1905)
+material = SubResource("StandardMaterial3D_ap0yy")
 
 [node name="Pillars" type="Node" parent="."]
 

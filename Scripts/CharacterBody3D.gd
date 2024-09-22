@@ -30,7 +30,13 @@ func _ready():
 	currentHealth.value = currentHealth.max_value
 
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
+	
+	Global.idkKerft = true
+	
+	
 #-----------------------------------------------------------------------------------------------------#
 
 
