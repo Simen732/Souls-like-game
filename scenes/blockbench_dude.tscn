@@ -1,12 +1,52 @@
-[gd_scene load_steps=2 format=3 uid="uid://4edefbkmlx6f"]
+[gd_scene load_steps=3 format=3 uid="uid://chm5ix4falpah"]
 
 [ext_resource type="PackedScene" uid="uid://bw3ae6tw21chl" path="res://Models/mainDude.gltf" id="1_uaevy"]
+[ext_resource type="Script" path="res://Scripts/blockbench_dude.gd" id="2_i7c4a"]
 
 [node name="blockbench_export" instance=ExtResource("1_uaevy")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+script = ExtResource("2_i7c4a")
+
+[node name="Pelvis" parent="Node" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.130526, -0.991445, 0, 0.991445, 0.130526, 0, 0.0625, 1.25)
+
+[node name="Body" parent="Node/Pelvis" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.999048, 0.0436194, 0, -0.0436194, 0.999048, 0, 0.125, 0)
+
+[node name="Head" parent="Node/Pelvis/Body" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.999048, -0.0436194, 0, 0.0436194, 0.999048, 0, 0.4375, -0.03125)
+
+[node name="Rarm" parent="Node/Pelvis/Body" index="2"]
+transform = Transform3D(0.869581, 0.0804838, -0.487187, -0.313983, 0.851605, -0.419742, 0.381109, 0.517968, 0.76581, 0.1875, 0.375, 0)
+
+[node name="Relbow" parent="Node/Pelvis/Body/Rarm" index="1"]
+transform = Transform3D(0.360051, -0.853563, 0.376554, 0.352848, -0.249051, -0.901927, 0.863633, 0.457606, 0.211507, 0.25, 0, 0)
+
+[node name="Sword" parent="Node/Pelvis/Body/Rarm/Relbow" index="2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.3125, 0)
 
 [node name="Larm" parent="Node/Pelvis/Body" index="3"]
-transform = Transform3D(0.158099, -0.983447, -0.0885213, 0.926777, 0.178725, -0.330366, 0.340719, -0.0298091, 0.939692, -0.1875, 0.375, 0)
+transform = Transform3D(0.563845, -0.744421, 0.357652, 0.737511, 0.64875, 0.187618, -0.371694, 0.157985, 0.914813, -0.1875, 0.375, 0)
 
 [node name="Lelbow" parent="Node/Pelvis/Body/Larm" index="1"]
-transform = Transform3D(0.492404, 0.539921, -0.682659, -0.642788, 0.754407, 0.133022, 0.586824, 0.373304, 0.718527, -0.25, 0, 0)
+transform = Transform3D(0.492374, 0.624499, -0.606274, -0.642836, 0.730527, 0.23042, 0.586797, 0.276281, 0.761143, -0.25, 0, 0)
+
+[node name="Leg" parent="Node/Pelvis" index="2"]
+transform = Transform3D(0.984808, 0.172163, -0.0226656, -0.173483, 0.96976, -0.171667, -0.00757443, 0.172991, 0.984894, -0.0625, 0.0625, 0)
+
+[node name="Lee" parent="Node/Pelvis/Leg" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.976296, 0.21644, 0, -0.21644, 0.976296, 0, -0.21875, 0)
+
+[node name="Loot" parent="Node/Pelvis/Leg/Lee" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871557, 0, -0.0871557, 0.996195, 0, -0.375, 0)
+
+[node name="Reg" parent="Node/Pelvis" index="3"]
+transform = Transform3D(0.984808, -0.173648, -2.32831e-10, 0.173483, 0.98387, -0.0436194, 0.00757443, 0.0429567, 0.999048, 0.0625, 0.0625, 0)
+
+[node name="Root" parent="Node/Pelvis/Reg/Ree" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.976296, -0.21644, 0, 0.21644, 0.976296, 0, -0.375, 0)
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "idle"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

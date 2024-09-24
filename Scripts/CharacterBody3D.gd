@@ -1,6 +1,9 @@
 extends CharacterBody3D
 
 #-----------------------------------------------------------------------------------------------------#
+
+
+
 @onready var skill_tree = $skillTree
 @onready var cam_origin = $CamOrigin
 @export var sensitivity = 0.05
@@ -12,10 +15,7 @@ extends CharacterBody3D
 @onready var currentStamina = $Stamina
 @onready var death_counter = $deathCounter
 @onready var menu = $Menu
-
-#-----------------------------------------------------------------------------------------------------#
-
-
+@onready var blockbench_export = $blockbench_export
 
 
 
@@ -29,10 +29,10 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 #-----------------------------------------------------------------------------------------------------#
 
 func _ready():
+	
 	menu.visible = false
 	currentStamina.max_value = Global.maxStamina
 	currentStamina.value = currentStamina.max_value
-
 	currentHealth.max_value = Global.maxHealth
 	currentHealth.value = currentHealth.max_value
 
@@ -63,6 +63,12 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 
 
+
+	if Input.is_action_just_pressed("attack") and !Global.playerIsDying and !Global.Menu_open:
+		$blockbench_export/AnimationPlayer.play("attack1")
+
+		
+		
 	# Jump
 	if Input.is_action_just_pressed("jump") and is_on_floor() and !Global.playerIsDying:
 		velocity.y = Global.JUMP_VELOCITY
@@ -134,30 +140,31 @@ func _on_area_3d_body_entered(body):
 		if !Global.idkKerft:
 			currentHealth.value -= 33.333
 			Global.Iframes = 60
-			print(currentHealth.value)
+
 			if currentHealth.value < 1:
 				Global.playerIsDying = true
 				Global.deathCount += 1
 				death_counter.text = "Deaths:  " + str(Global.deathCount)
 				death_timer.start()
 				Engine.time_scale = 0.3
+				$blockbench_export/AnimationPlayer.play("death")
 				animation_player.play("deathScreen")
 				sensitivity = 0
 	else:
 		Global.idkKerft = false
-		print("idk denne tingen funker")
-		print("du har I frames")
+
 
 #-----------------------------------------------------------------------------------------------------#
 
 # When the death timer ends and you respawn
 func _on_death_timer_timeout():
 	sensitivity = 0.05
-	print(Global.deathCount)
+
 	character_body_3d.global_position = spawn_point
 	death_timer.stop()
 	Engine.time_scale = 1
 	animation_player.play("RESET")
+	$blockbench_export/AnimationPlayer.play("idle")
 	currentHealth.value = Global.maxHealth
 	Global.playerIsDying = false
 	menu.visible = false
@@ -167,14 +174,13 @@ func _on_death_timer_timeout():
 # When you touch a checkpoint
 func _on_spawn_point_body_entered(body):
 	spawn_point = $".".global_position
-	print(spawn_point)
+
 
 
 func _on_menu_show_skill_tree():
 	menu.visible = false
 	skill_tree.visible = true
 
-	
 
 
 func _on_skill_tree_health_up():
@@ -185,3 +191,8 @@ func _on_skill_tree_health_up():
 func _on_skill_tree_stamina_up():
 	currentStamina.max_value += 100
 	currentStamina.value = currentStamina.max_value
+
+
+
+func _on_blockbench_export_attack_finished():
+	$blockbench_export/AnimationPlayer.play("idle")

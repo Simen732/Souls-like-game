@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://btfnal72lqsjw" path="res://Img/skillTreeBackground.jpg" id="2_887du"]
 
 [node name="skillTree" type="Control"]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
