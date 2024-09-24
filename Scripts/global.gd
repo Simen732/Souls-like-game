@@ -5,6 +5,7 @@ const SPEED = 5.0
 const JUMP_VELOCITY = 5
 
 #-----------------------------------------------------------------------------------------------------#
+
 var maxStamina = 200
 var maxHealth = 100
 var idkKerft = true

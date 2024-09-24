@@ -30,9 +30,9 @@ size = Vector3(19.5438, 1, 65.2554)
 material = SubResource("StandardMaterial3D_ap0yy")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="Terrain"]
-transform = Transform3D(1, 0, 0, 0, 0.978917, -0.204257, 0, 0.204257, 0.978917, 1.69598, -2.84157, 39.7468)
+transform = Transform3D(1, 0, 0, 0, 0.981627, -0.190809, 0, 0.190809, 0.981627, 1.696, -2.75, 39.828)
 use_collision = true
-size = Vector3(19.5438, 1, 24.1782)
+size = Vector3(19.5438, 1, 24.012)
 material = SubResource("StandardMaterial3D_ap0yy")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Terrain"]
