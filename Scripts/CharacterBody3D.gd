@@ -73,7 +73,7 @@ func _physics_process(delta):
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			Global.Menu_open = true
 			Engine.time_scale = 0.3
-			animation_player.play("Menu")
+			animation_player.play("Menu") 
 			
 		else:
 			Engine.time_scale = 1
