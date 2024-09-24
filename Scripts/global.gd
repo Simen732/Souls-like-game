@@ -5,7 +5,6 @@ const SPEED = 5.0
 const JUMP_VELOCITY = 5
 
 #-----------------------------------------------------------------------------------------------------#
-@onready var currentHealth = $Health
 var maxStamina = 200
 var maxHealth = 100
 var idkKerft = true

@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://Scripts/CharacterBody3D.gd" id="1_5ft5w"]
 [ext_resource type="FontFile" uid="uid://b1cueuu1ntugv" path="res://Fonts/Times New Roman.ttf" id="2_a7juk"]
 [ext_resource type="AudioStream" uid="uid://ci6717seh6nkl" path="res://Sound-Effect and music/dark-souls-'-you-died-'-sound-effect-made-with-Voicemod.mp3" id="3_y6gpd"]
-[ext_resource type="PackedScene" uid="uid://uaf3lmjkeoqg" path="res://scenes/main_dude.tscn" id="4_mbgjp"]
 [ext_resource type="PackedScene" uid="uid://8cj4yntvqgt4" path="res://scenes/menu.tscn" id="5_fnvqp"]
+[ext_resource type="PackedScene" uid="uid://4edefbkmlx6f" path="res://scenes/blockbench_dude.tscn" id="6_70msx"]
 [ext_resource type="PackedScene" uid="uid://d1c2gsmi5olfg" path="res://scenes/skill_tree.tscn" id="6_j0r2y"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhb74"]
@@ -65,23 +65,11 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("mainDude:rotation")
+tracks/3/enabled = false
+tracks/3/path = NodePath("Menu:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = false
-tracks/4/path = NodePath("Menu:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -129,18 +117,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("mainDude:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(1.5708, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_x8p6e"]
@@ -213,8 +189,6 @@ text = "YOU DIED"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_y6gpd")
 
-[node name="mainDude" parent="." instance=ExtResource("4_mbgjp")]
-
 [node name="deathCounter" type="RichTextLabel" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
@@ -227,6 +201,8 @@ text = "Deaths: 0"
 [node name="Menu" parent="." instance=ExtResource("5_fnvqp")]
 
 [node name="skillTree" parent="." instance=ExtResource("6_j0r2y")]
+
+[node name="blockbench_export" parent="." instance=ExtResource("6_70msx")]
 
 [connection signal="timeout" from="deathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="showSkillTree" from="Menu" to="." method="_on_menu_show_skill_tree"]

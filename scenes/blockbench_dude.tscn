@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://4edefbkmlx6f"]
+
+[ext_resource type="PackedScene" uid="uid://bw3ae6tw21chl" path="res://Models/mainDude.gltf" id="1_uaevy"]
+
+[node name="blockbench_export" instance=ExtResource("1_uaevy")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+
+[node name="Larm" parent="Node/Pelvis/Body" index="3"]
+transform = Transform3D(0.158099, -0.983447, -0.0885213, 0.926777, 0.178725, -0.330366, 0.340719, -0.0298091, 0.939692, -0.1875, 0.375, 0)
+
+[node name="Lelbow" parent="Node/Pelvis/Body/Larm" index="1"]
+transform = Transform3D(0.492404, 0.539921, -0.682659, -0.642788, 0.754407, 0.133022, 0.586824, 0.373304, 0.718527, -0.25, 0, 0)

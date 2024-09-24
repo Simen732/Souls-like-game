@@ -150,7 +150,7 @@ func _on_death_timer_timeout():
 	animation_player.play("RESET")
 	currentHealth.value = Global.maxHealth
 	Global.playerIsDying = false
-	menu.visible = false	
+	menu.visible = false
 
 #-----------------------------------------------------------------------------------------------------#
 
