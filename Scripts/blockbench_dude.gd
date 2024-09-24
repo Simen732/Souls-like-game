@@ -13,3 +13,4 @@ func _process(delta):
 
 func _on_animation_player_animation_finished(attack1):
 	emit_signal("attackFinished")
+	

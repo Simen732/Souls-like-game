@@ -3,7 +3,6 @@ extends CharacterBody3D
 #-----------------------------------------------------------------------------------------------------#
 
 
-
 @onready var skill_tree = $skillTree
 @onready var cam_origin = $CamOrigin
 @export var sensitivity = 0.05
@@ -16,8 +15,6 @@ extends CharacterBody3D
 @onready var death_counter = $deathCounter
 @onready var menu = $Menu
 @onready var blockbench_export = $blockbench_export
-
-
 
 
 #-----------------------------------------------------------------------------------------------------#
@@ -47,7 +44,6 @@ func _ready():
 #-----------------------------------------------------------------------------------------------------#
 
 
-
 # This is the code for how the camera moves.
 func _input(event):
 	if event is InputEventMouseMotion and !Global.Menu_open:
@@ -57,21 +53,23 @@ func _input(event):
 
 #-----------------------------------------------------------------------------------------------------#
 
+
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
 
-
 	if Input.is_action_just_pressed("attack") and !Global.playerIsDying and !Global.Menu_open:
 		$blockbench_export/AnimationPlayer.play("attack1")
 
-		
+
 		
 	# Jump
 	if Input.is_action_just_pressed("jump") and is_on_floor() and !Global.playerIsDying:
 		velocity.y = Global.JUMP_VELOCITY
+		$blockbench_export/AnimationPlayer.play("jump")
+
 
 	# Toggle menu with escape key
 	if Input.is_action_just_pressed("escape") and is_on_floor() and !Global.playerIsDying:
@@ -118,12 +116,14 @@ func _physics_process(delta):
 			currentStamina.value -= 1
 			velocity.x *= Global.runSpeed
 			velocity.z *= Global.runSpeed
-		if Input.is_action_just_pressed("dogde") and is_on_floor() and !Global.playerIsDying and direction and Global.dodgeCooldown < 1 and not Global.isDodging:
+			$blockbench_export/AnimationPlayer.play("running")
+		if Input.is_action_just_pressed("dodge") and is_on_floor() and !Global.playerIsDying and direction and Global.dodgeCooldown < 1 and not Global.isDodging:
 			if currentStamina.value >= 20:  # Ensure the player has enough stamina
 				currentStamina.value -= 80
 				Global.dashDirection = direction
 				Global.dashStartTime = 0  # Reset the dash timer
 				Global.isDodging = true
+				$blockbench_export/AnimationPlayer.play("dodge")
 				Global.dodgeCooldown = 60  # Reset dodge cooldown
 
 	else:
@@ -176,11 +176,9 @@ func _on_spawn_point_body_entered(body):
 	spawn_point = $".".global_position
 
 
-
 func _on_menu_show_skill_tree():
 	menu.visible = false
 	skill_tree.visible = true
-
 
 
 func _on_skill_tree_health_up():
@@ -191,7 +189,6 @@ func _on_skill_tree_health_up():
 func _on_skill_tree_stamina_up():
 	currentStamina.max_value += 100
 	currentStamina.value = currentStamina.max_value
-
 
 
 func _on_blockbench_export_attack_finished():
