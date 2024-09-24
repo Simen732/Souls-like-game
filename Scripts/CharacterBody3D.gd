@@ -16,6 +16,13 @@ extends CharacterBody3D
 #-----------------------------------------------------------------------------------------------------#
 
 
+
+
+
+
+#-----------------------------------------------------------------------------------------------------#
+
+
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
@@ -65,8 +72,11 @@ func _physics_process(delta):
 		if Global.Menu_open == false:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			Global.Menu_open = true
+			Engine.time_scale = 0.3
 			animation_player.play("Menu")
+			
 		else:
+			Engine.time_scale = 1
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			Global.Menu_open = false
 			animation_player.play("menuClose")
@@ -163,6 +173,7 @@ func _on_spawn_point_body_entered(body):
 func _on_menu_show_skill_tree():
 	menu.visible = false
 	skill_tree.visible = true
+
 	
 
 

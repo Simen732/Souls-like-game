@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1c2gsmi5olfg"]
+[gd_scene load_steps=3 format=3 uid="uid://d1c2gsmi5olfg"]
 
 [ext_resource type="Script" path="res://Scripts/skill_tree.gd" id="1_jskla"]
+[ext_resource type="Texture2D" uid="uid://btfnal72lqsjw" path="res://Img/skillTreeBackground.jpg" id="2_887du"]
 
 [node name="skillTree" type="Control"]
-visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -22,6 +22,32 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -340.0
+offset_right = 580.0
+offset_bottom = 365.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SpeedUp" type="Button" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+disabled = true
+text = "Speed Up"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+self_modulate = Color(1, 1, 1, 0.952941)
+z_index = -6
+layout_mode = 2
+texture = ExtResource("2_887du")
+
+[node name="MarginContainer5" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -67.5
 offset_top = -258.5
 offset_right = 67.5
@@ -29,7 +55,7 @@ offset_bottom = -225.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SpeedUp" type="Button" parent="MarginContainer"]
+[node name="SpeedUp" type="Button" parent="MarginContainer5"]
 layout_mode = 2
 text = "Speed Up"
 
@@ -88,7 +114,16 @@ grow_vertical = 2
 layout_mode = 2
 text = "Stamina up"
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 411.0
+offset_top = -292.0
+offset_right = 552.0
+offset_bottom = -265.0
+text = "Skill Points:"
+
 [connection signal="pressed" from="MarginContainer/SpeedUp" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer5/SpeedUp" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="MarginContainer2/DamageUp" to="." method="_on_damage_up_pressed"]
 [connection signal="pressed" from="MarginContainer4/HealthUp" to="." method="_on_health_up_pressed"]
 [connection signal="pressed" from="MarginContainer3/StaminaUp" to="." method="_on_stamina_up_pressed"]
