@@ -15,6 +15,9 @@ extends CharacterBody3D
 @onready var death_counter = $deathCounter
 @onready var menu = $Menu
 @onready var blockbench_export = $blockbench_export
+@onready var sword_area = $blockbench_export/Node/Pelvis/Body/Rarm/Relbow/Sword/Area3D
+@onready var sword_collision = $blockbench_export/Node/Pelvis/Body/Rarm/Relbow/Sword/Area3D/CollisionShape3D
+@onready var music = $Music
 
 
 #-----------------------------------------------------------------------------------------------------#
@@ -25,7 +28,18 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 #-----------------------------------------------------------------------------------------------------#
 
+signal biGayDamage
+
+
+#-----------------------------------------------------------------------------------------------------#
 func _ready():
+	
+	# Disable the sword hitbox at the start
+	sword_collision.disabled = true
+
+	# Connect the `area_entered` signal for detecting hits with the sword
+	sword_area.connect("area_entered", Callable(self, "_on_sword_hit_area"))
+
 	
 	menu.visible = false
 	currentStamina.max_value = Global.maxStamina
@@ -55,15 +69,36 @@ func _input(event):
 
 
 func _physics_process(delta):
-	# Add the gravity.
+	# Add gravity to the character's velocity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
+	if Global.isFightingBoss:
+		music.playing = false
+	
+	
+	# Attack logic
+	if Input.is_action_just_pressed("attack") and !Global.playerIsDying and !Global.Menu_open and !Global.isDodging: 
+		if Global.attackTimer <= 0:
+			Global.attackTimer = 120
+			$blockbench_export/AnimationPlayer.stop()
+			$blockbench_export/AnimationPlayer.play("attack1")
+			sword_collision.disabled = false  # Enable sword hitbox when attack starts
+			velocity.x = 0  # Reset horizontal movement velocity
+			velocity.z = 0  # Reset forward/backward movement velocity
+			
+	# Disable sword hitbox when the attack finishes
+	if Global.attackTimer > 0:
+		Global.attackTimer -= 1
+		Global.isAttacking = true
 
-	if Input.is_action_just_pressed("attack") and !Global.playerIsDying and !Global.Menu_open:
-		$blockbench_export/AnimationPlayer.play("attack1")
+	elif Global.attackTimer <= 0:
+		sword_collision.disabled = true  # Disable sword hitbox when attack ends
+		Global.isAttacking = false
 
 
+	if Global.enemyIFrames > 0:
+		Global.enemyIFrames -= 1
 		
 	# Jump
 	if Input.is_action_just_pressed("jump") and is_on_floor() and !Global.playerIsDying:
@@ -87,49 +122,83 @@ func _physics_process(delta):
 			skill_tree.visible = false
 			
 
-	# Handle movement and dodging
+
+	# Get input direction for movement (left, right, forward, backward)
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 	if Global.dodgeCooldown > 0:
 		Global.dodgeCooldown -= 1
+	
 
+	if direction == Vector3.ZERO and !Global.isDodging and !Global.isAttacking and !Global.playerIsDying:
+		velocity.x = 0  # Reset horizontal movement velocity
+		velocity.z = 0  # Reset forward/backward movement velocity
+		$blockbench_export/AnimationPlayer.play("idle")
+
+	
+	if Global.attackTimer > 0:
+		$blockbench_export/Node/Pelvis/Body/Rarm/Relbow/Sword/Area3D/CollisionShape3D.disabled = false
+		Global.attackTimer -= 1
+
+	elif Global.attackTimer < 0:
+		$blockbench_export/Node/Pelvis/Body/Rarm/Relbow/Sword/Area3D/CollisionShape3D.disabled = true
+		
+		
 	if Global.Iframes > 0:
 		Global.Iframes -= 1
+
+
 
 	if !Input.is_action_pressed("run") and currentStamina.value < Global.maxStamina:
 		currentStamina.value += 1
 
-	# Handle smooth dodging
+
+	if direction and !Global.Menu_open and !Global.playerIsDying and !Global.isAttacking:
+		# Movement velocity
+		velocity.x = direction.x * Global.SPEED
+		velocity.z = direction.z * Global.SPEED
+		
+		# Running logic
+	# Handle movement and reset sliding issues
+	if direction and !Global.Menu_open and !Global.playerIsDying and !Global.isDodging and !Global.isAttacking:
+		# Set velocity based on input direction and speed
+		velocity.x = direction.x * Global.SPEED
+		velocity.z = direction.z * Global.SPEED
+		
+		# Handle running logic
+		if Input.is_action_pressed("run") and currentStamina.value > 0:
+			currentStamina.value -= 1
+			velocity.x *= Global.runSpeed
+			velocity.z *= Global.runSpeed
+			$blockbench_export/AnimationPlayer.play("running")  # Play running animation
+		else:
+			$blockbench_export/AnimationPlayer.play("walking")  # Play walking animation
+
+
+	# Dodge logic
+	if Input.is_action_just_pressed("dodge") and is_on_floor() and direction and Global.dodgeCooldown < 1 and !Global.isDodging:
+		if currentStamina.value >= 20:  # Ensure the player has enough stamina
+			currentStamina.value -= 80
+			Global.dashDirection = direction
+			Global.dashStartTime = 0  # Reset the dash timer
+			Global.isDodging = true
+			$blockbench_export/AnimationPlayer.play("dodge")  # Play dodge animation
+			Global.dodgeCooldown = 60  # Reset dodge cooldown
+
+	# Smooth dodging
 	if Global.isDodging:
 		Global.dashStartTime += delta
 		if Global.dashStartTime < Global.dashDuration:
 			var dashProgress = Global.dashStartTime / Global.dashDuration
 			velocity.x = lerp(velocity.x, Global.dashDirection.x * Global.dogdeSpeed, dashProgress)
 			velocity.z = lerp(velocity.z, Global.dashDirection.z * Global.dogdeSpeed, dashProgress)
+			Global.Iframes = 2
 		else:
 			Global.isDodging = false
-	elif direction and !Global.Menu_open and !Global.playerIsDying:
-		velocity.x = direction.x * Global.SPEED
-		velocity.z = direction.z * Global.SPEED
-		if Input.is_action_pressed("run") and !Global.Menu_open and !Global.playerIsDying and currentStamina.value > 0:
-			currentStamina.value -= 1
-			velocity.x *= Global.runSpeed
-			velocity.z *= Global.runSpeed
-			$blockbench_export/AnimationPlayer.play("running")
-		if Input.is_action_just_pressed("dodge") and is_on_floor() and !Global.playerIsDying and direction and Global.dodgeCooldown < 1 and not Global.isDodging:
-			if currentStamina.value >= 20:  # Ensure the player has enough stamina
-				currentStamina.value -= 80
-				Global.dashDirection = direction
-				Global.dashStartTime = 0  # Reset the dash timer
-				Global.isDodging = true
-				$blockbench_export/AnimationPlayer.play("dodge")
-				Global.dodgeCooldown = 60  # Reset dodge cooldown
+			
 
-	else:
-		velocity.x = move_toward(velocity.x, 0, Global.SPEED)
-		velocity.z = move_toward(velocity.z, 0, Global.SPEED)
-
+	# Move the character
 	move_and_slide()
 
 #-----------------------------------------------------------------------------------------------------#
@@ -150,6 +219,7 @@ func _on_area_3d_body_entered(body):
 				$blockbench_export/AnimationPlayer.play("death")
 				animation_player.play("deathScreen")
 				sensitivity = 0
+				velocity = Vector3.ZERO
 	else:
 		Global.idkKerft = false
 
@@ -193,3 +263,20 @@ func _on_skill_tree_stamina_up():
 
 func _on_blockbench_export_attack_finished():
 	$blockbench_export/AnimationPlayer.play("idle")
+
+func _on_sword_hit_area(area):
+	# Only trigger during attack when sword collision is enabled
+	if not sword_collision.disabled:
+		if Global.enemyIFrames <= 0:
+			Global.enemyIFrames = 30
+			print(Global.biGayHealth)
+			print("You hit something!")
+			emit_signal("biGayDamage")
+
+
+
+
+
+
+
+

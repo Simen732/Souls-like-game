@@ -16,10 +16,18 @@ var runSpeed = 2
 var playerIsDying = false
 var dogdeSpeed = 10
 var dodgeCooldown = 60
-var Iframes = 60
+var Iframes = 20
 var isDodging = false
 var dashStartTime = 0.0
 var dashDuration = 0.5
 var dashDirection = Vector3.ZERO
 var weaponDamage = 10
-var SkillPoints = 100
+var SkillPoints = 1
+var attackTimer = 0
+var isAttacking = false
+var isRunning = false
+var enemyIFrames = 0
+var isFightingBoss = false
+
+var biGayHealth = 100
+

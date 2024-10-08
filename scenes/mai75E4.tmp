@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bm1tkh7x1d3cl"]
+[gd_scene load_steps=14 format=3 uid="uid://bm1tkh7x1d3cl"]
 
 [ext_resource type="Script" path="res://Scripts/CharacterBody3D.gd" id="1_5ft5w"]
 [ext_resource type="FontFile" uid="uid://b1cueuu1ntugv" path="res://Fonts/Times New Roman.ttf" id="2_a7juk"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://8cj4yntvqgt4" path="res://scenes/menu.tscn" id="5_fnvqp"]
 [ext_resource type="PackedScene" uid="uid://chm5ix4falpah" path="res://scenes/blockbench_dude.tscn" id="6_70msx"]
 [ext_resource type="PackedScene" uid="uid://d1c2gsmi5olfg" path="res://scenes/skill_tree.tscn" id="6_j0r2y"]
-[ext_resource type="PackedScene" uid="uid://dgg4hahiwclxx" path="res://scenes/main_background_music.tscn" id="7_3s78q"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhb74"]
 height = 2.10372
@@ -146,6 +145,7 @@ _data = {
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_5ft5w")
+sensitivity = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02118, -0.026892)
@@ -205,8 +205,6 @@ text = "Deaths: 0"
 [node name="skillTree" parent="." instance=ExtResource("6_j0r2y")]
 
 [node name="blockbench_export" parent="." instance=ExtResource("6_70msx")]
-
-[node name="Music" parent="." instance=ExtResource("7_3s78q")]
 
 [connection signal="timeout" from="deathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

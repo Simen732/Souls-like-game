@@ -1,12 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cnijba7hn7opy"]
+[gd_scene load_steps=10 format=3 uid="uid://cnijba7hn7opy"]
 
 [ext_resource type="Texture2D" uid="uid://ccq8rwy18sim3" path="res://Textures/696.jpg" id="1_m2yxv"]
 [ext_resource type="PackedScene" uid="uid://rf85mfsp141o" path="res://scenes/pillar.tscn" id="2_i73u5"]
 [ext_resource type="PackedScene" uid="uid://dmlpab6m7foju" path="res://scenes/deathBox.tscn" id="3_2sxlr"]
 [ext_resource type="PackedScene" uid="uid://c3opd7ufh7nps" path="res://scenes/spawn_point.tscn" id="4_50kp5"]
-[ext_resource type="PackedScene" uid="uid://dgg4hahiwclxx" path="res://scenes/main_background_music.tscn" id="4_c61on"]
 [ext_resource type="PackedScene" uid="uid://bm1tkh7x1d3cl" path="res://scenes/mainDude.tscn" id="5_0gych"]
-[ext_resource type="PackedScene" uid="uid://uaf3lmjkeoqg" path="res://scenes/main_dude.tscn" id="6_cbmvc"]
+[ext_resource type="PackedScene" uid="uid://cavmi5jt8bvd0" path="res://scenes/BiGay.tscn" id="7_6hhxa"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ap0yy"]
 albedo_texture = ExtResource("1_m2yxv")
@@ -33,6 +32,42 @@ material = SubResource("StandardMaterial3D_ap0yy")
 transform = Transform3D(1, 0, 0, 0, 0.981627, -0.190809, 0, 0.190809, 0.981627, 1.696, -2.75, 39.828)
 use_collision = true
 size = Vector3(19.5438, 1, 24.012)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.66708, -5.03256, 62.0573)
+use_collision = true
+size = Vector3(19.5438, 1, 24.012)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40611, -5.60532, 88.2255)
+use_collision = true
+size = Vector3(30, 1, 30)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8073, -4.48195, 88.2363)
+use_collision = true
+size = Vector3(1.57324, 2.01282, 30)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.55066, -4.3742, 73.8721)
+use_collision = true
+size = Vector3(1.57324, 2.01282, 30.349)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.0064, -4.48195, 88.2363)
+use_collision = true
+size = Vector3(1.57324, 2.01282, 30)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.3788, -4.48195, 102.547)
+use_collision = true
+size = Vector3(1.57324, 2.01282, 30)
 material = SubResource("StandardMaterial3D_ap0yy")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Terrain"]
@@ -70,8 +105,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.91227, 0.493558, 5.41171)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
 mesh = SubResource("BoxMesh_uvcdg")
 
-[node name="Music" parent="." instance=ExtResource("4_c61on")]
-
 [node name="spawnPoints" type="Node" parent="."]
 
 [node name="spawnPoint" parent="spawnPoints" instance=ExtResource("4_50kp5")]
@@ -93,7 +126,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.80655, 0.5, 14.2146)
 mesh = SubResource("BoxMesh_mvu4d")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("5_0gych")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12266, 29.4031)
 
 [node name="Health" type="ProgressBar" parent="CharacterBody3D"]
 modulate = Color(1, 0, 0, 1)
@@ -113,10 +146,11 @@ offset_right = 185.0
 offset_bottom = 43.0
 show_percentage = false
 
-[node name="mainDude" parent="." instance=ExtResource("6_cbmvc")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 4.95765)
+[node name="biGay" parent="." instance=ExtResource("7_6hhxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.09184, 89.0574)
 
 [connection signal="body_entered" from="Area3D" to="CharacterBody3D" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="spawnPoints/spawnPoint" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
 [connection signal="body_entered" from="spawnPoints/spawnPoint2" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
 [connection signal="body_entered" from="spawnPoints/spawnPoint3" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
+[connection signal="biGayDamage" from="CharacterBody3D" to="biGay" method="_on_character_body_3d_bi_gay_damage"]
