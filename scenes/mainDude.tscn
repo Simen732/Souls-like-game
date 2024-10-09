@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dgg4hahiwclxx" path="res://scenes/main_background_music.tscn" id="7_3s78q"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhb74"]
+radius = 0.375896
 height = 2.10372
 
 [sub_resource type="Animation" id="Animation_x0vj4"]
@@ -147,7 +148,7 @@ _data = {
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_5ft5w")
 
-[node name="Player" type="CollisionShape3D" parent="."]
+[node name="Player3" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02118, -0.026892)
 shape = SubResource("CapsuleShape3D_jhb74")
 
@@ -207,6 +208,12 @@ text = "Deaths: 0"
 [node name="blockbench_export" parent="." instance=ExtResource("6_70msx")]
 
 [node name="Music" parent="." instance=ExtResource("7_3s78q")]
+
+[node name="Player" type="Area3D" parent="."]
+
+[node name="Player" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02118, -0.026892)
+shape = SubResource("CapsuleShape3D_jhb74")
 
 [connection signal="timeout" from="deathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -205,13 +205,11 @@ func _physics_process(delta):
 	move_and_slide()
 
 #-----------------------------------------------------------------------------------------------------#
-
-# This is what happens when you touch the deathBox and die
-func _on_area_3d_body_entered(body):
+func playertakeDamage():
 	if Global.Iframes < 1:
 		if !Global.idkKerft:
-			currentHealth.value -= 33.3333
-			Global.Iframes = 60
+			currentHealth.value -= Global.enemyDamage
+			Global.Iframes = 15
 
 			if currentHealth.value <= 0:
 				Global.playerIsDying = true
@@ -226,6 +224,12 @@ func _on_area_3d_body_entered(body):
 	else:
 		Global.idkKerft = false
 
+
+
+
+# This is what happens when you touch the deathBox and die
+func _on_area_3d_body_entered(body):
+	playertakeDamage()
 
 #-----------------------------------------------------------------------------------------------------#
 
@@ -275,3 +279,7 @@ func _on_sword_hit_area(area):
 			print(Global.biGayHealth)
 			print("You hit something!")
 			emit_signal("biGayDamage")
+
+
+func _on_bi_gay_player_shank() -> void:
+	playertakeDamage()

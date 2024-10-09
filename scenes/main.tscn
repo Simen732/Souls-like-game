@@ -126,7 +126,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.80655, 0.5, 14.2146)
 mesh = SubResource("BoxMesh_mvu4d")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("5_0gych")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.74039, 81.9992)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.28734, 6.61002)
 
 [node name="Health" type="ProgressBar" parent="CharacterBody3D"]
 modulate = Color(1, 0, 0, 1)
@@ -154,3 +154,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -5.105, 98.659)
 [connection signal="body_entered" from="spawnPoints/spawnPoint2" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
 [connection signal="body_entered" from="spawnPoints/spawnPoint3" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
 [connection signal="biGayDamage" from="CharacterBody3D" to="BiGay" method="_on_character_body_3d_bi_gay_damage"]
+[connection signal="playerShank" from="BiGay" to="CharacterBody3D" method="_on_bi_gay_player_shank"]

@@ -4,14 +4,20 @@ extends Node3D
 @onready var music = $AudioStreamPlayer3D
 @onready var biguy = $RigidBody3D
 @onready var biGaySword: Area3D = $Node/Root/Body/ArmR/ElbowR/HandR/Sword/Area3D
+@onready var health: ProgressBar = $"../CharacterBody3D/Health"
+
+
+signal playerShank
+
 
 const aggro_range = 20
 var aggro = false
-var speed = 1
+var speed = 0.75
 const attack124_range = 3  # Distance at which bro uses 1st 2nd and 4th attack
 const attack3_range = 8
 const attack5_range = 20
 var walk_animation_playing = false
+var attack_cooldown
 
 # Attack animation names
 const attack_animations = ["attack1", "attack2", "attack4"]
@@ -26,8 +32,8 @@ var attack_damage = 20
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# Connect the sword's area_entered signal to detect hits on the player
-	biGaySword.connect("area_entered", Callable(self, "_on_sword_area_entered"))
+	if not biGaySword.is_connected("area_entered", Callable(self, "_on_sword_area_entered")):
+		biGaySword.connect("area_entered", Callable(self, "_on_sword_area_entered"))
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Global.biGayHealth > 0:
@@ -64,31 +70,30 @@ func handle_attack(delta):
 	if $".".global_position.distance_to(Global.player_position) <= attack124_range:
 		var animations = ["attack1", "attack2", "attack4"]
 		var random_animation = animations[randi() % animations.size()]
-		speed = 0
-		animation_player.play(random_animation)
-		await animation_player.animation_finished
-		speed = 1
-		animation_player.play("walk")
+		if animation_player.current_animation != "attack1":
+			if animation_player.current_animation != "attack2":
+					if animation_player.current_animation != "attack4":
+						speed = 0
+						animation_player.play(random_animation)
+						await animation_player.animation_finished
+						speed = 0.75
+						animation_player.play("walk")
+			
 
 # Handle when the sword hits an area
+# Handle when the sword hits something
 func _on_sword_area_entered(area: Area3D) -> void:
-	# Check if the area entered belongs to the player
-	if area.name == "Player":  # Assuming the player's collision area is named "Player"
-		apply_damage_to_player(attack_damage)
+	if area.name == "Player" or area.get_parent().name == "Player":
+		print("Player detected! Dealing damage.")
+		Global.enemyDamage = 40
+		apply_damage_to_player()
+
 
 # Apply damage to the player
-func apply_damage_to_player(damage: int) -> void:
-	Global.playerHealth -= damage  # Subtract the damage from the player's health
-	print("Player hit! Health remaining: " + str(Global.playerHealth))
-
-	# Optionally check if the player has died
-	if Global.playerHealth <= 0:
-		handle_player_death()
-
-# Handle player death logic
-func handle_player_death():
-	print("Player is dead!")
-	# Add logic to trigger death animation, respawn, or game over
+func apply_damage_to_player() -> void:
+	#health.value -=   # Subtract the damage from the player's health
+	emit_signal("playerShank")
+	print("Player hit! Health remaining: " + str(health.value))
 
 # When the enemy takes damage
 func _on_character_body_3d_bi_gay_damage():

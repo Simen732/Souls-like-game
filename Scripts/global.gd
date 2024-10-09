@@ -1,6 +1,8 @@
 extends Node
 
 
+
+
 const SPEED = 5.0
 const JUMP_VELOCITY = 5
 
@@ -16,7 +18,7 @@ var deathCount = 0
 var runSpeed = 2
 var playerIsDying = false
 var dogdeSpeed = 10
-var dodgeCooldown = 45
+var dodgeCooldown = 20
 var Iframes = 20
 var isDodging = false
 var dashStartTime = 0.0
@@ -30,5 +32,6 @@ var isRunning = false
 var enemyIFrames = 0
 
 
+var enemyDamage = 30
 var isFightingBoss = false
 var biGayHealth = 200
