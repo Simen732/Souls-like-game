@@ -15,7 +15,7 @@ var spawnPoint = Vector3(0,0,0)
 var deathCount = 0
 var runSpeed = 2
 var playerIsDying = false
-var dogdeSpeed = 5
+var dogdeSpeed = 10
 var dodgeCooldown = 45
 var Iframes = 20
 var isDodging = false
@@ -28,7 +28,7 @@ var attackTimer = 0
 var isAttacking = false
 var isRunning = false
 var enemyIFrames = 0
+
+
 var isFightingBoss = false
-
 var biGayHealth = 200
-
