@@ -259,12 +259,12 @@ func _on_menu_show_skill_tree():
 
 
 func _on_skill_tree_health_up():
-	currentHealth.max_value += 100
+	currentHealth.max_value += 10
 	currentHealth.value = currentHealth.max_value
 
 
 func _on_skill_tree_stamina_up():
-	currentStamina.max_value += 100
+	currentStamina.max_value += 10
 	currentStamina.value = currentStamina.max_value
 
 
@@ -276,9 +276,9 @@ func _on_sword_hit_area(area):
 	if !sword_collision.disabled:
 		if Global.enemyIFrames <= 0:
 			Global.enemyIFrames = 30
-			print(Global.biGayHealth)
 			print("You hit something!")
 			emit_signal("biGayDamage")
+			print(Global.biGayHealth)
 
 
 func _on_bi_gay_player_shank() -> void:

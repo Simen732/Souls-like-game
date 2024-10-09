@@ -147,7 +147,6 @@ offset_bottom = 43.0
 show_percentage = false
 
 [node name="BiGay" parent="." instance=ExtResource("7_6hhxa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -5.105, 98.659)
 
 [connection signal="body_entered" from="Area3D" to="CharacterBody3D" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="spawnPoints/spawnPoint" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
