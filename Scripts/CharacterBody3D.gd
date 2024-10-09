@@ -34,6 +34,7 @@ signal biGayDamage
 #-----------------------------------------------------------------------------------------------------#
 func _ready():
 	
+
 	# Disable the sword hitbox at the start
 	sword_collision.disabled = true
 
@@ -69,6 +70,8 @@ func _input(event):
 
 
 func _physics_process(delta):
+	# Set the player's global position
+	Global.player_position = $".".global_position
 	# Add gravity to the character's velocity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -207,10 +210,10 @@ func _physics_process(delta):
 func _on_area_3d_body_entered(body):
 	if Global.Iframes < 1:
 		if !Global.idkKerft:
-			currentHealth.value -= 33.333
+			currentHealth.value -= 33.3333
 			Global.Iframes = 60
 
-			if currentHealth.value < 1:
+			if currentHealth.value <= 0:
 				Global.playerIsDying = true
 				Global.deathCount += 1
 				death_counter.text = "Deaths:  " + str(Global.deathCount)
@@ -266,17 +269,9 @@ func _on_blockbench_export_attack_finished():
 
 func _on_sword_hit_area(area):
 	# Only trigger during attack when sword collision is enabled
-	if not sword_collision.disabled:
+	if !sword_collision.disabled:
 		if Global.enemyIFrames <= 0:
 			Global.enemyIFrames = 30
 			print(Global.biGayHealth)
 			print("You hit something!")
 			emit_signal("biGayDamage")
-
-
-
-
-
-
-
-

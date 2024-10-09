@@ -47,7 +47,7 @@ size = Vector3(30, 1, 30)
 material = SubResource("StandardMaterial3D_ap0yy")
 
 [node name="CSGBox3D9" type="CSGBox3D" parent="Terrain"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8073, -4.48195, 88.2363)
+transform = Transform3D(1, 0, 0, 0, 5.81724, 0, 0, 0, 1, -10.8073, 0.51805, 88.2363)
 use_collision = true
 size = Vector3(1.57324, 2.01282, 30)
 material = SubResource("StandardMaterial3D_ap0yy")
@@ -59,13 +59,13 @@ size = Vector3(1.57324, 2.01282, 30.349)
 material = SubResource("StandardMaterial3D_ap0yy")
 
 [node name="CSGBox3D10" type="CSGBox3D" parent="Terrain"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.0064, -4.48195, 88.2363)
+transform = Transform3D(1, 0, 0, 0, 5.81724, 0, 0, 0, 1, 18.0064, 0.51805, 88.2363)
 use_collision = true
 size = Vector3(1.57324, 2.01282, 30)
 material = SubResource("StandardMaterial3D_ap0yy")
 
 [node name="CSGBox3D11" type="CSGBox3D" parent="Terrain"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.3788, -4.48195, 102.547)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 5.81724, 0, -1, 0, -4.37114e-08, 3.3788, 0.51805, 102.547)
 use_collision = true
 size = Vector3(1.57324, 2.01282, 30)
 material = SubResource("StandardMaterial3D_ap0yy")
@@ -126,7 +126,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.80655, 0.5, 14.2146)
 mesh = SubResource("BoxMesh_mvu4d")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("5_0gych")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12266, 29.4031)
 
 [node name="Health" type="ProgressBar" parent="CharacterBody3D"]
 modulate = Color(1, 0, 0, 1)
@@ -146,11 +145,11 @@ offset_right = 185.0
 offset_bottom = 43.0
 show_percentage = false
 
-[node name="biGay" parent="." instance=ExtResource("7_6hhxa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.09184, 89.0574)
+[node name="BiGay" parent="." instance=ExtResource("7_6hhxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -5.105, 98.659)
 
 [connection signal="body_entered" from="Area3D" to="CharacterBody3D" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="spawnPoints/spawnPoint" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
 [connection signal="body_entered" from="spawnPoints/spawnPoint2" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
 [connection signal="body_entered" from="spawnPoints/spawnPoint3" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
-[connection signal="biGayDamage" from="CharacterBody3D" to="biGay" method="_on_character_body_3d_bi_gay_damage"]
+[connection signal="biGayDamage" from="CharacterBody3D" to="BiGay" method="_on_character_body_3d_bi_gay_damage"]
