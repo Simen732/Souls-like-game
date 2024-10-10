@@ -63,7 +63,7 @@ transform = Transform3D(0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939692, 0,
 transform = Transform3D(0.793353, 0, 0.60876, 0, 1, 0, -0.608761, 0, 0.793352, -0.1875, 0.875, 0)
 
 [node name="ArmL" parent="Node/Root/Body" index="4"]
-transform = Transform3D(0.185482, -0.822324, -0.53794, -0.000420541, 0.547373, -0.836888, 0.982648, 0.155454, 0.101182, 0, 0.6875, 0.4375)
+transform = Transform3D(0.185482, -0.822324, -0.53794, -0.000420451, 0.547373, -0.836888, 0.982648, 0.155454, 0.101182, 0, 0.6875, 0.4375)
 
 [node name="ElbowL" parent="Node/Root/Body/ArmL" index="1"]
 transform = Transform3D(0.649161, 0.226006, -0.726299, -0.127943, 0.973678, 0.18863, 0.749813, -0.0295263, 0.66099, 0, 0, 0.8125)
@@ -72,16 +72,16 @@ transform = Transform3D(0.649161, 0.226006, -0.726299, -0.127943, 0.973678, 0.18
 transform = Transform3D(0.336144, -0.935927, -0.10511, 0.940512, 0.339441, -0.0146953, 0.0494324, -0.0939177, 0.994352, 0, 0, 0.875)
 
 [node name="ArmR" parent="Node/Root/Body" index="5"]
-transform = Transform3D(0.308053, 0.949231, 0.0637446, -0.29585, 0.0318999, 0.954701, 0.9042, -0.312958, 0.290657, 0, 0.6875, -0.4375)
+transform = Transform3D(0.308054, 0.949231, 0.0637445, -0.29585, 0.0319, 0.954701, 0.9042, -0.312958, 0.290657, 0, 0.6875, -0.4375)
 
 [node name="ElbowR" parent="Node/Root/Body/ArmR" index="1"]
-transform = Transform3D(0.777556, -0.627022, 0.0474248, 0.444297, 0.601199, 0.664198, -0.444979, -0.49538, 0.746051, 0, 0, -0.8125)
+transform = Transform3D(0.777556, -0.627022, 0.0474249, 0.444297, 0.601199, 0.664198, -0.444979, -0.49538, 0.746051, 0, 0, -0.8125)
 
 [node name="HandR" parent="Node/Root/Body/ArmR/ElbowR" index="1"]
 transform = Transform3D(0.134702, 0.98884, 0.0636459, 0.9907, -0.133153, -0.0279953, -0.0192082, 0.066825, -0.99758, 0, 0, -0.875)
 
 [node name="Sword" parent="Node/Root/Body/ArmR/ElbowR/HandR" index="1"]
-transform = Transform3D(0.99908, -0.0428745, 4.24484e-06, 0.0428716, 0.999016, 0.0113868, -0.000492442, -0.0113761, 0.999935, -0.25, -0.046875, 0.125)
+transform = Transform3D(0.99908, -0.0428745, 4.24468e-06, 0.0428716, 0.999016, 0.0113868, -0.000492442, -0.0113761, 0.999935, -0.25, -0.046875, 0.125)
 
 [node name="Area3D" type="Area3D" parent="Node/Root/Body/ArmR/ElbowR/HandR/Sword" index="5"]
 
@@ -99,7 +99,7 @@ transform = Transform3D(0.766044, -0.642788, 0, 0.642788, 0.766044, 0, 0, 0, 1, 
 transform = Transform3D(0.999048, -0.0436193, 0, 0.0436193, 0.999048, 0, 0, 0, 1, 0, -0.84375, 0)
 
 [node name="Area3D2" type="Area3D" parent="Node/Root/LegL/KneeL/FootL" index="1"]
-transform = Transform3D(0.749286, -0.0327145, 0, 0.0327145, 0.749286, 0, 0, 0, 0.75, -0.125, -0.156, 0)
+transform = Transform3D(0.749286, -0.0327145, 0, 0.0327145, 0.749286, 0, -1.49012e-08, -9.31323e-10, 0.75, -0.125, -0.156, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Root/LegL/KneeL/FootL/Area3D2" index="0"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, -9.31323e-10, 2.98023e-08, -9.31323e-10, 1, 0, 0, 0)
@@ -123,7 +123,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0783386, 1.54418, -0.14702)
 shape = SubResource("CapsuleShape3D_6mk7g")
 
 [node name="Area3D" type="Area3D" parent="Node/Root" index="5"]
-transform = Transform3D(-0.293578, 0.21644, 0.93111, 0.0650848, 0.976296, -0.206422, -0.953716, 2.71456e-07, -0.300705, -0.324659, -1.46444, -1.29732e-07)
+transform = Transform3D(-0.293578, 0.21644, 0.93111, 0.0650848, 0.976296, -0.206422, -0.953716, 2.75857e-07, -0.300705, -0.324659, -1.46444, -1.28313e-07)
 
 [node name="BiguyHitbox" type="CollisionShape3D" parent="Node/Root/Area3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -0.25)

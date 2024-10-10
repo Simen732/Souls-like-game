@@ -83,7 +83,7 @@ func handle_attack(delta):
 						await animation_player.animation_finished
 						speed = 0.75
 						animation_player.play("walk")
-			
+
 
 # Handle when the sword hits an area
 # Handle when the sword hits something

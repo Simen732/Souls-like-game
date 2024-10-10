@@ -102,7 +102,8 @@ func _physics_process(delta):
 
 	if Global.enemyIFrames > 0:
 		Global.enemyIFrames -= 1
-		
+
+
 	# Jump
 	if Input.is_action_just_pressed("jump") and is_on_floor() and !Global.playerIsDying:
 		velocity.y = Global.JUMP_VELOCITY
@@ -116,14 +117,14 @@ func _physics_process(delta):
 			Global.Menu_open = true
 			Engine.time_scale = 0.3
 			animation_player.play("Menu") 
-			
+
 		else:
 			Engine.time_scale = 1
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			Global.Menu_open = false
 			animation_player.play("menuClose")
 			skill_tree.visible = false
-			
+
 
 
 	# Get input direction for movement (left, right, forward, backward)
@@ -132,7 +133,7 @@ func _physics_process(delta):
 
 	if Global.dodgeCooldown > 0:
 		Global.dodgeCooldown -= 1
-	
+
 
 	if direction == Vector3.ZERO and !Global.isDodging and !Global.isAttacking and !Global.playerIsDying:
 		velocity.x = 0  # Reset horizontal movement velocity
@@ -161,14 +162,14 @@ func _physics_process(delta):
 		# Movement velocity
 		velocity.x = direction.x * Global.SPEED
 		velocity.z = direction.z * Global.SPEED
-		
+
 		# Running logic
 	# Handle movement and reset sliding issues
 	if direction and !Global.Menu_open and !Global.playerIsDying and !Global.isDodging and !Global.isAttacking:
 		# Set velocity based on input direction and speed
 		velocity.x = direction.x * Global.SPEED
 		velocity.z = direction.z * Global.SPEED
-		
+
 		# Handle running logic
 		if Input.is_action_pressed("run") and currentStamina.value > 0:
 			currentStamina.value -= 1
@@ -199,7 +200,7 @@ func _physics_process(delta):
 			Global.Iframes = 2
 		else:
 			Global.isDodging = false
-			
+
 
 	# Move the character
 	move_and_slide()
