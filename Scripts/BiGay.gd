@@ -25,7 +25,7 @@ var attack_cooldown
 # Attack animation names
 const attack_animations = ["attack1", "attack2", "attack4"]
 
-# Attack probabilities
+# Attack probabilities 
 var attack_probabilities = [0.75, 0.75, 0.75]  # Initial weights
 var total_probability = 2.25  # Initial total probability
 var last_attack_index = -0.5  # Index of the last attack used
