@@ -2,10 +2,12 @@ extends Node3D
 
 @onready var animation_player = $AnimationPlayer
 @onready var music = $AudioStreamPlayer3D
-@onready var biguy = $RigidBody3D
+@onready var biGay = $Node/Root/RigidBody3D
 @onready var biGaySword: Area3D = $Node/Root/Body/ArmR/ElbowR/HandR/Sword/Area3D
 @onready var biGayFoot: Area3D = $Node/Root/LegL/KneeL/FootL/Area3D2
 @onready var health: ProgressBar = $"../CharacterBody3D/Health"
+@onready var BiGaySwordCollision = $Node/Root/Body/ArmR/ElbowR/HandR/Sword/Area3D/CollisionShape3D
+@onready var boss_healthbar = $"../CharacterBody3D/Boss Healthbar"
 
 
 signal playerShank
@@ -33,6 +35,10 @@ var attack_damage = 20
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	boss_healthbar.max_value = Global.biGayHealth
+	boss_healthbar.value = boss_healthbar.max_value
+	
 	$GPUParticles3D.position.y = $GPUParticles3D.position.y + 1000
 	if not biGaySword.is_connected("area_entered", Callable(self, "_on_sword_area_entered")):
 		biGaySword.connect("area_entered", Callable(self, "_on_sword_area_entered"))
@@ -52,6 +58,7 @@ func _process(delta):
 	if aggro:
 		move_towards_player(delta)
 		handle_attack(delta)
+		boss_healthbar.visible = true
 
 # Move towards the player and handle animations
 func move_towards_player(delta):
@@ -88,7 +95,7 @@ func handle_attack(delta):
 # Handle when the sword hits an area
 # Handle when the sword hits something
 func _on_sword_area_entered(area: Area3D) -> void:
-	if area.name == "Player" or area.get_parent().name == "Player":
+	if area.name == "Player" or area.get_parent().name == "Player" and !BiGaySwordCollision.disabled:
 		print("Player detected! Dealing damage.")
 		Global.enemyDamage = 40
 		apply_damage_to_player()
@@ -108,10 +115,11 @@ func apply_damage_to_player() -> void:
 
 # When the enemy takes damage
 func _on_character_body_3d_bi_gay_damage():
-	if $Node/Root/Area3D/BiguyHitbox.disabled == false:
+	if $Node/Root/BiGay/BiguyHitbox.disabled == false:
 		Global.biGayHealth -= Global.weaponDamage
+		boss_healthbar.value -= Global.weaponDamage
 		if Global.biGayHealth <= 0:
-			$Node/Root/Area3D/BiguyHitbox.disabled = true
+			$Node/Root/BiGay/BiguyHitbox.disabled = true
 			$GPUParticles3D.position.y = $GPUParticles3D.position.y - 1000
 			aggro = false
 			animation_player.stop()

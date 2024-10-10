@@ -161,7 +161,6 @@ margin = 0.5
 
 [node name="Camera3D" type="Camera3D" parent="CamOrigin/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.5)
-current = true
 
 [node name="deathTimer" type="Timer" parent="."]
 wait_time = 2.0

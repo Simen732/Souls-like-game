@@ -275,11 +275,12 @@ func _on_blockbench_export_attack_finished():
 func _on_sword_hit_area(area):
 	# Only trigger during attack when sword collision is enabled
 	if !sword_collision.disabled:
-		if Global.enemyIFrames <= 0:
-			Global.enemyIFrames = 30
-			print("You hit something!")
-			emit_signal("biGayDamage")
-			print(Global.biGayHealth)
+		if area.name == "BiGay" or area.get_parent().name == "BiGay":
+			if Global.enemyIFrames <= 0:
+				Global.enemyIFrames = 30
+				print("You hit something!")
+				emit_signal("biGayDamage")
+				print(Global.biGayHealth)
 
 
 func _on_bi_gay_player_shank() -> void:
