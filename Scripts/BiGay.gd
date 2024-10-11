@@ -52,6 +52,7 @@ func _process(delta):
 		Global.isFightingBoss = true
 		music.playing = true
 		boss_healthbar.visible = true
+		
 
 	if aggro:
 		move_towards_player(delta)

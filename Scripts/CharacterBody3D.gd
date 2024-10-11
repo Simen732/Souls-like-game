@@ -84,12 +84,10 @@ func _physics_process(delta):
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	
-# Rotate the player model (blockbench_export) to face the direction of movement
+
 	if direction != Vector3.ZERO and !Global.isDodging and !Global.playerIsDying and !Global.Menu_open:
-		# Get the angle based on input direction (atan2 gets the angle in radians)
 		var target_rotation_y = atan2(direction.x, direction.z)
-		# Interpolate (lerp) the player's model rotation for smooth turning
-		$blockbench_export.rotation.y = lerp_angle($blockbench_export.rotation.y, target_rotation_y, 0.1)  # Adjust 0.1 for smoother or faster turning
+		$blockbench_export.rotation.y = lerp_angle($blockbench_export.rotation.y, target_rotation_y, 0.1) 
 
 
 		
@@ -173,7 +171,7 @@ func _physics_process(delta):
 		currentStamina.value += 1
 
 
-	if direction and !Global.Menu_open and !Global.playerIsDying and !Global.isAttacking:
+	if direction and !Global.Menu_open and !Global.playerIsDying and !Global.isAttacking and !Global.isDodging:
 		# Movement velocity
 		velocity.x = direction.x * Global.SPEED
 		velocity.z = direction.z * Global.SPEED
@@ -196,7 +194,7 @@ func _physics_process(delta):
 
 
 	# Dodge logic
-	if Input.is_action_just_pressed("dodge") and is_on_floor() and direction and Global.dodgeCooldown < 1 and !Global.isDodging:
+	if Input.is_action_just_pressed("dodge") and is_on_floor() and direction and Global.dodgeCooldown < 1 and !Global.isDodging and !Global.playerIsDying:
 		if currentStamina.value >= 60:  # Ensure the player has enough stamina
 			currentStamina.value -= 60
 			Global.dashDirection = direction

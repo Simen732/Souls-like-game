@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://chm5ix4falpah"]
+[gd_scene load_steps=6 format=3 uid="uid://chm5ix4falpah"]
 
 [ext_resource type="PackedScene" uid="uid://cyujvlcvs4poc" path="res://Models/mainDude.gltf" id="1_uaevy"]
 [ext_resource type="Script" path="res://Scripts/blockbench_dude.gd" id="2_i7c4a"]
@@ -6,12 +6,17 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_58acl"]
 size = Vector3(0.0451355, 0.744507, 0.0440674)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xgx0f"]
+radius = 0.375896
+height = 2.10372
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yya2d"]
+radius = 0.373207
+height = 1.37687
+
 [node name="blockbench_export" instance=ExtResource("1_uaevy")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 script = ExtResource("2_i7c4a")
-
-[node name="Pelvis" parent="Node" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, -2.44929e-16, 0, 2.44929e-16, 1, 0, 0.5625, 0)
 
 [node name="Body" parent="Node/Pelvis" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.999048, 0.0436194, 0, -0.0436194, 0.999048, 0, 0.125, 0)
@@ -55,13 +60,24 @@ transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871558, 0, -0.0871558, 0.996195
 transform = Transform3D(1, 0, 0, 0, 0.976296, 0.21644, 0, -0.21644, 0.976296, 0.0625, 0.0625, 0)
 
 [node name="Ree" parent="Node/Pelvis/Reg" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.994612, 0.103664, 0, -0.103664, 0.994612, 0, -0.21875, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.21875, 0)
 
 [node name="Root" parent="Node/Pelvis/Reg/Ree" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.976296, -0.21644, 0, 0.21644, 0.976296, 0, -0.375, 0)
 
 [node name="AnimationPlayer" parent="." index="1"]
 autoplay = "idle"
+
+[node name="Player" type="Area3D" parent="." index="2"]
+
+[node name="Player" type="CollisionShape3D" parent="Player" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_xgx0f")
+
+[node name="Player2" type="CollisionShape3D" parent="Player" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.37192, 0)
+shape = SubResource("CapsuleShape3D_yya2d")
+disabled = true
 
 [connection signal="area_entered" from="Node/Pelvis/Body/Rarm/Relbow/Sword/Area3D" to="." method="_on_area_3d_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
