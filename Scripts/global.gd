@@ -9,6 +9,7 @@ const JUMP_VELOCITY = 5
 #-----------------------------------------------------------------------------------------------------#
 
 var player_position = 0
+var enemy_lock_on_position = 0
 var maxStamina = 200
 var maxHealth = 100
 var idkKerft = true
@@ -18,7 +19,7 @@ var deathCount = 0
 var runSpeed = 2
 var playerIsDying = false
 var dogdeSpeed = 10
-var dodgeCooldown = 20
+var dodgeCooldown = 45
 var Iframes = 20
 var isDodging = false
 var dashStartTime = 0.0

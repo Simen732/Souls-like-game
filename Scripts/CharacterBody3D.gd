@@ -82,11 +82,11 @@ func _physics_process(delta):
 	
 	# Attack logic
 	if Input.is_action_just_pressed("attack") and !Global.playerIsDying and !Global.Menu_open and !Global.isDodging: 
-		if Global.attackTimer <= 0:
+		if Global.attackTimer <= 0 and currentStamina.value >= 40:
+			currentStamina.value -= 40
 			Global.attackTimer = 120
 			$blockbench_export/AnimationPlayer.stop()
 			$blockbench_export/AnimationPlayer.play("attack1")
-			sword_collision.disabled = false  # Enable sword hitbox when attack starts
 			velocity.x = 0  # Reset horizontal movement velocity
 			velocity.z = 0  # Reset forward/backward movement velocity
 			
@@ -96,7 +96,6 @@ func _physics_process(delta):
 		Global.isAttacking = true
 
 	elif Global.attackTimer <= 0:
-		sword_collision.disabled = true  # Disable sword hitbox when attack ends
 		Global.isAttacking = false
 
 
@@ -154,7 +153,7 @@ func _physics_process(delta):
 
 
 
-	if !Input.is_action_pressed("run") and currentStamina.value < Global.maxStamina:
+	if !Input.is_action_pressed("run") and !Global.isDodging and !Global.isAttacking and currentStamina.value < Global.maxStamina:
 		currentStamina.value += 1
 
 
@@ -182,13 +181,13 @@ func _physics_process(delta):
 
 	# Dodge logic
 	if Input.is_action_just_pressed("dodge") and is_on_floor() and direction and Global.dodgeCooldown < 1 and !Global.isDodging:
-		if currentStamina.value >= 20:  # Ensure the player has enough stamina
-			currentStamina.value -= 80
+		if currentStamina.value >= 60:  # Ensure the player has enough stamina
+			currentStamina.value -= 60
 			Global.dashDirection = direction
 			Global.dashStartTime = 0  # Reset the dash timer
 			Global.isDodging = true
 			$blockbench_export/AnimationPlayer.play("dodge")  # Play dodge animation
-			Global.dodgeCooldown = 60  # Reset dodge cooldown
+			Global.dodgeCooldown = 45  # Reset dodge cooldown
 
 	# Smooth dodging
 	if Global.isDodging:
@@ -218,12 +217,12 @@ func playertakeDamage():
 				death_counter.text = "Deaths:  " + str(Global.deathCount)
 				death_timer.start()
 				Engine.time_scale = 0.3
+				velocity = Vector3.ZERO
+				$blockbench_export/AnimationPlayer.stop()
 				$blockbench_export/AnimationPlayer.play("death")
 				animation_player.play("deathScreen")
 				sensitivity = 0
-				velocity = Vector3.ZERO
-	else:
-		Global.idkKerft = false
+
 
 
 
@@ -278,9 +277,7 @@ func _on_sword_hit_area(area):
 		if area.name == "BiGay" or area.get_parent().name == "BiGay":
 			if Global.enemyIFrames <= 0:
 				Global.enemyIFrames = 30
-				print("You hit something!")
 				emit_signal("biGayDamage")
-				print(Global.biGayHealth)
 
 
 func _on_bi_gay_player_shank() -> void:

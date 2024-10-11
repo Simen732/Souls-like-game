@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dceftyh3xo01m"]
+
+[ext_resource type="Script" path="res://scripts/EnemyLockOn.gd" id="1_5pe4i"]
+
+[node name="EnemyLockOn" type="Node3D"]
+script = ExtResource("1_5pe4i")
