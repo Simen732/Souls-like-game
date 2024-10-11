@@ -10,6 +10,9 @@ size = Vector3(0.0451355, 0.744507, 0.0440674)
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 script = ExtResource("2_i7c4a")
 
+[node name="Pelvis" parent="Node" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, -2.44929e-16, 0, 2.44929e-16, 1, 0, 0.5625, 0)
+
 [node name="Body" parent="Node/Pelvis" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.999048, 0.0436194, 0, -0.0436194, 0.999048, 0, 0.125, 0)
 
@@ -50,6 +53,9 @@ transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871558, 0, -0.0871558, 0.996195
 
 [node name="Reg" parent="Node/Pelvis" index="3"]
 transform = Transform3D(1, 0, 0, 0, 0.976296, 0.21644, 0, -0.21644, 0.976296, 0.0625, 0.0625, 0)
+
+[node name="Ree" parent="Node/Pelvis/Reg" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.994612, 0.103664, 0, -0.103664, 0.994612, 0, -0.21875, 0)
 
 [node name="Root" parent="Node/Pelvis/Reg/Ree" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.976296, -0.21644, 0, 0.21644, 0.976296, 0, -0.375, 0)

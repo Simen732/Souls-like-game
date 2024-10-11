@@ -166,7 +166,8 @@ func _physics_process(delta):
 	if Global.Iframes > 0:
 		Global.Iframes -= 1
 
-
+	if Global.dashboost > 0:
+		Global.dashboost -= 1
 
 	if !Input.is_action_pressed("run") and !Global.isDodging and !Global.isAttacking and currentStamina.value < Global.maxStamina:
 		currentStamina.value += 1
@@ -201,6 +202,7 @@ func _physics_process(delta):
 			Global.dashDirection = direction
 			Global.dashStartTime = 0  # Reset the dash timer
 			Global.isDodging = true
+			Global.dashboost = 50
 			$blockbench_export/AnimationPlayer.play("dodge")  # Play dodge animation
 			Global.dodgeCooldown = 45  # Reset dodge cooldown
 
@@ -209,9 +211,16 @@ func _physics_process(delta):
 		Global.dashStartTime += delta
 		if Global.dashStartTime < Global.dashDuration:
 			var dashProgress = Global.dashStartTime / Global.dashDuration
-			velocity.x = lerp(velocity.x, Global.dashDirection.x * Global.dogdeSpeed, dashProgress)
-			velocity.z = lerp(velocity.z, Global.dashDirection.z * Global.dogdeSpeed, dashProgress)
-			Global.Iframes = 2
+			if Global.dashboost > 0:
+				velocity.x = lerp(velocity.x, Global.dashDirection.x * Global.dogdeSpeed, dashProgress)
+				velocity.z = lerp(velocity.z, Global.dashDirection.z * Global.dogdeSpeed, dashProgress)
+				Global.Iframes = 2
+				print("no 0 speed")
+			else:
+				velocity.x = lerp(velocity.x, Global.dashDirection.x * Global.SPEED * 0.25, dashProgress)
+				velocity.z = lerp(velocity.z, Global.dashDirection.z * Global.SPEED * 0.25, dashProgress)
+				print("0 speed")
+				Global.Iframes = 2
 		else:
 			Global.isDodging = false
 
