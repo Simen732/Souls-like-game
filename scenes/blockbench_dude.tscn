@@ -11,19 +11,19 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 script = ExtResource("2_i7c4a")
 
 [node name="Body" parent="Node/Pelvis" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.990132, 0.140133, 0, -0.140133, 0.990132, 0, 0.125, 0)
+transform = Transform3D(1, 0, 0, 0, 0.999048, 0.0436194, 0, -0.0436194, 0.999048, 0, 0.125, 0)
 
 [node name="Head" parent="Node/Pelvis/Body" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.999048, -0.0436194, 0, 0.0436194, 0.999048, 0, 0.4375, -0.03125)
 
 [node name="Rarm" parent="Node/Pelvis/Body" index="2"]
-transform = Transform3D(-0.100339, 0.97799, 0.182944, -0.865969, 0.0046988, -0.500075, -0.489928, -0.208601, 0.846438, 0.1875, 0.375, 0)
+transform = Transform3D(0.23457, 0.965926, 0.109382, -0.875426, 0.258819, -0.408218, -0.422618, 2.23517e-08, 0.906308, 0.1875, 0.375, 0)
 
 [node name="Relbow" parent="Node/Pelvis/Body/Rarm" index="1"]
-transform = Transform3D(0.372388, -0.928074, -0.00214536, 0.903625, 0.363102, -0.227199, 0.211637, 0.0826676, 0.973846, 0.25, 0, 0)
+transform = Transform3D(0.824733, -0.347037, 0.446521, 0.524027, 0.765838, -0.372675, -0.212631, 0.541346, 0.813469, 0.25, 0, 0)
 
 [node name="Sword" parent="Node/Pelvis/Body/Rarm/Relbow" index="2"]
-transform = Transform3D(0.687597, -0.433818, 0.582247, 0.706004, 0.586772, -0.396556, -0.169613, 0.68374, 0.70974, 0, -0.3125, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.3125, 0)
 
 [node name="Area3D" type="Area3D" parent="Node/Pelvis/Body/Rarm/Relbow/Sword" index="3"]
 transform = Transform3D(1, -2.98023e-08, -2.98023e-08, 2.98023e-08, 1, 0, 0, 5.96046e-08, 1, 0, 0, 0)
@@ -34,10 +34,10 @@ shape = SubResource("BoxShape3D_58acl")
 disabled = true
 
 [node name="Larm" parent="Node/Pelvis/Body" index="3"]
-transform = Transform3D(-0.0118799, -0.996765, -0.0794843, 0.844479, 0.0325651, -0.534598, 0.535457, -0.0734738, 0.84136, -0.1875, 0.375, 0)
+transform = Transform3D(0.158099, -0.983447, -0.0885213, 0.926777, 0.178725, -0.330366, 0.340719, -0.029809, 0.939692, -0.1875, 0.375, 0)
 
 [node name="Lelbow" parent="Node/Pelvis/Body/Larm" index="1"]
-transform = Transform3D(0.678017, 0.730063, 0.0854468, -0.712969, 0.624916, 0.31805, 0.178799, -0.276564, 0.944215, -0.25, 0, 0)
+transform = Transform3D(0.492404, 0.539921, -0.682659, -0.642788, 0.754406, 0.133022, 0.586824, 0.373304, 0.718527, -0.25, 0, 0)
 
 [node name="Leg" parent="Node/Pelvis" index="2"]
 transform = Transform3D(1, 0, 0, 0, 0.953717, -0.300706, 0, 0.300706, 0.953717, -0.0625, 0.0625, 0)

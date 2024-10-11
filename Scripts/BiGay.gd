@@ -12,13 +12,12 @@ extends Node3D
 @onready var BiGayHandCollision = $Node/Root/Body/ArmL/ElbowL/HandL/Area3D2/CollisionShape3D
 @onready var boss_healthbar = $"../CharacterBody3D/Boss Healthbar"
 
-
 signal playerShank
 
 
 const aggro_range = 20
 var aggro = false
-var speed = 0.75
+@export var speed = 0.75
 const attack124_range = 3  # Distance at which bro uses 1st 2nd and 4th attack
 const attack3_range = 8
 const attack5_minrange = 8
@@ -33,7 +32,7 @@ var last_attack_index = -0.5  # Index of the last attack used
 
 
 func _ready():
-	
+	$Node/Root/LegL/KneeL/FootL/Area3D2/GPUParticles3D2.emitting = false
 	boss_healthbar.max_value = Global.biGayHealth
 	boss_healthbar.value = boss_healthbar.max_value
 	
@@ -48,7 +47,6 @@ func _ready():
 
 
 func _process(delta):
-	boss_healthbar.value = Global.biGayHealth
 	if !aggro and $".".global_position.distance_to(Global.player_position) <= aggro_range and !Global.playerIsDying and Global.biGayHealth > 0:
 		aggro = true
 		Global.isFightingBoss = true
@@ -61,7 +59,8 @@ func _process(delta):
 		if $".".global_position.distance_to(Global.player_position) > aggro_range or Global.playerIsDying or Global.biGayHealth <= 1:
 			aggro = false
 			Global.biGayHealth = 200
-			Global.isFightingBoss = true
+			boss_healthbar.value = Global.biGayHealth
+			Global.isFightingBoss = false
 			music.playing = false
 			boss_healthbar.visible = false
 
@@ -69,7 +68,7 @@ func _process(delta):
 # Move towards the player and handle animations
 func move_towards_player(delta):
 	var direction = (Global.enemy_lock_on_position - $".".global_position)
-	rotation.y = $".".global_rotation.y
+	direction.y = 0
 	translate(speed * direction * delta / 10)
 	if BiGaySwordCollision and BiGayFootCollision and BiGayHandCollision:
 		if BiGaySwordCollision.disabled and BiGayFootCollision.disabled and BiGayHandCollision.disabled:
@@ -131,10 +130,12 @@ func apply_damage_to_player() -> void:
 func _on_character_body_3d_bi_gay_damage():
 	if $Node/Root/BiGay/BiguyHitbox.disabled == false:
 		Global.biGayHealth -= Global.weaponDamage
+		boss_healthbar.value = Global.biGayHealth
 		if Global.biGayHealth <= 0:
 			$Node/Root/BiGay/BiguyHitbox.disabled = true
 			aggro = false
 			animation_player.stop()
 			animation_player.play("dafeeted")
 			await animation_player.animation_finished
+			boss_healthbar.visible = false
 			queue_free()

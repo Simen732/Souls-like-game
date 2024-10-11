@@ -30,13 +30,9 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 signal biGayDamage
 
-
 #-----------------------------------------------------------------------------------------------------#
 func _ready():
-	
-
-	# Disable the sword hitbox at the start
-	sword_collision.disabled = true
+	rotation.y = 135
 
 	# Connect the `area_entered` signal for detecting hits with the sword
 	sword_area.connect("area_entered", Callable(self, "_on_sword_hit_area"))
@@ -52,10 +48,7 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-	
-	Global.idkKerft = true
-	
-	
+
 #-----------------------------------------------------------------------------------------------------#
 
 
@@ -207,21 +200,20 @@ func _physics_process(delta):
 #-----------------------------------------------------------------------------------------------------#
 func playertakeDamage():
 	if Global.Iframes < 1:
-		if !Global.idkKerft:
-			currentHealth.value -= Global.enemyDamage
-			Global.Iframes = 15
+		currentHealth.value -= Global.enemyDamage
+		Global.Iframes = 15
 
-			if currentHealth.value <= 0:
-				Global.playerIsDying = true
-				Global.deathCount += 1
-				death_counter.text = "Deaths:  " + str(Global.deathCount)
-				death_timer.start()
-				Engine.time_scale = 0.3
-				velocity = Vector3.ZERO
-				$blockbench_export/AnimationPlayer.stop()
-				$blockbench_export/AnimationPlayer.play("death")
-				animation_player.play("deathScreen")
-				sensitivity = 0
+		if currentHealth.value <= 0:
+			Global.playerIsDying = true
+			Global.deathCount += 1
+			death_counter.text = "Deaths:  " + str(Global.deathCount)
+			death_timer.start()
+			Engine.time_scale = 0.3
+			velocity = Vector3.ZERO
+			$blockbench_export/AnimationPlayer.stop()
+			$blockbench_export/AnimationPlayer.play("death")
+			animation_player.play("deathScreen")
+			sensitivity = 0
 
 
 
@@ -236,7 +228,7 @@ func _on_area_3d_body_entered(body):
 # When the death timer ends and you respawn
 func _on_death_timer_timeout():
 	sensitivity = 0.05
-
+	rotation.y = 135
 	character_body_3d.global_position = spawn_point
 	death_timer.stop()
 	Engine.time_scale = 1

@@ -33,7 +33,7 @@ _subresources={
 "animations": {
 "attack1": {
 "save_to_file/enabled": true,
-"save_to_file/keep_custom_tracks": false,
+"save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "res://Animations/Biguy/attack1.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
@@ -1832,7 +1832,7 @@ _subresources={
 },
 "attack2": {
 "save_to_file/enabled": true,
-"save_to_file/keep_custom_tracks": "",
+"save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "res://Animations/Biguy/attack2.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
@@ -3631,7 +3631,7 @@ _subresources={
 },
 "attack3": {
 "save_to_file/enabled": true,
-"save_to_file/keep_custom_tracks": "",
+"save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "res://Animations/Biguy/attack3.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
@@ -5430,7 +5430,7 @@ _subresources={
 },
 "attack4": {
 "save_to_file/enabled": true,
-"save_to_file/keep_custom_tracks": "",
+"save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "res://Animations/Biguy/attack4.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
@@ -7229,7 +7229,7 @@ _subresources={
 },
 "attack5": {
 "save_to_file/enabled": true,
-"save_to_file/keep_custom_tracks": "",
+"save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "res://Animations/Biguy/attack5.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
@@ -9028,7 +9028,7 @@ _subresources={
 },
 "dafeeted": {
 "save_to_file/enabled": true,
-"save_to_file/keep_custom_tracks": "",
+"save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "res://Animations/Biguy/dafeeted.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
@@ -10827,7 +10827,7 @@ _subresources={
 },
 "idle": {
 "save_to_file/enabled": true,
-"save_to_file/keep_custom_tracks": "",
+"save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "res://Animations/Biguy/idle.res",
 "settings/loop_mode": 1,
 "slice_1/end_frame": 0,
@@ -12626,7 +12626,7 @@ _subresources={
 },
 "walk": {
 "save_to_file/enabled": true,
-"save_to_file/keep_custom_tracks": "",
+"save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "res://Animations/Biguy/walk.res",
 "settings/loop_mode": 1,
 "slice_1/end_frame": 0,
