@@ -141,6 +141,7 @@ disabled = true
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Node/Root/Body/ArmR/ElbowR/HandR/Sword/Area3D" index="1"]
 transform = Transform3D(0.2, 0, 0, 0, 0.05, 0, 0, 0, 0.2, 2, 9.53674e-07, -1.19209e-07)
+emitting = false
 amount = 25
 one_shot = true
 explosiveness = 1.0
@@ -175,6 +176,7 @@ disabled = true
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Node/Root/LegL/KneeL/FootL/Area3D2" index="1"]
 transform = Transform3D(0.2, -1.86264e-08, 1.86265e-08, 7.45058e-08, 0.05, -1.16415e-09, -1.86265e-08, 2.91038e-10, 0.2, -1.04308e-07, 3.12459e-07, -3.72529e-09)
+emitting = false
 amount = 25
 one_shot = true
 explosiveness = 1.0
@@ -185,6 +187,7 @@ draw_pass_1 = SubResource("BoxMesh_3p5d5")
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="Node/Root/LegL/KneeL/FootL/Area3D2" index="2"]
 transform = Transform3D(2, 0, 0, -1.49012e-08, 2, 3.91155e-08, 0, -2.6077e-08, 2, 0, 0.05, 0)
 cast_shadow = 0
+emitting = false
 amount = 1
 one_shot = true
 visibility_aabb = AABB(-0.001, -4, -0.001, 0.002, 8, 0.002)

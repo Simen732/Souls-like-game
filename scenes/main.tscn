@@ -153,6 +153,7 @@ mesh = SubResource("BoxMesh_mvu4d")
 [node name="EnemyLockOn" parent="." instance=ExtResource("5_fek2o")]
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("5_0gych")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.48961, 65.3914)
 
 [node name="Health" type="ProgressBar" parent="CharacterBody3D"]
 modulate = Color(1, 0, 0, 1)

@@ -25,7 +25,6 @@ extends CharacterBody3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-
 #-----------------------------------------------------------------------------------------------------#
 
 signal biGayDamage
@@ -52,12 +51,21 @@ func _ready():
 #-----------------------------------------------------------------------------------------------------#
 
 
-# This is the code for how the camera moves.
+
 func _input(event):
 	if event is InputEventMouseMotion and !Global.Menu_open:
-		rotate_y(deg_to_rad(-event.relative.x * sensitivity))
+		# Rotate the camera around the player without affecting the player's rotation
+		cam_origin.rotate_y(deg_to_rad(-event.relative.x * sensitivity))  # Horizontal camera movement
+
+		# Clamp vertical camera movement to avoid flipping
 		cam_origin.rotate_x(deg_to_rad(event.relative.y * -sensitivity))
 		cam_origin.rotation.x = clamp(cam_origin.rotation.x, deg_to_rad(-80), deg_to_rad(40))
+		cam_origin.rotation.z = 0
+
+
+
+
+
 
 #-----------------------------------------------------------------------------------------------------#
 
@@ -72,7 +80,20 @@ func _physics_process(delta):
 	if Global.isFightingBoss:
 		music.playing = false
 	
+	var input_dir = Input.get_vector("left", "right", "up", "down")
+	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
+	
+# Rotate the player model (blockbench_export) to face the direction of movement
+	if direction != Vector3.ZERO and !Global.isDodging and !Global.playerIsDying and !Global.Menu_open:
+		# Get the angle based on input direction (atan2 gets the angle in radians)
+		var target_rotation_y = atan2(direction.x, direction.z)
+		# Interpolate (lerp) the player's model rotation for smooth turning
+		$blockbench_export.rotation.y = lerp_angle($blockbench_export.rotation.y, target_rotation_y, 0.1)  # Adjust 0.1 for smoother or faster turning
+
+
+		
+		
 	# Attack logic
 	if Input.is_action_just_pressed("attack") and !Global.playerIsDying and !Global.Menu_open and !Global.isDodging: 
 		if Global.attackTimer <= 0 and currentStamina.value >= 40:
@@ -87,12 +108,15 @@ func _physics_process(delta):
 	if Global.attackTimer > 0:
 		Global.attackTimer -= 1
 		Global.isAttacking = true
-
-	elif Global.attackTimer <= 0:
+		sword_collision.disabled = false  # Enable sword collision during attack
+	else:
 		Global.isAttacking = false
+		sword_collision.disabled = true  # Disable sword collision when not attacking
+
 
 
 	if Global.enemyIFrames > 0:
+		print(Global.enemyIFrames)
 		Global.enemyIFrames -= 1
 
 
@@ -119,9 +143,7 @@ func _physics_process(delta):
 
 
 
-	# Get input direction for movement (left, right, forward, backward)
-	var input_dir = Input.get_vector("left", "right", "up", "down")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+
 
 	if Global.dodgeCooldown > 0:
 		Global.dodgeCooldown -= 1
@@ -264,12 +286,13 @@ func _on_blockbench_export_attack_finished():
 	$blockbench_export/AnimationPlayer.play("idle")
 
 func _on_sword_hit_area(area):
-	# Only trigger during attack when sword collision is enabled
-	if !sword_collision.disabled:
+	# Only trigger damage during attack animation when sword collision is enabled
+	if not sword_collision.disabled:
 		if area.name == "BiGay" or area.get_parent().name == "BiGay":
 			if Global.enemyIFrames <= 0:
-				Global.enemyIFrames = 30
-				emit_signal("biGayDamage")
+				Global.enemyIFrames = 50  # Add invincibility frames to the enemy
+				emit_signal("biGayDamage")  # Emit damage signal
+
 
 
 func _on_bi_gay_player_shank() -> void:
