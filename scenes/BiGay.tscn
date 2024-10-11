@@ -92,7 +92,6 @@ height = 3.67646
 
 [node name="BiGay" instance=ExtResource("1_po3vc")]
 script = ExtResource("2_be8mv")
-speed = 2.0
 
 [node name="Root" parent="Node" index="0"]
 transform = Transform3D(-0.293578, 0.0650847, -0.953717, 0.21644, 0.976296, -7.45058e-09, 0.93111, -0.206422, -0.300706, 0, 1.5, 0)

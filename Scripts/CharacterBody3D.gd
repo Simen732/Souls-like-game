@@ -24,19 +24,20 @@ extends CharacterBody3D
 
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var pitch = 0.0
 
 #-----------------------------------------------------------------------------------------------------#
 
 signal biGayDamage
 
 #-----------------------------------------------------------------------------------------------------#
+
 func _ready():
 	rotation.y = 135
 
 	# Connect the `area_entered` signal for detecting hits with the sword
 	sword_area.connect("area_entered", Callable(self, "_on_sword_hit_area"))
 
-	
 	menu.visible = false
 	currentStamina.max_value = Global.maxStamina
 	currentStamina.value = currentStamina.max_value
@@ -51,15 +52,15 @@ func _ready():
 #-----------------------------------------------------------------------------------------------------#
 
 
-
 func _input(event):
 	if event is InputEventMouseMotion and !Global.Menu_open:
 		# Rotate the camera around the player without affecting the player's rotation
 		cam_origin.rotate_y(deg_to_rad(-event.relative.x * sensitivity))  # Horizontal camera movement
 
 		# Clamp vertical camera movement to avoid flipping
-		cam_origin.rotate_x(deg_to_rad(event.relative.y * -sensitivity))
-		cam_origin.rotation.x = clamp(cam_origin.rotation.x, deg_to_rad(-80), deg_to_rad(40))
+		pitch -= (deg_to_rad(event.relative.y * sensitivity))  # Invert the input to make up/down feel natural
+		pitch = clamp(pitch, deg_to_rad(-80), deg_to_rad(40))
+		cam_origin.rotation.x = pitch
 		cam_origin.rotation.z = 0
 
 
@@ -77,21 +78,21 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
+
 	if Global.isFightingBoss:
 		music.playing = false
 	
 	var input_dir = Input.get_vector("left", "right", "up", "down")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	
-	
+	var cam_forward = -cam_origin.transform.basis.z.normalized() # Forward direction of the camera
+	var cam_right = cam_origin.transform.basis.x.normalized() # Right direction of the camera
+	var direction = (-cam_right * input_dir.x + cam_forward * input_dir.y).normalized()
+
 
 	if direction != Vector3.ZERO and !Global.isDodging and !Global.playerIsDying and !Global.Menu_open:
 		var target_rotation_y = atan2(direction.x, direction.z)
 		$blockbench_export.rotation.y = lerp_angle($blockbench_export.rotation.y, target_rotation_y, 0.1) 
 
 
-		
-		
 	# Attack logic
 	if Input.is_action_just_pressed("attack") and !Global.playerIsDying and !Global.Menu_open and !Global.isDodging: 
 		if Global.attackTimer <= 0 and currentStamina.value >= 40:
@@ -256,6 +257,7 @@ func _on_area_3d_body_entered(body):
 
 # When the death timer ends and you respawn
 func _on_death_timer_timeout():
+	emit_signal("Global.restart")
 	sensitivity = 0.05
 	rotation.y = 135
 	character_body_3d.global_position = spawn_point

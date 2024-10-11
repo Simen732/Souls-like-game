@@ -17,11 +17,10 @@ signal playerShank
 
 const aggro_range = 20
 var aggro = false
-@export var speed = 0.75
+var speed = 0.75
 const attack124_range = 3  # Distance at which bro uses 1st 2nd and 4th attack
 const attack3_range = 8
 const attack5_minrange = 8
-var walk_animation_playing = false
 var attack_cooldown
 
 
@@ -52,37 +51,34 @@ func _process(delta):
 		Global.isFightingBoss = true
 		music.playing = true
 		boss_healthbar.visible = true
-		
+		animation_player.play("walk")
 
 	if aggro:
 		move_towards_player(delta)
 		handle_attack(delta)
 		if $".".global_position.distance_to(Global.player_position) > aggro_range or Global.playerIsDying or Global.biGayHealth <= 1:
 			aggro = false
-			Global.biGayHealth = 200
-			boss_healthbar.value = Global.biGayHealth
-			Global.isFightingBoss = false
-			music.playing = false
-			boss_healthbar.visible = false
+
+
+func _on_character_body_3d_restart():
+	Global.biGayHealth = 200
+	boss_healthbar.value = Global.biGayHealth
+	Global.isFightingBoss = false
+	music.playing = false
+	boss_healthbar.visible = false
+	await animation_player.current_animation
+	animation_player.play("idle")
+	$".".position = Vector3(0, -16.5, 100)
 
 
 # Move towards the player and handle animations
 func move_towards_player(delta):
-	var direction = (Global.enemy_lock_on_position - $".".global_position)
-	direction.y = 0
+	var direction = Global.enemy_lock_on_position - $".".global_position
 	translate(speed * direction * delta / 10)
 	if BiGaySwordCollision and BiGayFootCollision and BiGayHandCollision:
 		if BiGaySwordCollision.disabled and BiGayFootCollision.disabled and BiGayHandCollision.disabled:
 			look_at(Global.enemy_lock_on_position)
-
-	if direction.length() > 0.1:
-		if !walk_animation_playing:
-			animation_player.play("walk")
-			walk_animation_playing = true
-	else:
-		if walk_animation_playing:
-			animation_player.play("idle")
-			walk_animation_playing = false
+			#$".".rotation.y = lerp_angle($".".rotation.y, Global.enemy_lock_on_position, 0.1)
 
 
 # Handle attacking logic
