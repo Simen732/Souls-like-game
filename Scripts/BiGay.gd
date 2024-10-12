@@ -11,12 +11,13 @@ extends Node3D
 @onready var BiGayFootCollision = $Node/Root/LegL/KneeL/FootL/Area3D2/CollisionShape3D
 @onready var BiGayHandCollision = $Node/Root/Body/ArmL/ElbowL/HandL/Area3D2/CollisionShape3D
 @onready var boss_healthbar = $"../CharacterBody3D/Boss Healthbar"
+@onready var collision_shape_3d = $Node/Pelvis/Body/Rarm/Relbow/Sword/Area3D/CollisionShape3D
 
 
 signal playerShank
 
 
-const aggro_range = 20
+const aggro_range = 29
 var aggro = false
 var speed = 0.75
 const attack124_range = 3  # Distance at which bro uses 1st 2nd and 4th attack
@@ -57,7 +58,7 @@ func _process(delta):
 		handle_attack(delta)
 		if $".".global_position.distance_to(Global.player_position) > aggro_range or Global.biGayHealth <= 1:
 			aggro = false
-			Global.biGayHealth = 200
+			Global.biGayHealth = boss_healthbar.max_value
 			boss_healthbar.value = Global.biGayHealth
 			Global.isFightingBoss = false
 			music.playing = false
@@ -68,13 +69,14 @@ func _process(delta):
 
 func on_restart():
 	aggro = false
-	Global.biGayHealth = 200
+	Global.biGayHealth = boss_healthbar.max_value
 	boss_healthbar.value = Global.biGayHealth
 	Global.isFightingBoss = false
 	music.playing = false
 	boss_healthbar.visible = false
+	animation_player.stop()	
 	animation_player.play("idle")
-	$".".position = Vector3(0, -16.5, 100)
+	$".".position = Vector3(0, -29.726, 105)
 
 
 # Move towards the player and handle animations
@@ -93,7 +95,7 @@ func move_towards_player(delta):
 func handle_attack(delta):
 	if $".".global_position.distance_to(Global.player_position) >= attack3_range:
 		ranged_attack_timer -= 1
-		print(ranged_attack_timer)
+
 
 #Close range attacks
 	if $".".global_position.distance_to(Global.player_position) <= attack124_range:
@@ -169,8 +171,9 @@ func apply_damage_to_player() -> void:
 		print("Player hit! Health remaining: " + str(health.value))
 
 
-# When the enemy takes damage
+
 func _on_character_body_3d_player_damage(area):
+		print(collision_shape_3d)
 		if area.name == "BiGay" or area.get_parent().name == "BiGay":
 			if !$Node/BiGay/BiguyHitbox.disabled:
 				Global.biGayHealth -= Global.weaponDamage

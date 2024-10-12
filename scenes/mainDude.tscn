@@ -5,8 +5,8 @@
 [ext_resource type="AudioStream" uid="uid://ci6717seh6nkl" path="res://Sound-Effect and music/dark-souls-'-you-died-'-sound-effect-made-with-Voicemod.mp3" id="3_y6gpd"]
 [ext_resource type="PackedScene" uid="uid://8cj4yntvqgt4" path="res://scenes/menu.tscn" id="5_fnvqp"]
 [ext_resource type="PackedScene" uid="uid://chm5ix4falpah" path="res://scenes/blockbench_dude.tscn" id="6_70msx"]
-[ext_resource type="PackedScene" uid="uid://d1c2gsmi5olfg" path="res://scenes/skill_tree.tscn" id="6_j0r2y"]
 [ext_resource type="PackedScene" uid="uid://dgg4hahiwclxx" path="res://scenes/main_background_music.tscn" id="7_3s78q"]
+[ext_resource type="PackedScene" uid="uid://d1c2gsmi5olfg" path="res://scenes/skill_tree.tscn" id="7_qahho"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhb74"]
 radius = 0.375896
@@ -192,8 +192,6 @@ text = "Deaths: 0"
 
 [node name="Menu" parent="." instance=ExtResource("5_fnvqp")]
 
-[node name="skillTree" parent="." instance=ExtResource("6_j0r2y")]
-
 [node name="blockbench_export" parent="." instance=ExtResource("6_70msx")]
 
 [node name="Music" parent="." instance=ExtResource("7_3s78q")]
@@ -209,10 +207,10 @@ margin = 0.5
 [node name="Camera3D" type="Camera3D" parent="CamOrigin/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0, 0, 4)
 
+[node name="skillTree" parent="." instance=ExtResource("7_qahho")]
+
 [connection signal="timeout" from="deathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="showSkillTree" from="Menu" to="." method="_on_menu_show_skill_tree"]
-[connection signal="healthUp" from="skillTree" to="." method="_on_skill_tree_health_up"]
-[connection signal="staminaUp" from="skillTree" to="." method="_on_skill_tree_stamina_up"]
 [connection signal="attackConnected" from="blockbench_export" to="." method="_on_blockbench_export_attack_connected"]
 [connection signal="attackFinished" from="blockbench_export" to="." method="_on_blockbench_export_attack_finished"]

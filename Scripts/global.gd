@@ -13,7 +13,6 @@ var player_position = 0
 var enemy_lock_on_position = 0
 var maxStamina = 200
 var maxHealth = 100
-var idkKerft = true
 var Menu_open = false
 var spawnPoint = Vector3(0,0,0)
 var deathCount = 0
@@ -28,11 +27,13 @@ var dashDuration = 1
 var dashboost = 0
 var dashDirection = Vector3.ZERO
 var weaponDamage = 10
-var SkillPoints = 1
+var SkillPoints = 100
 var attackTimer = 0
 var isAttacking = false
 var isRunning = false
 var enemyIFrames = 0
+var flinch = false
+
 
 
 var enemyDamage = 30
