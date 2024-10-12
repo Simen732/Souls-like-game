@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cqt0ear62f5w5"
+uid="uid://dnd7anovs6ljt"
 path="res://.godot/imported/biguy.gltf-03dff07beda60a8e00876fc556179001.scn"
 
 [deps]
@@ -10829,7 +10829,7 @@ _subresources={
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "res://Animations/Biguy/idle.res",
-"settings/loop_mode": 1,
+"settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
 "slice_1/name": "",
@@ -12628,7 +12628,7 @@ _subresources={
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "res://Animations/Biguy/walk.res",
-"settings/loop_mode": 1,
+"settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
 "slice_1/name": "",

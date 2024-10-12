@@ -19,7 +19,7 @@ func _on_button_pressed():
 
 func _on_damage_up_pressed():
 	if Global.SkillPoints > 0:
-		Global.weaponDamage += 10
+		Global.weaponDamage *= 1.1
 		print(Global.weaponDamage)
 		Global.SkillPoints -= 1
 		rich_text_label.text = "Skill Points:" + str(Global.SkillPoints)

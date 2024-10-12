@@ -38,3 +38,4 @@ var enemyIFrames = 0
 var enemyDamage = 30
 var isFightingBoss = false
 var biGayHealth = 200
+

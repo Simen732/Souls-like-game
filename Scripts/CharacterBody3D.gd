@@ -22,9 +22,10 @@ extends CharacterBody3D
 
 #-----------------------------------------------------------------------------------------------------#
 
-
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var pitch = 0.0
+var locked_on = false
+var lock_on_position = Vector3(0, 0, 0)
 
 #-----------------------------------------------------------------------------------------------------#
 
@@ -33,8 +34,6 @@ signal biGayDamage
 #-----------------------------------------------------------------------------------------------------#
 
 func _ready():
-	rotation.y = 135
-
 	# Connect the `area_entered` signal for detecting hits with the sword
 	sword_area.connect("area_entered", Callable(self, "_on_sword_hit_area"))
 
@@ -53,19 +52,14 @@ func _ready():
 
 
 func _input(event):
-	if event is InputEventMouseMotion and !Global.Menu_open:
+	if event is InputEventMouseMotion and !Global.Menu_open and !locked_on:
 		# Rotate the camera around the player without affecting the player's rotation
 		cam_origin.rotate_y(deg_to_rad(-event.relative.x * sensitivity))  # Horizontal camera movement
-
 		# Clamp vertical camera movement to avoid flipping
 		pitch -= (deg_to_rad(event.relative.y * sensitivity))  # Invert the input to make up/down feel natural
 		pitch = clamp(pitch, deg_to_rad(-80), deg_to_rad(40))
 		cam_origin.rotation.x = pitch
 		cam_origin.rotation.z = 0
-
-
-
-
 
 
 #-----------------------------------------------------------------------------------------------------#
@@ -83,14 +77,26 @@ func _physics_process(delta):
 		music.playing = false
 	
 	var input_dir = Input.get_vector("left", "right", "up", "down")
-	var cam_forward = -cam_origin.transform.basis.z.normalized() # Forward direction of the camera
+	var cam_forward = cam_origin.transform.basis.z.normalized() # Forward direction of the camera
+	cam_forward.y = 0
 	var cam_right = cam_origin.transform.basis.x.normalized() # Right direction of the camera
-	var direction = (-cam_right * input_dir.x + cam_forward * input_dir.y).normalized()
+	var direction = (cam_right * input_dir.x + cam_forward * input_dir.y).normalized()
 
 
-	if direction != Vector3.ZERO and !Global.isDodging and !Global.playerIsDying and !Global.Menu_open:
-		var target_rotation_y = atan2(direction.x, direction.z)
-		$blockbench_export.rotation.y = lerp_angle($blockbench_export.rotation.y, target_rotation_y, 0.1) 
+	if direction != Vector3.ZERO and !Global.isDodging and !Global.playerIsDying and !Global.Menu_open and $blockbench_export.rotatable:
+		var target_rotation_y = atan2(-direction.x, -direction.z)
+		$blockbench_export.rotation.y = lerp_angle($blockbench_export.rotation.y, target_rotation_y, 0.1)
+
+#Lock on logic
+	if Input.is_action_just_pressed("lock on"):
+		locked_on = true
+	
+	if locked_on:
+		lock_on_position = $"../BiGay/playerLockOn".global_position
+		var lock_on_direction = Vector3(lock_on_position - cam_origin.global_position)
+		lock_on_direction = lock_on_direction.normalized()
+		var target_rotation = atan2(-lock_on_direction.x, -lock_on_direction.z)
+		cam_origin.rotation.y = lerp_angle(cam_origin.rotation.y, target_rotation, 0.5)
 
 
 	# Attack logic
@@ -100,29 +106,29 @@ func _physics_process(delta):
 			Global.attackTimer = 120
 			$blockbench_export/AnimationPlayer.stop()
 			$blockbench_export/AnimationPlayer.play("attack1")
-			velocity.x = 0  # Reset horizontal movement velocity
-			velocity.z = 0  # Reset forward/backward movement velocity
-			
+			velocity.z = 0
+			velocity.x = 0
 	# Disable sword hitbox when the attack finishes
 	if Global.attackTimer > 0:
 		Global.attackTimer -= 1
-		Global.isAttacking = true
-		sword_collision.disabled = false  # Enable sword collision during attack
+		Global.isAttacking = true  # Enable sword collision during attack
 	else:
-		Global.isAttacking = false
-		sword_collision.disabled = true  # Disable sword collision when not attacking
-
+		Global.isAttacking = false  # Disable sword collision when not attacking
 
 
 	if Global.enemyIFrames > 0:
-		print(Global.enemyIFrames)
 		Global.enemyIFrames -= 1
+
+	if $blockbench_export/AnimationPlayer.current_animation == "attack1" and $blockbench_export.rotatable:
+		$blockbench_export.rotation.y = lerp_angle($blockbench_export.rotation.y, cam_origin.rotation.y, 0.25)
 
 
 	# Jump
 	if Input.is_action_just_pressed("jump") and is_on_floor() and !Global.playerIsDying:
-		velocity.y = Global.JUMP_VELOCITY
-		$blockbench_export/AnimationPlayer.play("jump")
+		if currentStamina.value >= 20:
+			currentStamina.value -= 20
+			velocity.y = Global.JUMP_VELOCITY
+			$blockbench_export/AnimationPlayer.play("jump")
 
 
 	# Toggle menu with escape key
@@ -168,7 +174,7 @@ func _physics_process(delta):
 	if Global.dashboost > 0:
 		Global.dashboost -= 1
 
-	if !Input.is_action_pressed("run") and !Global.isDodging and !Global.isAttacking and currentStamina.value < Global.maxStamina:
+	if !Input.is_action_pressed("run") and is_on_floor() and !Global.isDodging and !Global.isAttacking and currentStamina.value < Global.maxStamina:
 		currentStamina.value += 1
 
 
@@ -214,11 +220,9 @@ func _physics_process(delta):
 				velocity.x = lerp(velocity.x, Global.dashDirection.x * Global.dogdeSpeed, dashProgress)
 				velocity.z = lerp(velocity.z, Global.dashDirection.z * Global.dogdeSpeed, dashProgress)
 				Global.Iframes = 2
-				print("no 0 speed")
 			else:
 				velocity.x = lerp(velocity.x, Global.dashDirection.x * Global.SPEED * 0.25, dashProgress)
 				velocity.z = lerp(velocity.z, Global.dashDirection.z * Global.SPEED * 0.25, dashProgress)
-				print("0 speed")
 				Global.Iframes = 2
 		else:
 			Global.isDodging = false
@@ -257,9 +261,8 @@ func _on_area_3d_body_entered(body):
 
 # When the death timer ends and you respawn
 func _on_death_timer_timeout():
-	emit_signal("Global.restart")
+	cam_origin.look_at_from_position(cam_origin.global_position, character_body_3d.global_position, Vector3.UP)
 	sensitivity = 0.05
-	rotation.y = 135
 	character_body_3d.global_position = spawn_point
 	death_timer.stop()
 	Engine.time_scale = 1
@@ -267,6 +270,7 @@ func _on_death_timer_timeout():
 	$blockbench_export/AnimationPlayer.play("idle")
 	currentHealth.value = Global.maxHealth
 	Global.playerIsDying = false
+	Global.restart.emit()
 	menu.visible = false
 
 #-----------------------------------------------------------------------------------------------------#
@@ -282,13 +286,13 @@ func _on_menu_show_skill_tree():
 
 
 func _on_skill_tree_health_up():
-	currentHealth.max_value += 10
-	currentHealth.value = currentHealth.max_value
+	Global.maxHealth *= 1.1
+	currentHealth.max_value = Global.maxHealth
 
 
 func _on_skill_tree_stamina_up():
-	currentStamina.max_value += 10
-	currentStamina.value = currentStamina.max_value
+	Global.maxStamina *= 1.1
+	currentStamina.max_value = Global.maxStamina
 
 
 func _on_blockbench_export_attack_finished():
@@ -296,7 +300,7 @@ func _on_blockbench_export_attack_finished():
 
 func _on_sword_hit_area(area):
 	# Only trigger damage during attack animation when sword collision is enabled
-	if not sword_collision.disabled:
+	if !sword_collision.disabled:
 		if area.name == "BiGay" or area.get_parent().name == "BiGay":
 			if Global.enemyIFrames <= 0:
 				Global.enemyIFrames = 50  # Add invincibility frames to the enemy

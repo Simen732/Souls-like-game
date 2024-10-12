@@ -12,6 +12,7 @@ extends Node3D
 @onready var BiGayHandCollision = $Node/Root/Body/ArmL/ElbowL/HandL/Area3D2/CollisionShape3D
 @onready var boss_healthbar = $"../CharacterBody3D/Boss Healthbar"
 
+
 signal playerShank
 
 
@@ -19,18 +20,16 @@ const aggro_range = 20
 var aggro = false
 var speed = 0.75
 const attack124_range = 3  # Distance at which bro uses 1st 2nd and 4th attack
-const attack3_range = 8
+const attack3_range = 6
 const attack5_minrange = 8
-var attack_cooldown
-
-
-# Attack probabilities
-var attack_probabilities = [0.75, 0.75, 0.75]  # Initial weights
-var total_probability = 2.25  # Initial total probability
-var last_attack_index = -0.5  # Index of the last attack used
+var ranged_attack_timer = randi_range(60, 180)
+@export var attackmove = 0
+var attackstop_distance = 0
+@export var rotatable = true
 
 
 func _ready():
+	Global.restart.connect(on_restart)
 	$Node/Root/LegL/KneeL/FootL/Area3D2/GPUParticles3D2.emitting = false
 	boss_healthbar.max_value = Global.biGayHealth
 	boss_healthbar.value = boss_healthbar.max_value
@@ -56,35 +55,49 @@ func _process(delta):
 	if aggro:
 		move_towards_player(delta)
 		handle_attack(delta)
-		if $".".global_position.distance_to(Global.player_position) > aggro_range or Global.playerIsDying or Global.biGayHealth <= 1:
+		if $".".global_position.distance_to(Global.player_position) > aggro_range or Global.biGayHealth <= 1:
 			aggro = false
+			Global.biGayHealth = 200
+			boss_healthbar.value = Global.biGayHealth
+			Global.isFightingBoss = false
+			music.playing = false
+			boss_healthbar.visible = false
+			await animation_player.animation_finished
+			animation_player.play("idle")
 
 
-func _on_character_body_3d_restart():
+func on_restart():
+	aggro = false
 	Global.biGayHealth = 200
 	boss_healthbar.value = Global.biGayHealth
 	Global.isFightingBoss = false
 	music.playing = false
 	boss_healthbar.visible = false
-	await animation_player.current_animation
 	animation_player.play("idle")
 	$".".position = Vector3(0, -16.5, 100)
 
 
 # Move towards the player and handle animations
 func move_towards_player(delta):
-	var direction = Global.enemy_lock_on_position - $".".global_position
-	translate(speed * direction * delta / 10)
+	var direction = Vector3(Global.enemy_lock_on_position.x - $".".global_position.x, 0, Global.enemy_lock_on_position.z - $".".global_position.z)
+	direction = direction.normalized()
+	if $".".global_position.distance_to(Global.player_position) >= attackstop_distance:
+		$".".global_position += (speed + attackmove) * direction * delta
 	if BiGaySwordCollision and BiGayFootCollision and BiGayHandCollision:
-		if BiGaySwordCollision.disabled and BiGayFootCollision.disabled and BiGayHandCollision.disabled:
-			look_at(Global.enemy_lock_on_position)
-			#$".".rotation.y = lerp_angle($".".rotation.y, Global.enemy_lock_on_position, 0.1)
+		if rotatable:
+			var target_rotation_y = atan2(-direction.x, -direction.z)
+			$".".rotation.y = lerp_angle($".".rotation.y, target_rotation_y, 0.05)
 
 
 # Handle attacking logic
 func handle_attack(delta):
+	if $".".global_position.distance_to(Global.player_position) >= attack3_range:
+		ranged_attack_timer -= 1
+		print(ranged_attack_timer)
+
+#Close range attacks
 	if $".".global_position.distance_to(Global.player_position) <= attack124_range:
-		var animations = ["attack1", "attack2", "attack3", "attack4"]
+		var animations = ["attack1", "attack2", "attack4"]
 		var random_animation = animations[randi() % animations.size()]
 		if animation_player.current_animation != "attack1":
 			if animation_player.current_animation != "attack2":
@@ -96,6 +109,39 @@ func handle_attack(delta):
 							await animation_player.animation_finished
 							speed = 0.75
 							animation_player.play("walk")
+
+#Attack3
+	elif $".".global_position.distance_to(Global.player_position) <= attack3_range:
+		if animation_player.current_animation != "attack1":
+			if animation_player.current_animation != "attack2":
+				if animation_player.current_animation != "attack3":
+					if animation_player.current_animation != "attack4":
+						if animation_player.current_animation != "attack5":
+							attackstop_distance = 2
+							speed = 0
+							animation_player.play("attack3")
+							await animation_player.animation_finished
+							speed = 0.75
+							attackstop_distance = 0
+							ranged_attack_timer = randi_range(60, 180)
+							animation_player.play("walk")
+
+#ULTIMATE PERFECT ATTACK
+	elif $".".global_position.distance_to(Global.player_position) >= attack5_minrange:
+		if animation_player.current_animation != "attack1":
+			if animation_player.current_animation != "attack2":
+				if animation_player.current_animation != "attack3":
+					if animation_player.current_animation != "attack4":
+						if animation_player.current_animation != "attack5":
+							if ranged_attack_timer <= 0:
+								attackstop_distance = 6
+								speed = 0
+								animation_player.play("attack5")
+								await animation_player.animation_finished
+								speed = 0.75
+								attackstop_distance = 0
+								ranged_attack_timer = randi_range(60, 180)
+								animation_player.play("walk")
 
 
 # Handle when the sword hits an area
@@ -125,14 +171,15 @@ func apply_damage_to_player() -> void:
 
 # When the enemy takes damage
 func _on_character_body_3d_bi_gay_damage():
-	if $Node/Root/BiGay/BiguyHitbox.disabled == false:
-		Global.biGayHealth -= Global.weaponDamage
-		boss_healthbar.value = Global.biGayHealth
-		if Global.biGayHealth <= 0:
-			$Node/Root/BiGay/BiguyHitbox.disabled = true
-			aggro = false
-			animation_player.stop()
-			animation_player.play("dafeeted")
-			await animation_player.animation_finished
-			boss_healthbar.visible = false
-			queue_free()
+		if !$Node/BiGay/BiguyHitbox.disabled:
+			Global.biGayHealth -= Global.weaponDamage
+			boss_healthbar.value = Global.biGayHealth
+			print("Bigay hit! Health remaining: " + str(boss_healthbar.value))
+			if Global.biGayHealth <= 0:
+				$Node/BiGay/BiguyHitbox.disabled = true
+				aggro = false
+				animation_player.stop()
+				animation_player.play("dafeeted")
+				await animation_player.animation_finished
+				boss_healthbar.visible = false
+				queue_free()
