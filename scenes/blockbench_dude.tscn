@@ -17,19 +17,18 @@ height = 1.37687
 [node name="blockbench_export" instance=ExtResource("1_uaevy")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 script = ExtResource("2_i7c4a")
-rotatable = false
 
 [node name="Body" parent="Node/Pelvis" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.990132, 0.140133, 0, -0.140133, 0.990132, 0, 0.125, 0)
 
 [node name="Head" parent="Node/Pelvis/Body" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.999048, -0.0436192, 0, 0.0436192, 0.999048, 0, 0.4375, -0.03125)
+transform = Transform3D(1, 0, 0, 0, 0.999048, -0.0436194, 0, 0.0436194, 0.999048, 0, 0.4375, -0.03125)
 
 [node name="Rarm" parent="Node/Pelvis/Body" index="2"]
-transform = Transform3D(-0.100339, 0.97799, 0.182944, -0.865969, 0.00469901, -0.500075, -0.489928, -0.208601, 0.846438, 0.1875, 0.375, 0)
+transform = Transform3D(-0.100339, 0.97799, 0.182944, -0.865969, 0.0046988, -0.500075, -0.489928, -0.208601, 0.846438, 0.1875, 0.375, 0)
 
 [node name="Relbow" parent="Node/Pelvis/Body/Rarm" index="1"]
-transform = Transform3D(0.372388, -0.928074, -0.00214544, 0.903625, 0.363102, -0.227199, 0.211637, 0.0826675, 0.973846, 0.25, 0, 0)
+transform = Transform3D(0.372388, -0.928074, -0.00214536, 0.903625, 0.363102, -0.227199, 0.211637, 0.0826676, 0.973846, 0.25, 0, 0)
 
 [node name="Sword" parent="Node/Pelvis/Body/Rarm/Relbow" index="2"]
 transform = Transform3D(0.687597, -0.433818, 0.582247, 0.706004, 0.586772, -0.396556, -0.169613, 0.68374, 0.70974, 0, -0.3125, 0)

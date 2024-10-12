@@ -2,7 +2,6 @@ extends CharacterBody3D
 
 #-----------------------------------------------------------------------------------------------------#
 
-
 @onready var skill_tree = $skillTree
 @onready var cam_origin = $CamOrigin
 @export var sensitivity = 0.05
@@ -18,7 +17,6 @@ extends CharacterBody3D
 @onready var sword_area = $blockbench_export/Node/Pelvis/Body/Rarm/Relbow/Sword/Area3D
 @onready var sword_collision = $blockbench_export/Node/Pelvis/Body/Rarm/Relbow/Sword/Area3D/CollisionShape3D
 @onready var music = $Music
-
 
 #-----------------------------------------------------------------------------------------------------#
 
@@ -111,9 +109,11 @@ func _physics_process(delta):
 	# Disable sword hitbox when the attack finishes
 	if Global.attackTimer > 0:
 		Global.attackTimer -= 1
+		sword_collision.disabled = false
 		Global.isAttacking = true  # Enable sword collision during attack
 	else:
 		Global.isAttacking = false  # Disable sword collision when not attacking
+		sword_collision.disabled = true
 
 
 	if Global.enemyIFrames > 0:
