@@ -24,10 +24,11 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var pitch = 0.0
 var locked_on = false
 var lock_on_position = Vector3(0, 0, 0)
+var jumpDamage = Global.weaponDamage * 1.25
 
 #-----------------------------------------------------------------------------------------------------#
 
-signal biGayDamage
+signal playerDamage
 
 #-----------------------------------------------------------------------------------------------------#
 
@@ -87,7 +88,10 @@ func _physics_process(delta):
 
 #Lock on logic
 	if Input.is_action_just_pressed("lock on"):
-		locked_on = true
+		if !locked_on:
+			locked_on = true
+		elif locked_on:
+			locked_on = false
 	
 	if locked_on:
 		lock_on_position = $"../BiGay/playerLockOn".global_position
@@ -207,7 +211,7 @@ func _physics_process(delta):
 			Global.dashDirection = direction
 			Global.dashStartTime = 0  # Reset the dash timer
 			Global.isDodging = true
-			Global.dashboost = 50
+			Global.dashboost = 30
 			$blockbench_export/AnimationPlayer.play("dodge")  # Play dodge animation
 			Global.dodgeCooldown = 45  # Reset dodge cooldown
 
@@ -301,10 +305,10 @@ func _on_blockbench_export_attack_finished():
 func _on_sword_hit_area(area):
 	# Only trigger damage during attack animation when sword collision is enabled
 	if !sword_collision.disabled:
-		if area.name == "BiGay" or area.get_parent().name == "BiGay":
-			if Global.enemyIFrames <= 0:
-				Global.enemyIFrames = 50  # Add invincibility frames to the enemy
-				emit_signal("biGayDamage")  # Emit damage signal
+		if is_on_floor():
+			emit_signal("playerDamage", Global.weaponDamage) # Emit damage signal
+		elif !is_on_floor():
+			emit_signal("playerDamage", jumpDamage)
 
 
 

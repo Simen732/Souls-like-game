@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var animation_player = $AnimationPlayer
 @onready var music = $AudioStreamPlayer3D
-@onready var biGay = $Node/Root/RigidBody3D
+@onready var biGayRigid = $Node/Root/RigidBody3D
 @onready var biGaySword: Area3D = $Node/Root/Body/ArmR/ElbowR/HandR/Sword/Area3D
 @onready var biGayFoot: Area3D = $Node/Root/LegL/KneeL/FootL/Area3D2
 @onready var biGayHand = $Node/Root/Body/ArmL/ElbowL/HandL/Area3D2
@@ -170,16 +170,17 @@ func apply_damage_to_player() -> void:
 
 
 # When the enemy takes damage
-func _on_character_body_3d_bi_gay_damage():
-		if !$Node/BiGay/BiguyHitbox.disabled:
-			Global.biGayHealth -= Global.weaponDamage
-			boss_healthbar.value = Global.biGayHealth
-			print("Bigay hit! Health remaining: " + str(boss_healthbar.value))
-			if Global.biGayHealth <= 0:
-				$Node/BiGay/BiguyHitbox.disabled = true
-				aggro = false
-				animation_player.stop()
-				animation_player.play("dafeeted")
-				await animation_player.animation_finished
-				boss_healthbar.visible = false
-				queue_free()
+func _on_character_body_3d_player_damage(area):
+		if area.name == "BiGay" or area.get_parent().name == "BiGay":
+			if !$Node/BiGay/BiguyHitbox.disabled:
+				Global.biGayHealth -= Global.weaponDamage
+				boss_healthbar.value = Global.biGayHealth
+				print("Bigay hit! Health remaining: " + str(boss_healthbar.value))
+				if Global.biGayHealth <= 0:
+					$Node/BiGay/BiguyHitbox.disabled = true
+					aggro = false
+					animation_player.stop()
+					animation_player.play("dafeeted")
+					await animation_player.animation_finished
+					boss_healthbar.visible = false
+					queue_free()
