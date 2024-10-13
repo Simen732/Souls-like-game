@@ -38,5 +38,5 @@ var flinch = false
 
 var enemyDamage = 30
 var isFightingBoss = false
-var biGayHealth = 300
+var biGayHealth = 250
 

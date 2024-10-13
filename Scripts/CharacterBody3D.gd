@@ -107,9 +107,11 @@ func _physics_process(delta):
 			lock_on_direction = lock_on_direction.normalized()
 			var target_rotation = atan2(-lock_on_direction.x, -lock_on_direction.z)
 			cam_origin.rotation.y = lerp_angle(cam_origin.rotation.y, target_rotation, 0.5)
+		else:
+			locked_on = false
 
 	# Attack logic
-	if Input.is_action_just_pressed("attack") and !Global.playerIsDying and !Global.Menu_open and !Global.isDodging and !Global.flinch: 
+	if Input.is_action_just_pressed("attack") and !Global.playerIsDying and !Global.Menu_open and !Global.isDodging:
 		if Global.attackTimer <= 0 and currentStamina.value >= 40:
 			currentStamina.value -= 40
 			$blockbench_export/AnimationPlayer.stop()
@@ -158,10 +160,10 @@ func _physics_process(delta):
 			skill_tree.visible = false
 
 
-	#if  animation_player.current_animation == "hurt":
-		#Global.flinch = true
-		#await animation_player.animation_finished
-		#Global.flinch = false
+	if  animation_player.current_animation == "hurt":
+		Global.flinch = true
+	else:
+		Global.flinch = false
 		
 		
 	if Global.dodgeCooldown > 0:
@@ -249,7 +251,6 @@ func _physics_process(delta):
 func playertakeDamage():
 	if Global.Iframes < 1:
 		currentHealth.value -= Global.enemyDamage
-		Global.flinch = true
 		animation_player.stop()
 		animation_player.play("hurt")
 		Global.Iframes = 15
@@ -267,10 +268,6 @@ func playertakeDamage():
 			$blockbench_export/AnimationPlayer.play("death")
 			animation_player.play("deathScreen")
 			sensitivity = 0
-		else:
-			# Await the completion of the hurt animation before allowing other animations
-			await animation_player.animation_finished
-			Global.flinch = false  # Allow normal animations again after hurt finishes
 
 
 
