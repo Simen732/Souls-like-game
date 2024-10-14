@@ -92,25 +92,24 @@ height = 3.1805
 
 [node name="BiGay" instance=ExtResource("1_po3vc")]
 script = ExtResource("2_be8mv")
-rotatable = false
 
 [node name="Root" parent="Node" index="0"]
-transform = Transform3D(-0.293578, 0.0650847, -0.953717, 0.21644, 0.976296, -1.49012e-08, 0.93111, -0.206422, -0.300706, 0, 1.5, 0)
+transform = Transform3D(-0.293578, 0.0650847, -0.953717, 0.21644, 0.976296, -1.49012e-08, 0.93111, -0.206422, -0.300706, 0, 1.5, -0.3125)
 
 [node name="Body" parent="Node/Root" index="1"]
-transform = Transform3D(0.939691, 0, -0.34202, 0, 0.999999, 0, 0.34202, 0, 0.939692, 0, 0.1875, 0)
+transform = Transform3D(0.668258, 0.427433, 0.608876, -0.519716, 0.853845, -0.0289987, -0.532281, -0.297064, 0.792734, 0, 0.1875, 0)
 
 [node name="Head" parent="Node/Root/Body" index="3"]
-transform = Transform3D(0.793353, 0, 0.608761, 0, 1, 0, -0.608761, 0, 0.793352, -0.1875, 0.875, 0)
+transform = Transform3D(0.939796, 0.198784, -0.27797, -0.046037, 0.87964, 0.473407, 0.33862, -0.432109, 0.835833, -0.1875, 0.875, 0)
 
 [node name="ArmL" parent="Node/Root/Body" index="4"]
-transform = Transform3D(0.185482, -0.822324, -0.53794, -0.000420571, 0.547373, -0.836889, 0.982648, 0.155454, 0.101182, 0, 0.6875, 0.4375)
+transform = Transform3D(0.746792, -0.0214456, -0.664712, -0.654466, 0.153968, -0.740249, 0.11822, 0.987843, 0.100947, 0, 0.6875, 0.4375)
 
 [node name="ElbowL" parent="Node/Root/Body/ArmL" index="1"]
-transform = Transform3D(0.649161, 0.226006, -0.7263, -0.127943, 0.973678, 0.18863, 0.749813, -0.0295265, 0.66099, 0, 0, 0.8125)
+transform = Transform3D(-0.0839668, -0.328734, -0.940683, -0.982001, -0.132978, 0.134126, -0.169182, 0.935013, -0.311652, 0, 0, 0.8125)
 
 [node name="HandL" parent="Node/Root/Body/ArmL/ElbowL" index="1"]
-transform = Transform3D(0.336144, -0.935926, -0.10511, 0.940511, 0.339441, -0.0146953, 0.0494324, -0.0939175, 0.994352, 0, 0, 0.875)
+transform = Transform3D(-0.0895273, -0.970222, 0.22506, 0.789455, -0.206897, -0.577887, 0.607242, 0.125938, 0.784471, 0, 0, 0.875)
 
 [node name="Area3D2" type="Area3D" parent="Node/Root/Body/ArmL/ElbowL/HandL" index="1"]
 transform = Transform3D(0.749286, -0.0327145, 0, 0.0327145, 0.749286, 0, 0, 0, 0.75, 0, 0, 0.1)
@@ -121,16 +120,16 @@ shape = SubResource("SphereShape3D_el6w0")
 disabled = true
 
 [node name="ArmR" parent="Node/Root/Body" index="5"]
-transform = Transform3D(0.308054, 0.949232, 0.0637447, -0.295851, 0.0319002, 0.954701, 0.9042, -0.312958, 0.290657, 0, 0.6875, -0.4375)
+transform = Transform3D(-0.0982546, -0.328824, 0.939266, 0.0549842, -0.944186, -0.324794, 0.993643, 0.0197324, 0.11085, 0, 0.6875, -0.4375)
 
 [node name="ElbowR" parent="Node/Root/Body/ArmR" index="1"]
-transform = Transform3D(0.777556, -0.627022, 0.0474248, 0.444297, 0.601199, 0.664198, -0.444979, -0.49538, 0.746051, 0, 0, -0.8125)
+transform = Transform3D(0.489994, 0.233871, -0.839768, 0.815416, -0.463582, 0.34668, -0.308223, -0.854631, -0.417855, 0, 0, -0.8125)
 
 [node name="HandR" parent="Node/Root/Body/ArmR/ElbowR" index="1"]
-transform = Transform3D(0.134702, 0.98884, 0.0636459, 0.9907, -0.133153, -0.0279953, -0.0192082, 0.066825, -0.99758, 0, 0, -0.875)
+transform = Transform3D(-0.744468, -0.409683, 0.527188, -0.584395, 0.781697, -0.217789, -0.322877, -0.470223, -0.821366, 0, 0, -0.875)
 
 [node name="Sword" parent="Node/Root/Body/ArmR/ElbowR/HandR" index="1"]
-transform = Transform3D(0.99908, -0.0428745, 4.24519e-06, 0.0428716, 0.999016, 0.0113868, -0.000492442, -0.0113761, 0.999936, -0.25, -0.046875, 0.125)
+transform = Transform3D(0.99908, -0.00256592, 0.0427975, 0.0428715, 0.0712468, -0.996538, -0.000492126, 0.997456, 0.0712914, -0.25, -0.046875, 0.125)
 
 [node name="Area3D" type="Area3D" parent="Node/Root/Body/ArmR/ElbowR/HandR/Sword" index="5"]
 
@@ -150,7 +149,7 @@ process_material = SubResource("ParticleProcessMaterial_ift0s")
 draw_pass_1 = SubResource("BoxMesh_3p5d5")
 
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="Node/Root/Body/ArmR/ElbowR/HandR/Sword/Area3D" index="2"]
-transform = Transform3D(-8.74228e-09, -0.05, 8.74228e-09, 0, -2.18557e-09, -0.2, 0.2, -2.18557e-09, 3.82137e-16, 2.75, 0, 0)
+transform = Transform3D(-8.74228e-09, -0.05, 8.74228e-09, 0, -2.18557e-09, -0.2, 0.2, -2.18557e-09, 3.82137e-16, 2, 0, 0)
 emitting = false
 amount = 25
 visibility_aabb = AABB(-1, -1, -1, 2, 2, 2)
@@ -158,19 +157,19 @@ process_material = SubResource("ParticleProcessMaterial_ift0s")
 draw_pass_1 = SubResource("BoxMesh_3p5d5")
 
 [node name="LegL" parent="Node/Root" index="2"]
-transform = Transform3D(0.573576, 0.819152, 0, -0.819152, 0.573576, 0, 0, 0, 1, 0, 0, 0.3125)
+transform = Transform3D(0.607063, 0.794654, 0, -0.794654, 0.607063, 0, 0, 0, 1, 0, 0, 0.3125)
 
 [node name="KneeL" parent="Node/Root/LegL" index="1"]
-transform = Transform3D(0.766044, -0.642788, 0, 0.642788, 0.766044, 0, 0, 0, 1, 0, -0.6875, 0)
+transform = Transform3D(0.750511, -0.660858, 0, 0.660858, 0.750511, 0, 0, 0, 1, 0, -0.6875, 0)
 
 [node name="FootL" parent="Node/Root/LegL/KneeL" index="1"]
-transform = Transform3D(0.999048, -0.0436194, 0, 0.0436194, 0.999048, 0, 0, 0, 1, 0, -0.84375, 0)
+transform = Transform3D(0.999284, -0.0378392, 0, 0.0378392, 0.999284, 0, 0, 0, 1, 0, -0.84375, 0)
 
 [node name="Area3D2" type="Area3D" parent="Node/Root/LegL/KneeL/FootL" index="1"]
 transform = Transform3D(9.99048, -0.436192, 1.19356e-06, 0.436192, 9.99048, -7.54996e-09, -1.19209e-06, 5.96047e-08, 10, 0, -0.16, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Root/LegL/KneeL/FootL/Area3D2" index="0"]
-transform = Transform3D(0.25, -3.72529e-10, 7.45058e-09, 3.72529e-09, 0.025, -2.91038e-10, -7.45058e-09, 2.91038e-11, 0.25, 0, 0, 0)
+transform = Transform3D(0.476312, -3.72529e-10, 1.41952e-08, 7.09759e-09, 0.025, -5.54499e-10, -1.41952e-08, 2.91038e-11, 0.476312, 0, 0, 0)
 shape = SubResource("CylinderShape3D_jen6g")
 disabled = true
 
@@ -186,6 +185,7 @@ draw_pass_1 = SubResource("BoxMesh_3p5d5")
 
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="Node/Root/LegL/KneeL/FootL/Area3D2" index="2"]
 transform = Transform3D(2, 0, 0, -1.49012e-08, 2, 3.91155e-08, 0, -2.6077e-08, 2, 0, 0.05, 0)
+transparency = 1.0
 cast_shadow = 0
 emitting = false
 amount = 1
@@ -195,13 +195,13 @@ process_material = SubResource("ParticleProcessMaterial_yhmmq")
 draw_pass_1 = SubResource("TorusMesh_8g8e7")
 
 [node name="LegR" parent="Node/Root" index="3"]
-transform = Transform3D(0.907673, -0.229041, -0.351667, 0.24321, 0.969965, -0.00399849, 0.34202, -0.0818996, 0.936117, 0, 0, -0.3125)
+transform = Transform3D(0.92333, -0.153317, -0.352073, 0.162311, 0.986731, -0.00402214, 0.348018, -0.0534315, 0.935964, 0, 0, -0.3125)
 
 [node name="KneeR" parent="Node/Root/LegR" index="1"]
-transform = Transform3D(0.999048, -0.0436194, 0, 0.0436194, 0.999048, 0, 0, 0, 1, 0, -0.6875, 0)
+transform = Transform3D(0.836035, -0.548676, 0, 0.548676, 0.836035, 0, 0, 0, 1, 0, -0.6875, 0)
 
 [node name="FootR" parent="Node/Root/LegR/KneeR" index="1"]
-transform = Transform3D(0.764372, 0.443457, -0.468061, -0.356433, 0.89554, 0.266389, 0.5373, -0.0367882, 0.842589, 0, -0.84375, 0)
+transform = Transform3D(0.837848, 0.214676, 0.501922, -0.192602, 0.976552, -0.0961728, -0.510799, -0.0160929, 0.85955, 0, -0.84375, 0)
 
 [node name="BiGay" type="Area3D" parent="Node" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.8, 0, 0, 0, 1, 0, 1.5, -0.25)
@@ -226,7 +226,7 @@ unit_size = 40.0
 max_distance = 40.0
 emission_angle_filter_attenuation_db = 0.0
 
-[connection signal="area_entered" from="Node/Root/Body/ArmL/ElbowL/HandL/Area3D2" to="." method="_on_area_3d_2_area_entered"]
 [connection signal="area_entered" from="Node/Root/Body/ArmL/ElbowL/HandL/Area3D2" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_entered" from="Node/Root/Body/ArmL/ElbowL/HandL/Area3D2" to="." method="_on_area_3d_2_area_entered"]
 [connection signal="area_entered" from="Node/Root/Body/ArmR/ElbowR/HandR/Sword/Area3D" to="." method="_on_area_3d_area_entered"]
 [connection signal="area_entered" from="Node/Root/LegL/KneeL/FootL/Area3D2" to="." method="_on_area_3d_area_entered"]

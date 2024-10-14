@@ -43,7 +43,7 @@ shape = SubResource("BoxShape3D_58acl")
 disabled = true
 
 [node name="Larm" parent="Node/Pelvis/Body" index="3"]
-transform = Transform3D(0.158099, -0.983447, -0.0885213, 0.926777, 0.178725, -0.330366, 0.340719, -0.029809, 0.939692, -0.1875, 0.375, 0)
+transform = Transform3D(0.158098, -0.983447, -0.0885212, 0.926777, 0.178725, -0.330366, 0.340719, -0.0298091, 0.939692, -0.1875, 0.375, 0)
 
 [node name="Lelbow" parent="Node/Pelvis/Body/Larm" index="1"]
 transform = Transform3D(0.492404, 0.539921, -0.682659, -0.642787, 0.754406, 0.133022, 0.586824, 0.373304, 0.718527, -0.25, 0, 0)
@@ -69,11 +69,11 @@ autoplay = "idle"
 [node name="Player" type="Area3D" parent="." index="2"]
 
 [node name="Player" type="CollisionShape3D" parent="Player" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.6, 0, 0, 0, 0.5, 0, 0.65, 0)
 shape = SubResource("CapsuleShape3D_xgx0f")
 
-[node name="Player2" type="CollisionShape3D" parent="Player" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.37192, 0)
+[node name="Jump_hitbox" type="CollisionShape3D" parent="Player" index="1"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_yya2d")
 disabled = true
 

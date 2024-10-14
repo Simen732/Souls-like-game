@@ -160,7 +160,7 @@ func _physics_process(delta):
 			skill_tree.visible = false
 
 
-	if  animation_player.current_animation == "hurt":
+	if  $blockbench_export/AnimationPlayer.current_animation == "hurt":
 		Global.flinch = true
 	else:
 		Global.flinch = false
@@ -251,9 +251,12 @@ func _physics_process(delta):
 func playertakeDamage():
 	if Global.Iframes < 1:
 		currentHealth.value -= Global.enemyDamage
-		animation_player.stop()
-		animation_player.play("hurt")
-		Global.Iframes = 15
+		$blockbench_export/AnimationPlayer.stop()
+		$blockbench_export/AnimationPlayer.play("hurt")
+		velocity.z = 0
+		velocity.x = 0
+	# Disable sword hitbox when the attack finishes
+		Global.Iframes = 10
 		print("denne runner")
 
 
@@ -268,10 +271,6 @@ func playertakeDamage():
 			$blockbench_export/AnimationPlayer.play("death")
 			animation_player.play("deathScreen")
 			sensitivity = 0
-
-
-
-
 
 # This is what happens when you touch the deathBox and die
 func _on_area_3d_body_entered(body):

@@ -63,9 +63,12 @@ func _process(delta):
 			Global.isFightingBoss = false
 			music.playing = false
 			boss_healthbar.visible = false
-			await animation_player.animation_finished
-			animation_player.play("idle")
-
+			if animation_player.current_animation != "walk":
+				await animation_player.animation_finished
+				animation_player.play("idle")
+			else:
+				animation_player.stop
+				animation_player.play("idle")
 
 func on_restart():
 	aggro = false
@@ -154,7 +157,7 @@ func _on_sword_area_entered(area: Area3D) -> void:
 
 func _on_foot_area_entered(area: Area3D) -> void:
 	if area.name == "Player" or area.get_parent().name == "Player" and !BiGayFootCollision.disabled:
-		Global.enemyDamage = 30
+		Global.enemyDamage = 60
 		apply_damage_to_player()
 
 func _on_hand_area_entered(area: Area3D) -> void:
