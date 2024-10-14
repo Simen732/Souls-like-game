@@ -80,6 +80,7 @@ func on_restart():
 	animation_player.stop()	
 	animation_player.play("idle")
 	$".".position = Vector3(0, -29.726, 105)
+	$".".rotation = Vector3(0, 0, 0)
 
 
 # Move towards the player and handle animations
