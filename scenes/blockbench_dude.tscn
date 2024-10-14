@@ -20,10 +20,10 @@ script = ExtResource("2_i7c4a")
 rotatable = false
 
 [node name="Body" parent="Node/Pelvis" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.999048, 0.0436194, 0, -0.0436194, 0.999048, 0, 0.125, 0)
+transform = Transform3D(1, 0, 0, 0, 0.999048, 0.0436193, 0, -0.0436193, 0.999048, 0, 0.125, 0)
 
 [node name="Head" parent="Node/Pelvis/Body" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.999048, -0.0436194, 0, 0.0436194, 0.999048, 0, 0.4375, -0.03125)
+transform = Transform3D(1, 0, 0, 0, 0.999048, -0.0436193, 0, 0.0436193, 0.999048, 0, 0.4375, -0.03125)
 
 [node name="Rarm" parent="Node/Pelvis/Body" index="2"]
 transform = Transform3D(0.23457, 0.965926, 0.109382, -0.875426, 0.258819, -0.408218, -0.422618, 2.23517e-08, 0.906308, 0.1875, 0.375, 0)
@@ -43,7 +43,7 @@ shape = SubResource("BoxShape3D_58acl")
 disabled = true
 
 [node name="Larm" parent="Node/Pelvis/Body" index="3"]
-transform = Transform3D(0.158098, -0.983447, -0.0885212, 0.926777, 0.178725, -0.330366, 0.340719, -0.0298091, 0.939692, -0.1875, 0.375, 0)
+transform = Transform3D(0.158098, -0.983447, -0.0885213, 0.926777, 0.178725, -0.330366, 0.340719, -0.0298091, 0.939692, -0.1875, 0.375, 0)
 
 [node name="Lelbow" parent="Node/Pelvis/Body/Larm" index="1"]
 transform = Transform3D(0.492404, 0.539921, -0.682659, -0.642787, 0.754406, 0.133022, 0.586824, 0.373304, 0.718527, -0.25, 0, 0)
