@@ -146,7 +146,7 @@ sky_mode = 1
 [node name="Pillars" type="Node" parent="."]
 
 [node name="Pillar1" parent="Pillars" instance=ExtResource("2_i73u5")]
-transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -0.838848, 1, 0.493767)
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -2.83885, 1, 0.493767)
 
 [node name="Area3D" parent="." instance=ExtResource("3_2sxlr")]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -5.91377, 0.493558, 12.7729)
@@ -177,7 +177,6 @@ mesh = SubResource("BoxMesh_mvu4d")
 [node name="EnemyLockOn" parent="." instance=ExtResource("5_fek2o")]
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("5_0gych")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.992535, -3.91814, 79.9777)
 
 [node name="Health" type="ProgressBar" parent="CharacterBody3D"]
 modulate = Color(1, 0, 0, 1)

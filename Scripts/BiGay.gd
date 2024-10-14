@@ -4,20 +4,17 @@ extends Node3D
 @onready var music = $AudioStreamPlayer3D
 @onready var biGayRigid = $Node/Root/RigidBody3D
 @onready var biGaySword: Area3D = $Node/Root/Body/ArmR/ElbowR/HandR/Sword/Area3D
+@onready var biGayHilt: Area3D = $Node/Root/Body/ArmR/ElbowR/HandR/Area3D2
 @onready var biGayFoot: Area3D = $Node/Root/LegL/KneeL/FootL/Area3D2
-@onready var biGayHand = $Node/Root/Body/ArmL/ElbowL/HandL/Area3D2
+@onready var biGayHand: Area3D = $Node/Root/Body/ArmL/ElbowL/HandL/Area3D2
 @onready var health: ProgressBar = $"../CharacterBody3D/Health"
-@onready var BiGaySwordCollision = $Node/Root/Body/ArmR/ElbowR/HandR/Sword/Area3D/CollisionShape3D
-@onready var BiGayFootCollision = $Node/Root/LegL/KneeL/FootL/Area3D2/CollisionShape3D
-@onready var BiGayHandCollision = $Node/Root/Body/ArmL/ElbowL/HandL/Area3D2/CollisionShape3D
 @onready var boss_healthbar = $"../CharacterBody3D/Boss Healthbar"
-@onready var collision_shape_3d = $Node/Pelvis/Body/Rarm/Relbow/Sword/Area3D/CollisionShape3D
 
 
 signal playerShank
 
 
-const aggro_range = 29
+const aggro_range = 30
 var aggro = false
 var speed = 0.75
 const attack124_range = 3  # Distance at which bro uses 1st 2nd and 4th attack
@@ -43,6 +40,9 @@ func _ready():
 
 	if not biGayHand.is_connected("area_entered", Callable(self, "_on_hand_area_entered")):
 		biGayHand.connect("area_entered", Callable(self, "_on_hand_area_entered"))
+
+	if not biGayHilt.is_connected("area_entered", Callable(self, "_on_hilt_area_entered")):
+		biGayHilt.connect("area_entered", Callable(self, "_on_hilt_area_entered"))
 
 
 func _process(delta):
@@ -89,10 +89,9 @@ func move_towards_player(delta):
 	direction = direction.normalized()
 	if $".".global_position.distance_to(Global.player_position) >= attackstop_distance:
 		$".".global_position += (speed + attackmove) * direction * delta
-	if BiGaySwordCollision and BiGayFootCollision and BiGayHandCollision:
-		if rotatable:
-			var target_rotation_y = atan2(-direction.x, -direction.z)
-			$".".rotation.y = lerp_angle($".".rotation.y, target_rotation_y, 0.05)
+	if rotatable:
+		var target_rotation_y = atan2(-direction.x, -direction.z)
+		$".".rotation.y = lerp_angle($".".rotation.y, target_rotation_y, 0.05)
 
 
 # Handle attacking logic
@@ -140,7 +139,7 @@ func handle_attack(delta):
 					if animation_player.current_animation != "attack4":
 						if animation_player.current_animation != "attack5":
 							if ranged_attack_timer <= 0:
-								attackstop_distance = 6
+								attackstop_distance = 5
 								speed = 0
 								animation_player.play("attack5")
 								await animation_player.animation_finished
@@ -152,18 +151,23 @@ func handle_attack(delta):
 
 # Handle when the sword hits an area
 func _on_sword_area_entered(area: Area3D) -> void:
-	if area.name == "Player" or area.get_parent().name == "Player" and !BiGaySwordCollision.disabled:
+	if area.name == "Player" or area.get_parent().name == "Player" and !biGaySword.disabled:
 		Global.enemyDamage = 40
 		apply_damage_to_player()
 
 func _on_foot_area_entered(area: Area3D) -> void:
-	if area.name == "Player" or area.get_parent().name == "Player" and !BiGayFootCollision.disabled:
+	if area.name == "Player" or area.get_parent().name == "Player" and !biGayFoot.disabled:
 		Global.enemyDamage = 60
 		apply_damage_to_player()
 
 func _on_hand_area_entered(area: Area3D) -> void:
-	if area.name == "Player" or area.get_parent().name == "Player" and !BiGayHandCollision.disabled:
+	if area.name == "Player" or area.get_parent().name == "Player" and !biGayHand.disabled:
 		Global.enemyDamage = 20
+		apply_damage_to_player()
+
+func _on_hilt_area_entered(area: Area3D) -> void:
+	if area.name == "Player" or area.get_parent().name == "Player" and !biGayHilt.disabled:
+		Global.enemyDamage = 30
 		apply_damage_to_player()
 
 
@@ -177,7 +181,6 @@ func apply_damage_to_player() -> void:
 
 
 func _on_character_body_3d_player_damage(area):
-		print(collision_shape_3d)
 		if area.name == "BiGay" or area.get_parent().name == "BiGay":
 			if !$Node/BiGay/BiguyHitbox.disabled:
 				Global.biGayHealth -= Global.weaponDamage

@@ -8,7 +8,6 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kb1e4"]
 radius = 0.322123
-height = 2.41185
 
 [sub_resource type="Curve" id="Curve_mda4a"]
 min_value = 90.0
@@ -104,7 +103,7 @@ transform = Transform3D(0.939691, 0, -0.34202, 0, 0.999999, 0, 0.34202, 0, 0.939
 transform = Transform3D(0.793353, 0, 0.608761, 0, 1, 0, -0.608761, 0, 0.793353, -0.1875, 0.875, 0)
 
 [node name="ArmL" parent="Node/Root/Body" index="4"]
-transform = Transform3D(0.185482, -0.822324, -0.537941, -0.00042063, 0.547373, -0.836889, 0.982648, 0.155454, 0.101182, 0, 0.6875, 0.4375)
+transform = Transform3D(0.185482, -0.822324, -0.537941, -0.00042057, 0.547373, -0.836889, 0.982648, 0.155454, 0.101182, 0, 0.6875, 0.4375)
 
 [node name="ElbowL" parent="Node/Root/Body/ArmL" index="1"]
 transform = Transform3D(0.649161, 0.226006, -0.7263, -0.127943, 0.973678, 0.18863, 0.749813, -0.0295264, 0.660991, 0, 0, 0.8125)
@@ -121,7 +120,7 @@ shape = SubResource("SphereShape3D_el6w0")
 disabled = true
 
 [node name="ArmR" parent="Node/Root/Body" index="5"]
-transform = Transform3D(0.308054, 0.949232, 0.0637447, -0.295851, 0.0319001, 0.954701, 0.904201, -0.312958, 0.290658, 0, 0.6875, -0.4375)
+transform = Transform3D(0.308053, 0.949232, 0.0637446, -0.295851, 0.0319, 0.954701, 0.904201, -0.312957, 0.290657, 0, 0.6875, -0.4375)
 
 [node name="ElbowR" parent="Node/Root/Body/ArmR" index="1"]
 transform = Transform3D(0.777556, -0.627022, 0.0474247, 0.444297, 0.601199, 0.664198, -0.444979, -0.49538, 0.746051, 0, 0, -0.8125)
@@ -130,7 +129,7 @@ transform = Transform3D(0.777556, -0.627022, 0.0474247, 0.444297, 0.601199, 0.66
 transform = Transform3D(0.134702, 0.98884, 0.0636459, 0.9907, -0.133153, -0.0279953, -0.0192082, 0.066825, -0.99758, 0, 0, -0.875)
 
 [node name="Sword" parent="Node/Root/Body/ArmR/ElbowR/HandR" index="1"]
-transform = Transform3D(0.99908, -0.0428745, 4.24512e-06, 0.0428716, 0.999016, 0.0113868, -0.000492442, -0.0113761, 0.999936, -0.25, -0.046875, 0.125)
+transform = Transform3D(0.99908, -0.0428745, 4.24499e-06, 0.0428716, 0.999016, 0.0113868, -0.000492442, -0.0113761, 0.999936, -0.25, -0.046875, 0.125)
 
 [node name="Area3D" type="Area3D" parent="Node/Root/Body/ArmR/ElbowR/HandR/Sword" index="5"]
 
@@ -140,7 +139,7 @@ shape = SubResource("CapsuleShape3D_kb1e4")
 disabled = true
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Node/Root/Body/ArmR/ElbowR/HandR/Sword/Area3D" index="1"]
-transform = Transform3D(-3.25841e-08, -0.05, 8.74228e-09, 0, -2.18557e-09, -0.2, 0.2, -8.14603e-09, 1.4243e-15, 2, 9.53674e-07, -1.19209e-07)
+transform = Transform3D(-8.74228e-09, -0.05, 8.74228e-09, 0, -2.18557e-09, -0.2, 0.2, -2.18557e-09, 3.82137e-16, 2, 9.53674e-07, -1.19209e-07)
 emitting = false
 amount = 25
 one_shot = true
@@ -151,14 +150,20 @@ draw_pass_1 = SubResource("BoxMesh_3p5d5")
 
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="Node/Root/Body/ArmR/ElbowR/HandR/Sword/Area3D" index="2"]
 transform = Transform3D(-8.74228e-09, -0.05, 8.74228e-09, 0, -2.18557e-09, -0.2, 0.2, -2.18557e-09, 3.82137e-16, 2.75, 0, -8.9407e-08)
-emitting = false
 amount = 25
 visibility_aabb = AABB(-1, -1, -1, 2, 2, 2)
 process_material = SubResource("ParticleProcessMaterial_ift0s")
 draw_pass_1 = SubResource("BoxMesh_3p5d5")
 
+[node name="Area3D2" type="Area3D" parent="Node/Root/Body/ArmR/ElbowR/HandR" index="2"]
+transform = Transform3D(0.999079, -0.0428931, -0.00105283, 0.0429029, 0.998415, 0.0364398, -0.000511914, -0.0364514, 0.999336, -0.25, -0.0468751, 0.125)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Node/Root/Body/ArmR/ElbowR/HandR/Area3D2" index="0"]
+transform = Transform3D(-1.49012e-08, -0.75, -1.93715e-07, 0.5, -1.49012e-08, -1.15484e-07, 5.58794e-08, -3.27826e-07, 0.5, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_kb1e4")
+
 [node name="LegL" parent="Node/Root" index="2"]
-transform = Transform3D(0.573577, 0.819152, 0, -0.819152, 0.573577, 0, 0, 0, 1, 0, 0, 0.3125)
+transform = Transform3D(0.573576, 0.819152, 0, -0.819152, 0.573576, 0, 0, 0, 1, 0, 0, 0.3125)
 
 [node name="KneeL" parent="Node/Root/LegL" index="1"]
 transform = Transform3D(0.766044, -0.642788, 0, 0.642788, 0.766044, 0, 0, 0, 1, 0, -0.6875, 0)
@@ -229,4 +234,5 @@ emission_angle_filter_attenuation_db = 0.0
 [connection signal="area_entered" from="Node/Root/Body/ArmL/ElbowL/HandL/Area3D2" to="." method="_on_area_3d_area_entered"]
 [connection signal="area_entered" from="Node/Root/Body/ArmL/ElbowL/HandL/Area3D2" to="." method="_on_area_3d_2_area_entered"]
 [connection signal="area_entered" from="Node/Root/Body/ArmR/ElbowR/HandR/Sword/Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_entered" from="Node/Root/Body/ArmR/ElbowR/HandR/Area3D2" to="." method="_on_area_3d_area_entered"]
 [connection signal="area_entered" from="Node/Root/LegL/KneeL/FootL/Area3D2" to="." method="_on_area_3d_area_entered"]
