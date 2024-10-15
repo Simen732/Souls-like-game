@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1c2gsmi5olfg"]
+[gd_scene load_steps=7 format=3 uid="uid://d1c2gsmi5olfg"]
 
 [ext_resource type="Script" path="res://Scripts/skill_tree.gd" id="1_jskla"]
 [ext_resource type="Texture2D" uid="uid://btfnal72lqsjw" path="res://Img/skillTreeBackground.jpg" id="2_887du"]
+[ext_resource type="Texture2D" uid="uid://bdc8wtip2cm20" path="res://Img/Spirit_icon.png" id="3_bh5te"]
+[ext_resource type="Texture2D" uid="uid://b7anuvpap4ms" path="res://Img/sebaspill-icon.svg" id="4_5k8rg"]
+[ext_resource type="Texture2D" uid="uid://dj8xjk5sq4vq1" path="res://Img/Tenacity_icon.png" id="5_018lo"]
+[ext_resource type="Texture2D" uid="uid://bvlef8luaxdvf" path="res://Img/Fortitude_icon.png" id="6_iytla"]
 
 [node name="skillTree" type="Control"]
-visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -49,16 +52,41 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -67.5
-offset_top = -258.5
-offset_right = 67.5
-offset_bottom = -225.5
+offset_left = 104.0
+offset_top = 85.0
+offset_right = 210.0
+offset_bottom = 211.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SpeedUp" type="Button" parent="MarginContainer5"]
+[node name="SpiritPanel" type="Panel" parent="MarginContainer5"]
 layout_mode = 2
-text = "Speed Up"
+mouse_filter = 2
+
+[node name="spiritUp" type="TextureButton" parent="MarginContainer5"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("3_bh5te")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer5/spiritUp"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -49.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SpiritLabel" type="Label" parent="MarginContainer5/spiritUp/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 35
+text = "0/10"
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -67,17 +95,41 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -67.5
-offset_top = -177.5
-offset_right = 67.5
-offset_bottom = -144.5
+offset_left = -287.0
+offset_top = 83.0
+offset_right = -127.0
+offset_bottom = 217.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DamageUp" type="Button" parent="MarginContainer2"]
+[node name="DamagePanel" type="Panel" parent="MarginContainer2"]
 layout_mode = 2
-text = "Damage up
-"
+mouse_filter = 2
+
+[node name="damageUp" type="TextureButton" parent="MarginContainer2"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("4_5k8rg")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/damageUp"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -49.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="damageLabel" type="Label" parent="MarginContainer2/damageUp/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 35
+text = "0/10"
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="MarginContainer4" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -86,45 +138,95 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 102.5
-offset_top = -176.5
-offset_right = 237.5
-offset_bottom = -143.5
+offset_left = 97.0
+offset_top = -193.0
+offset_right = 223.0
+offset_bottom = -82.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HealthUp" type="Button" parent="MarginContainer4"]
+[node name="StaminaPanel" type="Panel" parent="MarginContainer4"]
 layout_mode = 2
-text = "Health up"
+mouse_filter = 2
 
-[node name="MarginContainer3" type="MarginContainer" parent="."]
+[node name="StaminaUp" type="TextureButton" parent="MarginContainer4"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("5_018lo")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer4/StaminaUp"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -49.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="StaminaLabel" type="Label" parent="MarginContainer4/StaminaUp/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 35
+text = "0/10"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="MarginContainer6" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -239.5
-offset_top = -177.5
-offset_right = -104.5
-offset_bottom = -144.5
+offset_left = -261.0
+offset_top = -193.0
+offset_right = -135.0
+offset_bottom = -82.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="StaminaUp" type="Button" parent="MarginContainer3"]
+[node name="healthPanel" type="Panel" parent="MarginContainer6"]
 layout_mode = 2
-text = "Stamina up"
+mouse_filter = 2
+
+[node name="healthUp" type="TextureButton" parent="MarginContainer6"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("6_iytla")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="healthContainer" type="MarginContainer" parent="MarginContainer6/healthUp"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -49.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="healthLabel" type="Label" parent="MarginContainer6/healthUp/healthContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 35
+text = "0/10"
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 411.0
-offset_top = -292.0
-offset_right = 552.0
-offset_bottom = -265.0
+offset_left = -62.0
+offset_top = -30.0
+offset_right = 79.0
+offset_bottom = -3.0
 text = "Skill Points:"
 
 [connection signal="pressed" from="MarginContainer/SpeedUp" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="MarginContainer5/SpeedUp" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="MarginContainer2/DamageUp" to="." method="_on_damage_up_pressed"]
-[connection signal="pressed" from="MarginContainer4/HealthUp" to="." method="_on_health_up_pressed"]
-[connection signal="pressed" from="MarginContainer3/StaminaUp" to="." method="_on_stamina_up_pressed"]
+[connection signal="pressed" from="MarginContainer5/spiritUp" to="." method="_on_spirit_up_pressed"]
+[connection signal="pressed" from="MarginContainer2/damageUp" to="." method="_on_damage_up_pressed"]
+[connection signal="pressed" from="MarginContainer4/StaminaUp" to="." method="_on_stamina_up_pressed"]
+[connection signal="pressed" from="MarginContainer6/healthUp" to="." method="_on_health_up_pressed"]

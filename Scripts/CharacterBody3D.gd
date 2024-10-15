@@ -305,20 +305,6 @@ func _on_menu_show_skill_tree():
 	skill_tree.visible = true
 
 
-func _on_skill_tree_health_up():
-	Global.maxHealth += 50 * 1.05
-	currentHealth.max_value = Global.maxHealth
-	currentHealth.value += currentHealth.max_value/10 
-	print(currentHealth.value)
-	print(currentHealth.max_value)
-
-func _on_skill_tree_stamina_up():
-	Global.maxStamina *= 1.1
-	currentStamina.max_value = Global.maxStamina
-
-
-
-
 func _on_sword_hit_area(area):
 	if !sword_collision.disabled:
 		print(sword_collision.disabled)
@@ -329,3 +315,17 @@ func _on_sword_hit_area(area):
 
 func _on_bi_gay_player_shank() -> void:
 	playertakeDamage()
+
+
+func _on_skill_tree_stamina_up():
+	Global.maxStamina *= 1.1
+	currentStamina.max_value = Global.maxStamina
+	print("Stamina up")
+
+
+func _on_skill_tree_health_up():
+	Global.maxHealth += 50 * 1.05
+	currentHealth.max_value = Global.maxHealth
+	currentHealth.value += currentHealth.max_value/10 
+	print(currentHealth.value)
+	print(currentHealth.max_value)

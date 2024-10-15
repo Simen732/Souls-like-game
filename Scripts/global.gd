@@ -27,13 +27,13 @@ var dashDuration = 1
 var dashboost = 0
 var dashDirection = Vector3.ZERO
 var weaponDamage = 10
-var SkillPoints = 1
+var SkillPoints = 100
 var attackTimer = 0
 var isAttacking = false
 var isRunning = false
 var enemyIFrames = 0
 var flinch = false
-
+var Spirit = 0
 
 
 var enemyDamage = 30

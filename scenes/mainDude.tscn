@@ -212,3 +212,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0, 0, 4)
 [connection signal="timeout" from="deathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="showSkillTree" from="Menu" to="." method="_on_menu_show_skill_tree"]
+[connection signal="healthUp" from="skillTree" to="." method="_on_skill_tree_health_up"]
+[connection signal="staminaUp" from="skillTree" to="." method="_on_skill_tree_stamina_up"]
