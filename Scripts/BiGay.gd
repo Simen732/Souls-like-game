@@ -6,13 +6,13 @@ extends Node3D
 @onready var biGayHilt: Area3D = $Node/Root/Body/ArmR/ElbowR/HandR/Area3D2
 @onready var biGayFoot: Area3D = $Node/Root/LegL/KneeL/FootL/Area3D2
 @onready var biGayHand: Area3D = $Node/Root/Body/ArmL/ElbowL/HandL/Area3D2
-@onready var health: ProgressBar = $"../CharacterBody3D/Health"
 @onready var boss_healthbar = $"../CharacterBody3D/BossHealthbar"
 
 
 signal playerShank
 
 
+var Health = 300
 const aggro_range = 30
 var aggro = false
 var speed = 0.75
@@ -28,7 +28,7 @@ var attackstop_distance = 0
 func _ready():
 	Global.restart.connect(on_restart)
 	$Node/Root/LegL/KneeL/FootL/Area3D2/GPUParticles3D2.emitting = false
-	boss_healthbar.max_value = Global.biGayHealth
+	boss_healthbar.max_value = Health
 	boss_healthbar.value = boss_healthbar.max_value
 	
 	if not biGaySword.is_connected("area_entered", Callable(self, "_on_sword_area_entered")):
@@ -45,9 +45,9 @@ func _ready():
 
 
 func _process(delta):
-	if !aggro and $".".global_position.distance_to(Global.player_position) <= aggro_range and !Global.playerIsDying and Global.biGayHealth > 0:
+	if !aggro and $".".global_position.distance_to(Global.player_position) <= aggro_range and !Global.playerIsDying and Health > 0:
 		aggro = true
-		Global.isFightingBoss = true
+		Global.isFighting = true
 		music.playing = true
 		boss_healthbar.visible = true
 		animation_player.play("walk")
@@ -55,11 +55,11 @@ func _process(delta):
 	if aggro:
 		move_towards_player(delta)
 		handle_attack(delta)
-		if $".".global_position.distance_to(Global.player_position) > aggro_range or Global.biGayHealth <= 1:
+		if $".".global_position.distance_to(Global.player_position) > aggro_range or Health <= 1:
 			aggro = false
-			Global.biGayHealth = boss_healthbar.max_value
-			boss_healthbar.value = Global.biGayHealth
-			Global.isFightingBoss = false
+			Health = boss_healthbar.max_value
+			boss_healthbar.value = Health
+			Global.isFighting = false
 			music.playing = false
 			boss_healthbar.visible = false
 			if animation_player.current_animation != "walk":
@@ -71,9 +71,9 @@ func _process(delta):
 
 func on_restart():
 	aggro = false
-	Global.biGayHealth = boss_healthbar.max_value
-	boss_healthbar.value = Global.biGayHealth
-	Global.isFightingBoss = false
+	Health = boss_healthbar.max_value
+	boss_healthbar.value = Health
+	Global.isFighting = false
 	music.playing = false
 	boss_healthbar.visible = false
 	animation_player.stop()	
@@ -175,17 +175,16 @@ func apply_damage_to_player() -> void:
 	#health.value -=   # Subtract the damage from the player's health
 	if !Global.playerIsDying:
 		emit_signal("playerShank")
-		print("Player hit! Health remaining: " + str(health.value))
 
 
 
 func _on_character_body_3d_player_damage(area):
 		if area.name == "BiGay" or area.get_parent().name == "BiGay":
 			if !$Node/BiGay/BiguyHitbox.disabled:
-				Global.biGayHealth -= Global.weaponDamage
-				boss_healthbar.value = Global.biGayHealth
+				Health -= Global.weaponDamage
+				boss_healthbar.value = Health
 				print("Bigay hit! Health remaining: " + str(boss_healthbar.value))
-				if Global.biGayHealth <= 0:
+				if Health <= 0:
 					$Node/BiGay/BiguyHitbox.disabled = true
 					aggro = false
 					animation_player.stop()

@@ -238,3 +238,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30598, -4.5, 71.3903)
 [connection signal="body_entered" from="spawnPoints/spawnPoint2" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
 [connection signal="body_entered" from="spawnPoints/spawnPoint3" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
 [connection signal="playerDamage" from="CharacterBody3D" to="BiGay" method="_on_character_body_3d_player_damage"]
+[connection signal="playerShank" from="BiGay" to="CharacterBody3D" method="_on_bi_gay_player_shank"]
