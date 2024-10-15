@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://dgv4buxnd8ejl"]
+
+[ext_resource type="PackedScene" uid="uid://c3cpm3w7xv2o4" path="res://Models/templeGoon.gltf" id="1_bodcd"]
+[ext_resource type="Script" path="res://Scripts/templeGoon.gd" id="2_8y2fm"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6v8eq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xa0ot"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ndqt8"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_63yck"]
+
+[node name="templeGoon" instance=ExtResource("1_bodcd")]
+script = ExtResource("2_8y2fm")
+
+[node name="Root" parent="Node" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1.4375, 0)
+
+[node name="ArmL" parent="Node/Root" index="1"]
+transform = Transform3D(0.5, -0.707107, 0.5, 0.5, 0.707107, 0.5, -0.707107, -1.19209e-07, 0.707107, -0.40625, 0.1875, 0)
+
+[node name="ElbowL" parent="Node/Root/ArmL" index="2"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.4375, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="Node/Root/ArmL/ElbowL/sphere4" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Root/ArmL/ElbowL/sphere4/Area3D" index="0"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("SphereShape3D_6v8eq")
+disabled = true
+
+[node name="ArmR" parent="Node/Root" index="2"]
+transform = Transform3D(0.5, 0.707107, 0.5, -0.5, 0.707107, -0.5, -0.707107, 1.19209e-07, 0.707107, 0.40625, 0.1875, 0)
+
+[node name="ElbowR" parent="Node/Root/ArmR" index="2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.4375, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="Node/Root/ArmR/ElbowR/sphere7" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Root/ArmR/ElbowR/sphere7/Area3D" index="0"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("SphereShape3D_6v8eq")
+disabled = true
+
+[node name="LegL" parent="Node/Root" index="3"]
+transform = Transform3D(0.996195, 0.0805214, -0.0333532, -0.0805214, 0.996752, 0.00134538, 0.0333532, 0.00134539, 0.999443, -0.15625, -0.40625, 0)
+
+[node name="KneeL" parent="Node/Root/LegL" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.608761, -0.793353, 0, 0.793353, 0.608761, 0, -0.625, 0)
+
+[node name="LegR" parent="Node/Root" index="4"]
+transform = Transform3D(0.998182, -0.0313983, 0.0514424, 0.0120395, 0.940248, 0.340277, -0.0590528, -0.339039, 0.938917, 0.15625, -0.40625, 0)
+
+[node name="KneeR" parent="Node/Root/LegR" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5, 0, -0.625, 0)
+
+[node name="Area3D" type="Area3D" parent="Node/Root" index="5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Root/Area3D" index="0"]
+transform = Transform3D(1, 5.82077e-11, 0, 5.82077e-11, 1, -7.45058e-09, 0, -7.45058e-09, 1, 0, -0.5, 0)
+shape = SubResource("CapsuleShape3D_xa0ot")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." index="2"]
+physics_material_override = SubResource("PhysicsMaterial_ndqt8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_63yck")

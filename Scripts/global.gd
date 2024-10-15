@@ -28,7 +28,6 @@ var dashboost = 0
 var dashDirection = Vector3.ZERO
 var weaponDamage = 10
 var SkillPoints = 100
-var attackTimer = 0
 var isAttacking = false
 var isRunning = false
 var enemyIFrames = 0
@@ -37,6 +36,5 @@ var Spirit = 0
 
 
 var enemyDamage = 30
-var isFightingBoss = false
-var biGayHealth = 250
+var isFighting = false
 

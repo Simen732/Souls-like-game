@@ -69,17 +69,14 @@ func _input(event):
 
 
 func _physics_process(delta):
-	
-	if !Global.isAttacking:
-		sword_collision.disabled = true
-	# Set the player's global position
 	Global.player_position = $".".global_position
+
 	# Add gravity to the character's velocity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
 
-	if Global.isFightingBoss:
+	if Global.isFighting:
 		music.playing = false
 	
 	var input_dir = Input.get_vector("left", "right", "up", "down")
@@ -94,7 +91,7 @@ func _physics_process(delta):
 		$blockbench_export.rotation.y = lerp_angle($blockbench_export.rotation.y, target_rotation_y, 0.1)
 
 #Lock on logic
-	if Input.is_action_just_pressed("lock on") and Global.isFightingBoss:
+	if Input.is_action_just_pressed("lock on") and Global.isFighting:
 		if !locked_on:
 			locked_on = true
 		elif locked_on:
@@ -111,22 +108,13 @@ func _physics_process(delta):
 			locked_on = false
 
 	# Attack logic
-	if Input.is_action_just_pressed("attack") and !Global.playerIsDying and !Global.Menu_open and !Global.isDodging:
-		if Global.attackTimer <= 0 and currentStamina.value >= 40:
+	if Input.is_action_just_pressed("attack") and !Global.playerIsDying and !Global.Menu_open and !Global.isDodging and $blockbench_export/AnimationPlayer.current_animation != "attack1":
+		if currentStamina.value >= 40:
 			currentStamina.value -= 40
 			$blockbench_export/AnimationPlayer.stop()
 			$blockbench_export/AnimationPlayer.play("attack1")
-			Global.attackTimer = 120
 			velocity.z = 0
 			velocity.x = 0
-	# Disable sword hitbox when the attack finishes
-	if Global.attackTimer > 0:
-		Global.attackTimer -= 1
-		#sword_collision.disabled = false
-		Global.isAttacking = true  # Enable sword collision during attack
-	else:
-		Global.isAttacking = false  # Disable sword collision when not attacking
-		#sword_collision.disabled = true
 
 
 	if Global.enemyIFrames > 0:
@@ -170,44 +158,28 @@ func _physics_process(delta):
 		Global.dodgeCooldown -= 1
 
 
-	if !Global.flinch and direction == Vector3.ZERO and !Global.isDodging and !Global.isAttacking and !Global.playerIsDying:
+	if !Global.flinch and direction == Vector3.ZERO and !Global.isDodging and !Global.playerIsDying and $blockbench_export/AnimationPlayer.current_animation != "attack1":
 		velocity.x = 0  # Reset horizontal movement velocity
 		velocity.z = 0  # Reset forward/backward movement velocity
 		$blockbench_export/AnimationPlayer.play("idle")
 
-	
-	if Global.attackTimer > 0:
-		#$blockbench_export/Node/Pelvis/Body/Rarm/Relbow/Sword/Area3D/CollisionShape3D.disabled = false
-		Global.attackTimer -= 1
-#
-	#elif Global.attackTimer < 0:
-		#$blockbench_export/Node/Pelvis/Body/Rarm/Relbow/Sword/Area3D/CollisionShape3D.disabled = true
-		
-		
 	if Global.Iframes > 0:
 		Global.Iframes -= 1
 
 	if Global.dashboost > 0:
 		Global.dashboost -= 1
 
-	if !Input.is_action_pressed("run") and is_on_floor() and !Global.isDodging and !Global.isAttacking and currentStamina.value < Global.maxStamina:
+	if !Input.is_action_pressed("run") and is_on_floor() and !Global.isDodging and currentStamina.value < Global.maxStamina and $blockbench_export/AnimationPlayer.current_animation != "attack1":
 		currentStamina.value += 1
 
-
-	#if direction and !Global.Menu_open and !Global.playerIsDying and !Global.isAttacking and !Global.isDodging:
-		## Movement velocity
-		#velocity.x = direction.x * Global.SPEED
-		#velocity.z = direction.z * Global.SPEED
-
-		# Running logic
 	# Handle movement and reset sliding issues
-	if direction and !Global.Menu_open and !Global.playerIsDying and !Global.isDodging and !Global.isAttacking and !Global.flinch:
+	if direction and !Global.Menu_open and !Global.playerIsDying and !Global.isDodging and !Global.flinch and $blockbench_export/AnimationPlayer.current_animation != "attack1":
 		# Set velocity based on input direction and speed
 		velocity.x = direction.x * Global.SPEED
 		velocity.z = direction.z * Global.SPEED
 
 		# Handle running logic
-		if Input.is_action_pressed("run") and currentStamina.value > 0 and !Global.flinch:
+		if Input.is_action_pressed("run") and currentStamina.value > 0 and !Global.flinch and $blockbench_export/AnimationPlayer.current_animation != "attack1":
 			currentStamina.value -= 1
 			velocity.x *= Global.runSpeed
 			velocity.z *= Global.runSpeed
@@ -215,9 +187,8 @@ func _physics_process(delta):
 		else:
 			$blockbench_export/AnimationPlayer.play("walking")  # Play walking animation
 
-
 	# Dodge logic
-	if Input.is_action_just_pressed("dodge") and is_on_floor() and direction and Global.dodgeCooldown < 1 and !Global.isDodging and !Global.playerIsDying and !Global.flinch:
+	if Input.is_action_just_pressed("dodge") and is_on_floor() and direction and Global.dodgeCooldown < 1 and !Global.isDodging and !Global.playerIsDying and !Global.flinch and $blockbench_export/AnimationPlayer.current_animation != "attack1":
 		if currentStamina.value >= 60:  # Ensure the player has enough stamina
 			currentStamina.value -= 60
 			Global.dashDirection = direction
@@ -243,11 +214,11 @@ func _physics_process(delta):
 		else:
 			Global.isDodging = false
 
-
 	# Move the character
 	move_and_slide()
 
 #-----------------------------------------------------------------------------------------------------#
+
 func playertakeDamage():
 	if Global.Iframes < 1:
 		currentHealth.value -= Global.enemyDamage
@@ -255,10 +226,10 @@ func playertakeDamage():
 		$blockbench_export/AnimationPlayer.play("hurt")
 		velocity.z = 0
 		velocity.x = 0
+		print("Player hit! Health remaining: " + str(currentHealth.value))
 	# Disable sword hitbox when the attack finishes
 		Global.Iframes = 10
 		print("denne runner")
-
 
 		if currentHealth.value <= 0:
 			Global.playerIsDying = true
@@ -309,12 +280,6 @@ func _on_sword_hit_area(area):
 	if !sword_collision.disabled:
 		print(sword_collision.disabled)
 		emit_signal("playerDamage", area) # Emit damage signal
-
-
-
-
-func _on_bi_gay_player_shank() -> void:
-	playertakeDamage()
 
 
 func _on_skill_tree_stamina_up():

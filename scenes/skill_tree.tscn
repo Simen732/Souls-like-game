@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bvlef8luaxdvf" path="res://Img/Fortitude_icon.png" id="6_iytla"]
 
 [node name="skillTree" type="Control"]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
