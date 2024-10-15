@@ -2,13 +2,12 @@ extends Node3D
 
 @onready var animation_player = $AnimationPlayer
 @onready var music = $AudioStreamPlayer3D
-@onready var biGayRigid = $Node/Root/RigidBody3D
 @onready var biGaySword: Area3D = $Node/Root/Body/ArmR/ElbowR/HandR/Sword/Area3D
 @onready var biGayHilt: Area3D = $Node/Root/Body/ArmR/ElbowR/HandR/Area3D2
 @onready var biGayFoot: Area3D = $Node/Root/LegL/KneeL/FootL/Area3D2
 @onready var biGayHand: Area3D = $Node/Root/Body/ArmL/ElbowL/HandL/Area3D2
 @onready var health: ProgressBar = $"../CharacterBody3D/Health"
-@onready var boss_healthbar = $"../CharacterBody3D/Boss Healthbar"
+@onready var boss_healthbar = $"../CharacterBody3D/BossHealthbar"
 
 
 signal playerShank
@@ -144,7 +143,7 @@ func handle_attack(delta):
 								animation_player.play("attack5")
 								await animation_player.animation_finished
 								speed = 0.75
-								attackstop_distance = 0
+								attackstop_distance = 6
 								ranged_attack_timer = randi_range(60, 180)
 								animation_player.play("walk")
 
