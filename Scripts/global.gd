@@ -34,7 +34,6 @@ var enemyIFrames = 0
 var flinch = false
 var Spirit = 0
 
-
 var enemyDamage = 30
 var isFighting = false
 

@@ -152,28 +152,22 @@ func handle_attack(delta):
 func _on_sword_area_entered(area: Area3D) -> void:
 	if area.name == "Player" or area.get_parent().name == "Player" and !biGaySword.disabled:
 		Global.enemyDamage = 40
-		apply_damage_to_player()
+		emit_signal("playerShank")
 
 func _on_foot_area_entered(area: Area3D) -> void:
 	if area.name == "Player" or area.get_parent().name == "Player" and !biGayFoot.disabled:
 		Global.enemyDamage = 60
-		apply_damage_to_player()
+		emit_signal("playerShank")
 
 func _on_hand_area_entered(area: Area3D) -> void:
 	if area.name == "Player" or area.get_parent().name == "Player" and !biGayHand.disabled:
 		Global.enemyDamage = 20
-		apply_damage_to_player()
+		emit_signal("playerShank")
+		
 
 func _on_hilt_area_entered(area: Area3D) -> void:
 	if area.name == "Player" or area.get_parent().name == "Player" and !biGayHilt.disabled:
 		Global.enemyDamage = 30
-		apply_damage_to_player()
-
-
-# Apply damage to the player
-func apply_damage_to_player() -> void:
-	#health.value -=   # Subtract the damage from the player's health
-	if !Global.playerIsDying:
 		emit_signal("playerShank")
 
 

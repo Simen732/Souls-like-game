@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bm1tkh7x1d3cl"]
+[gd_scene load_steps=16 format=3 uid="uid://bm1tkh7x1d3cl"]
 
 [ext_resource type="Script" path="res://Scripts/CharacterBody3D.gd" id="1_5ft5w"]
 [ext_resource type="FontFile" uid="uid://b1cueuu1ntugv" path="res://Fonts/Times New Roman.ttf" id="2_a7juk"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://chm5ix4falpah" path="res://scenes/blockbench_dude.tscn" id="6_70msx"]
 [ext_resource type="PackedScene" uid="uid://dgg4hahiwclxx" path="res://scenes/main_background_music.tscn" id="7_3s78q"]
 [ext_resource type="PackedScene" uid="uid://d1c2gsmi5olfg" path="res://scenes/skill_tree.tscn" id="7_qahho"]
+[ext_resource type="PackedScene" uid="uid://jfxji8kk2cv2" path="res://scenes/skillTreeMain.tscn" id="8_e0ra7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhb74"]
 radius = 0.375896
@@ -207,10 +208,14 @@ margin = 0.5
 [node name="Camera3D" type="Camera3D" parent="CamOrigin/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0, 0, 4)
 
+[node name="PureSoulTree" parent="." instance=ExtResource("8_e0ra7")]
+
 [node name="skillTree" parent="." instance=ExtResource("7_qahho")]
 
 [connection signal="timeout" from="deathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="showSkillTree" from="Menu" to="." method="_on_menu_show_skill_tree"]
+[connection signal="ShowSkillTree" from="PureSoulTree" to="skillTree" method="_on_pure_soul_tree_show_skill_tree"]
+[connection signal="ShowPureSoul" from="skillTree" to="PureSoulTree" method="_on_skill_tree_show_pure_soul"]
 [connection signal="healthUp" from="skillTree" to="." method="_on_skill_tree_health_up"]
 [connection signal="staminaUp" from="skillTree" to="." method="_on_skill_tree_stamina_up"]

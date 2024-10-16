@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d1c2gsmi5olfg"]
+[gd_scene load_steps=8 format=3 uid="uid://d1c2gsmi5olfg"]
 
 [ext_resource type="Script" path="res://Scripts/skill_tree.gd" id="1_jskla"]
 [ext_resource type="Texture2D" uid="uid://btfnal72lqsjw" path="res://Img/skillTreeBackground.jpg" id="2_887du"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b7anuvpap4ms" path="res://Img/sebaspill-icon.svg" id="4_5k8rg"]
 [ext_resource type="Texture2D" uid="uid://dj8xjk5sq4vq1" path="res://Img/Tenacity_icon.png" id="5_018lo"]
 [ext_resource type="Texture2D" uid="uid://bvlef8luaxdvf" path="res://Img/Fortitude_icon.png" id="6_iytla"]
+[ext_resource type="Texture2D" uid="uid://dlvg85i4hqokq" path="res://Img/Pure_Soul.png" id="7_6a7uk"]
 
 [node name="skillTree" type="Control"]
 visible = false
@@ -226,8 +227,19 @@ offset_right = 79.0
 offset_bottom = -3.0
 text = "Skill Points:"
 
+[node name="PureSoul" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 420.0
+offset_top = -27.0
+offset_right = 537.0
+offset_bottom = 90.0
+texture_normal = ExtResource("7_6a7uk")
+ignore_texture_size = true
+stretch_mode = 0
+
 [connection signal="pressed" from="MarginContainer/SpeedUp" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="MarginContainer5/spiritUp" to="." method="_on_spirit_up_pressed"]
 [connection signal="pressed" from="MarginContainer2/damageUp" to="." method="_on_damage_up_pressed"]
 [connection signal="pressed" from="MarginContainer4/StaminaUp" to="." method="_on_stamina_up_pressed"]
 [connection signal="pressed" from="MarginContainer6/healthUp" to="." method="_on_health_up_pressed"]
+[connection signal="pressed" from="PureSoul" to="." method="_on_pure_soul_pressed"]

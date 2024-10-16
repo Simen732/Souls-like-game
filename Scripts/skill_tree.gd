@@ -8,10 +8,11 @@ extends Control
 @onready var stamina_label = $MarginContainer4/StaminaUp/MarginContainer/StaminaLabel
 @onready var health_panel = $MarginContainer6/healthPanel
 @onready var health_label = $MarginContainer6/healthUp/healthContainer/healthLabel
+@onready var skill_tree = $"."
 
 
 
-
+signal ShowPureSoul
 signal healthUp
 signal staminaUp
 
@@ -37,13 +38,7 @@ var healthLevel : int = 0:
 
 func _ready():
 	rich_text_label.text = "Skill Points:" + str(Global.SkillPoints)
-
-
-
-
-
-
-
+	
 
 func _on_spirit_up_pressed():
 	if Global.SkillPoints > 0:
@@ -86,3 +81,12 @@ func _on_health_up_pressed():
 		health_panel.show_behind_parent = true
 		healthLevel = min ( healthLevel+1, 10)
 		print("healthlevel er nå" + str(healthLevel))
+
+
+func _on_pure_soul_pressed():
+	skill_tree.visible = false
+	emit_signal("ShowPureSoul")
+
+
+func _on_pure_soul_tree_show_skill_tree():
+	skill_tree.visible = true

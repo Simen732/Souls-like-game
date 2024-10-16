@@ -1,0 +1,241 @@
+[gd_scene load_steps=13 format=3 uid="uid://cnijba7hn7opy"]
+
+[ext_resource type="Texture2D" uid="uid://ccq8rwy18sim3" path="res://Textures/696.jpg" id="1_m2yxv"]
+[ext_resource type="PackedScene" uid="uid://rf85mfsp141o" path="res://scenes/pillar.tscn" id="2_i73u5"]
+[ext_resource type="PackedScene" uid="uid://dmlpab6m7foju" path="res://scenes/deathBox.tscn" id="3_2sxlr"]
+[ext_resource type="PackedScene" uid="uid://c3opd7ufh7nps" path="res://scenes/spawn_point.tscn" id="4_50kp5"]
+[ext_resource type="PackedScene" uid="uid://bm1tkh7x1d3cl" path="res://scenes/mainDude.tscn" id="5_0gych"]
+[ext_resource type="PackedScene" uid="uid://dceftyh3xo01m" path="res://scenes/enemy_lock_on.tscn" id="5_fek2o"]
+[ext_resource type="PackedScene" uid="uid://cavmi5jt8bvd0" path="res://scenes/BiGay.tscn" id="7_6hhxa"]
+[ext_resource type="PackedScene" uid="uid://dt55ba0rjqbdn" path="res://scenes/player_lock_on.tscn" id="8_hlc6o"]
+[ext_resource type="PackedScene" uid="uid://dgv4buxnd8ejl" path="res://scenes/templeGoon.tscn" id="9_rc5vx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ap0yy"]
+albedo_texture = ExtResource("1_m2yxv")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_uvcdg"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mvu4d"]
+
+[node name="Main" type="Node3D"]
+
+[node name="Terrain" type="Node" parent="."]
+
+[node name="sun" type="DirectionalLight3D" parent="Terrain"]
+transform = Transform3D(0.707107, -0.353553, 0.612373, 1.77636e-15, 0.866026, 0.5, -0.707107, -0.353553, 0.612373, -1.0015, 27.2639, 11.5665)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -1.0015, -0.5, 7.3612)
+use_collision = true
+size = Vector3(20, 1, 57)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 3.33621e-08, 1.71633e-07, -1.3027e-15, 0.981627, -0.190809, -1.74846e-07, 0.190809, 0.981627, -1.00149, -2.75, 47.3612)
+use_collision = true
+size = Vector3(20, 1, 24)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -1.00149, -5, 69.3612)
+visible = false
+use_collision = true
+size = Vector3(20, 1, 24)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -1.00149, -30.2267, 95.8612)
+use_collision = true
+size = Vector3(30, 1, 31)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 5.81724, 0, -1.74846e-07, 0, 1, -16.0015, -19.3953, 95.3612)
+use_collision = true
+size = Vector3(1.57324, 4.89919, 30)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, -1.00149, -18.3387, 80.3612)
+use_collision = true
+size = Vector3(1, 27.4487, 30)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 5.81724, 0, -1.74846e-07, 0, 1, 13.9985, -19.706, 95.3612)
+use_collision = true
+size = Vector3(1, 4.99316, 30)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-2.18557e-07, 0, 1, 0, 5.81724, 0, -1, 0, -2.18557e-07, -1.00148, -18.4389, 109.908)
+use_collision = true
+size = Vector3(1.57324, 4.47855, 30)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 1.74846e-07, 1, -4.37114e-08, 0, 7.64274e-15, 1.74846e-07, 1, 8.9985, 4, 11.3612)
+use_collision = true
+size = Vector3(13, 1, 65)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 8.9985, 4.30404, 58.5988)
+use_collision = true
+size = Vector3(19.2023, 1, 56.6169)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -11.0759, 4.3519, 58.5988)
+use_collision = true
+size = Vector3(19.2023, 1, 56.6169)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 1.74846e-07, 1, -4.37114e-08, 0, 7.64274e-15, 1.74846e-07, 1, -11.0015, 4, 11.3612)
+use_collision = true
+size = Vector3(13, 1, 65)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -1.0015, 10, 7.3612)
+use_collision = true
+size = Vector3(20, 1, 57)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 3.63525e-08, 1.71025e-07, -2.04358e-08, 0.995744, -0.0921623, -1.73648e-07, 0.0921623, 0.995744, -1.00149, 7.47731, 60.9505)
+use_collision = true
+size = Vector3(20, 1, 56.8751)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -0.501485, -0.5, 98.3612)
+use_collision = true
+size = Vector3(33, 10, 25)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 9.49851, -5, 82.8612)
+use_collision = true
+size = Vector3(15, 1, 7)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D19" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -1.00149, -5, 69.8612)
+use_collision = true
+size = Vector3(20, 1, 21)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -11.0015, -5, 82.8612)
+use_collision = true
+size = Vector3(14, 1, 7)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -1.00149, -5, 85.3612)
+use_collision = true
+size = Vector3(6, 1, 2)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.34838, 4.41236, 0)
+sky_mode = 1
+
+[node name="Pillars" type="Node" parent="."]
+
+[node name="Pillar1" parent="Pillars" instance=ExtResource("2_i73u5")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -2.83885, 1, 0.493767)
+
+[node name="Area3D" parent="." instance=ExtResource("3_2sxlr")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -5.91377, 0.493558, 12.7729)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+mesh = SubResource("BoxMesh_uvcdg")
+
+[node name="spawnPoints" type="Node" parent="."]
+
+[node name="spawnPoint" parent="spawnPoints" instance=ExtResource("4_50kp5")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 6.9985, 0.5, 15.3612)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawnPoints/spawnPoint"]
+mesh = SubResource("BoxMesh_mvu4d")
+
+[node name="spawnPoint2" parent="spawnPoints" instance=ExtResource("4_50kp5")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 6.85568, 0.5, 18.7603)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawnPoints/spawnPoint2"]
+mesh = SubResource("BoxMesh_mvu4d")
+
+[node name="spawnPoint3" parent="spawnPoints" instance=ExtResource("4_50kp5")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -1.00149, -4, 76.3612)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawnPoints/spawnPoint3"]
+mesh = SubResource("BoxMesh_mvu4d")
+
+[node name="EnemyLockOn" parent="." instance=ExtResource("5_fek2o")]
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("5_0gych")]
+
+[node name="Health" type="ProgressBar" parent="CharacterBody3D"]
+modulate = Color(1, 0, 0, 1)
+self_modulate = Color(1, 0.0980392, 0, 1)
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 185.0
+offset_bottom = 24.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Stamina" type="ProgressBar" parent="CharacterBody3D"]
+modulate = Color(0, 0.360784, 0, 1)
+self_modulate = Color(0, 0.360784, 0, 1)
+offset_left = 10.0
+offset_top = 30.0
+offset_right = 185.0
+offset_bottom = 43.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="BossHealthbar" type="ProgressBar" parent="CharacterBody3D"]
+visible = false
+self_modulate = Color(0.996078, 0, 0, 1)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -464.0
+offset_top = -60.0
+offset_right = 464.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+value = 100.0
+show_percentage = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CharacterBody3D/BossHealthbar"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = -28.0
+offset_right = 162.0
+offset_bottom = 1.0
+text = "Biguy the Big Guy"
+
+[node name="BiGay" parent="." instance=ExtResource("7_6hhxa")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, -29.726, 105)
+
+[node name="playerLockOn" parent="BiGay" instance=ExtResource("8_hlc6o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.25)
+
+[node name="templeGoon" parent="." instance=ExtResource("9_rc5vx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30598, -4.5, 71.3903)
+
+[connection signal="body_entered" from="Area3D" to="CharacterBody3D" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="spawnPoints/spawnPoint" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
+[connection signal="body_entered" from="spawnPoints/spawnPoint2" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
+[connection signal="body_entered" from="spawnPoints/spawnPoint3" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
+[connection signal="playerDamage" from="CharacterBody3D" to="BiGay" method="_on_character_body_3d_player_damage"]
+[connection signal="playerShank" from="BiGay" to="CharacterBody3D" method="_on_bi_gay_player_shank"]

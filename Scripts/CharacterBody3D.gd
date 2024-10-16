@@ -27,8 +27,7 @@ var pitch = 0.0
 var locked_on = false
 var lock_on_position = Vector3(0, 0, 0)
 var jumpDamage = Global.weaponDamage * 1.25
-
-
+var staminaLevel = 0
 #-----------------------------------------------------------------------------------------------------#
 
 signal playerDamage
@@ -170,7 +169,8 @@ func _physics_process(delta):
 		Global.dashboost -= 1
 
 	if !Input.is_action_pressed("run") and is_on_floor() and !Global.isDodging and currentStamina.value < Global.maxStamina and $blockbench_export/AnimationPlayer.current_animation != "attack1":
-		currentStamina.value += 1
+		currentStamina.value += 1 + (staminaLevel/5)
+		print(currentStamina.value)
 
 	# Handle movement and reset sliding issues
 	if direction and !Global.Menu_open and !Global.playerIsDying and !Global.isDodging and !Global.flinch and $blockbench_export/AnimationPlayer.current_animation != "attack1":
@@ -284,6 +284,7 @@ func _on_sword_hit_area(area):
 
 func _on_skill_tree_stamina_up():
 	Global.maxStamina *= 1.1
+	staminaLevel += 1
 	currentStamina.max_value = Global.maxStamina
 	print("Stamina up")
 
@@ -294,3 +295,7 @@ func _on_skill_tree_health_up():
 	currentHealth.value += currentHealth.max_value/10 
 	print(currentHealth.value)
 	print(currentHealth.max_value)
+
+
+func _on_bi_gay_player_shank():
+	playertakeDamage()
