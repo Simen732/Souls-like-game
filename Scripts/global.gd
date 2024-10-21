@@ -33,6 +33,10 @@ var isRunning = false
 var enemyIFrames = 0
 var flinch = false
 var Spirit = 0
+var locked_on = false
+var stopLockOn = false
+
+
 
 var enemyDamage = 30
 var isFighting = false

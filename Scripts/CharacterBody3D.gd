@@ -24,7 +24,7 @@ extends CharacterBody3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var pitch = 0.0
-var locked_on = false
+
 var lock_on_position = Vector3(0, 0, 0)
 var jumpDamage = Global.weaponDamage * 1.25
 var staminaLevel = 0
@@ -54,7 +54,7 @@ func _ready():
 
 
 func _input(event):
-	if event is InputEventMouseMotion and !Global.Menu_open and !locked_on:
+	if event is InputEventMouseMotion and !Global.Menu_open and !Global.locked_on:
 		# Rotate the camera around the player without affecting the player's rotation
 		cam_origin.rotate_y(deg_to_rad(-event.relative.x * sensitivity))  # Horizontal camera movement
 		# Clamp vertical camera movement to avoid flipping
@@ -68,6 +68,9 @@ func _input(event):
 
 
 func _physics_process(delta):
+	
+	
+	
 	Global.player_position = $".".global_position
 
 	# Add gravity to the character's velocity
@@ -90,13 +93,13 @@ func _physics_process(delta):
 		$blockbench_export.rotation.y = lerp_angle($blockbench_export.rotation.y, target_rotation_y, 0.1)
 
 #Lock on logic
-	if Input.is_action_just_pressed("lock on") and Global.isFighting:
-		if !locked_on:
-			locked_on = true
-		elif locked_on:
-			locked_on = false
+	if Input.is_action_just_pressed("lock on") and Global.isFighting and !Global.stopLockOn:
+		if !Global.locked_on:
+			Global.locked_on = true
+		elif Global.locked_on:
+			Global.locked_on = false
 	
-	if locked_on:
+	if Global.locked_on:
 		if  $"../BiGay/playerLockOn".global_position != null:
 			lock_on_position = $"../BiGay/playerLockOn".global_position
 			var lock_on_direction = Vector3(lock_on_position - cam_origin.global_position)
@@ -104,7 +107,9 @@ func _physics_process(delta):
 			var target_rotation = atan2(-lock_on_direction.x, -lock_on_direction.z)
 			cam_origin.rotation.y = lerp_angle(cam_origin.rotation.y, target_rotation, 0.5)
 		else:
-			locked_on = false
+			Global.locked_on = false
+
+
 
 	# Attack logic
 	if Input.is_action_just_pressed("attack") and !Global.playerIsDying and !Global.Menu_open and !Global.isDodging and $blockbench_export/AnimationPlayer.current_animation != "attack1":
@@ -170,7 +175,7 @@ func _physics_process(delta):
 
 	if !Input.is_action_pressed("run") and is_on_floor() and !Global.isDodging and currentStamina.value < Global.maxStamina and $blockbench_export/AnimationPlayer.current_animation != "attack1":
 		currentStamina.value += 1 + (staminaLevel/5)
-		print(currentStamina.value)
+
 
 	# Handle movement and reset sliding issues
 	if direction and !Global.Menu_open and !Global.playerIsDying and !Global.isDodging and !Global.flinch and $blockbench_export/AnimationPlayer.current_animation != "attack1":
@@ -262,7 +267,7 @@ func _on_death_timer_timeout():
 	Global.playerIsDying = false
 	Global.restart.emit()
 	menu.visible = false
-	locked_on = false
+	Global.locked_on = false
 
 #-----------------------------------------------------------------------------------------------------#
 
@@ -298,4 +303,8 @@ func _on_skill_tree_health_up():
 
 
 func _on_bi_gay_player_shank():
+	playertakeDamage()
+
+
+func _on_temple_goon_playertake_damage():
 	playertakeDamage()

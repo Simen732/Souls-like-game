@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b7anuvpap4ms" path="res://Img/sebaspill-icon.svg" id="3_4remc"]
 
 [node name="PureSoulTree" type="TextureButton"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

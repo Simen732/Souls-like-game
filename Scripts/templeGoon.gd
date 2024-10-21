@@ -1,25 +1,36 @@
 extends Node3D
 
 @onready var animation_player = $AnimationPlayer
-@onready var hand = $Node/Root/ArmL/ElbowL/sphere4/Area3D/CollisionShape3D
-@onready var handL = $Node/Root/ArmR/ElbowR/sphere7/Area3D
-@onready var hitbox = $Node/Root/Area3D/CollisionShape3D
+@onready var right_hand = $Node/Root/ArmR/ElbowR/sphere7/RightHand
+@onready var rightHandCollisionShape = $Node/Root/Body/CollisionShape3D
+@onready var left_hand = $Node/Root/ArmL/ElbowL/sphere4/leftHand
+@onready var leftHandCollisionShape = $Node/Root/ArmL/ElbowL/sphere4/leftHand/CollisionShape3D
+@onready var hit_box = $Node/Root/templeGoonBody/hitBox
 
 
+
+
+@export var attackmove = 0
+@export var rotatable = true
+
+var isDead = false
 var Health = 25
 const aggro_range = 30
 var aggro = false
 var speed = 2
-@export var attackmove = 0
 var attackstop_distance = 0
-@export var rotatable = true
-
+signal playertakeDamage
 
 func _ready():
 	Global.restart.connect(on_restart)
 	
-	if not hand.is_connected("area_entered", Callable(self, "_on_hand_area_entered")):
-		hand.connect("area_entered", Callable(self, "_on_hand_area_entered"))
+	
+	
+	if not right_hand.is_connected("area_entered", Callable(self, "_on_hand_area_entered")):
+		right_hand.connect("area_entered", Callable(self, "_on_hand_area_entered"))
+		
+	if not left_hand.is_connected("area_entered", Callable(self, "_on_hand_area_entered")):
+		left_hand.connect("area_entered", Callable(self, "_on_hand_area_entered"))
 
 
 func _process(delta):
@@ -28,7 +39,7 @@ func _process(delta):
 		Global.isFighting = true
 		animation_player.play("walk")
 
-	if aggro:
+	if aggro and !isDead:
 		move_towards_player(delta)
 		handle_attack(delta)
 		if $".".global_position.distance_to(Global.player_position) > aggro_range or Health <= 1:
@@ -38,8 +49,9 @@ func _process(delta):
 				await animation_player.animation_finished
 				animation_player.play("idle")
 	else:
-		animation_player.stop
-		animation_player.play("idle")
+		if !isDead:
+			animation_player.stop
+			animation_player.play("idle")
 
 
 func on_restart():
@@ -84,21 +96,33 @@ func handle_attack(delta):
 				speed = 2
 				animation_player.play("walk")
 
-# Handle when the sword hits an area
-func _on_hand_area_entered(area: Area3D) -> void:
-	if area.name == "Player" or area.get_parent().name == "Player" and !hand.disabled:
-		Global.enemyDamage = 20
-		if !Global.playerIsDying:
-			emit_signal("playertakeDamage")
+
 
 func _on_character_body_3d_player_damage(area):
-		if area.name == "templeGoon" or area.get_parent().name == "templeGoon":
-			if !hitbox.disabled:
+		if area.name == "templeGoonBody" or area.get_parent().name == "templeGoonBody":
+			print("temple Goooon")
+			if !hit_box.disabled:
 				Health -= Global.weaponDamage
+				print(Health)
 				if Health <= 0:
-					hitbox.disabled = true
+					hit_box.disabled = true
 					aggro = false
 					animation_player.stop()
 					animation_player.play("death")
 					await animation_player.animation_finished
 					queue_free()
+
+func _on_left_hand_area_entered(area):
+	if area.name == "Player" or area.get_parent().name == "Player" and !leftHandCollisionShape.disabled:
+		Global.enemyDamage = 20
+		if !Global.playerIsDying:
+			emit_signal("playertakeDamage")
+
+
+
+func _on_right_hand_area_entered(area):
+	print("hello")
+	if area.name == "Player" or area.get_parent().name == "Player" and !rightHandCollisionShape.disabled:
+		Global.enemyDamage = 20
+		if !Global.playerIsDying:
+			emit_signal("playertakeDamage")

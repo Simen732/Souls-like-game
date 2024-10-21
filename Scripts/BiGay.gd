@@ -9,20 +9,24 @@ extends Node3D
 @onready var boss_healthbar = $"../CharacterBody3D/BossHealthbar"
 
 
+@export var rotatable = true
+@export var attackmove = 0
+
+
 signal playerShank
 
-
+var ranged_attack_timer = randi_range(60, 180)
 var Health = 300
-const aggro_range = 30
 var aggro = false
 var speed = 0.75
+var attackstop_distance = 0
+
+
+
+const aggro_range = 30
 const attack124_range = 3  # Distance at which bro uses 1st 2nd and 4th attack
 const attack3_range = 6
 const attack5_minrange = 8
-var ranged_attack_timer = randi_range(60, 180)
-@export var attackmove = 0
-var attackstop_distance = 0
-@export var rotatable = true
 
 
 func _ready():
@@ -45,6 +49,9 @@ func _ready():
 
 
 func _process(delta):
+	
+
+	
 	if !aggro and $".".global_position.distance_to(Global.player_position) <= aggro_range and !Global.playerIsDying and Health > 0:
 		aggro = true
 		Global.isFighting = true
@@ -185,4 +192,6 @@ func _on_character_body_3d_player_damage(area):
 					animation_player.play("dafeeted")
 					await animation_player.animation_finished
 					boss_healthbar.visible = false
+					Global.stopLockOn = true
+					Global.locked_on = false
 					queue_free()
