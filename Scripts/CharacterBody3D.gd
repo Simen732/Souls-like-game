@@ -36,6 +36,10 @@ signal playerSwordHitbox
 #-----------------------------------------------------------------------------------------------------#
 
 func _ready():
+	if !Global.havePlayedGame:
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+		Global.havePlayedGame = true
+		print("DSADSADSADSADSADSADSA")
 	# Connect the `area_entered` signal for detecting hits with the sword
 	sword_area.connect("area_entered", Callable(self, "_on_sword_hit_area"))
 
@@ -48,6 +52,7 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	fixCamera()
 
 
 #-----------------------------------------------------------------------------------------------------#
@@ -308,3 +313,19 @@ func _on_bi_gay_player_shank():
 
 func _on_temple_goon_playertake_damage():
 	playertakeDamage()
+
+
+func fixCamera():
+	print("Denne runner")
+	if Global.Menu_open == false:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		Global.Menu_open = true
+		Engine.time_scale = 0.3
+		animation_player.play("Menu") 
+
+	else:
+		Engine.time_scale = 1
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		Global.Menu_open = false
+		animation_player.play("menuClose")
+		skill_tree.visible = false

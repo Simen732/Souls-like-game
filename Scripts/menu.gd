@@ -8,6 +8,7 @@ func _on_quit_game_pressed():
 
 
 func _on_main_menu_pressed():
+	Global.Iframes = 60
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 

@@ -11,7 +11,7 @@ const JUMP_VELOCITY = 5
 
 var player_position = 0
 var enemy_lock_on_position = 0
-var maxStamina = 200
+var maxStamina = 300
 var maxHealth = 200
 var Menu_open = false
 var spawnPoint = Vector3(0,0,0)
@@ -35,8 +35,7 @@ var flinch = false
 var Spirit = 0
 var locked_on = false
 var stopLockOn = false
-
-
+var havePlayedGame = false
 
 var enemyDamage = 30
 var isFighting = false

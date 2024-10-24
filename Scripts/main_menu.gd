@@ -1,8 +1,19 @@
 extends Control
 
 
-# Called when the node enters the scene tree for the first time.
 
+signal FixMouse
 
 func _on_play_pressed():
+	emit_signal("FixMouse")
+	Global.Iframes = 60
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
+
+
+
+func _on_quit_game_pressed():
+	get_tree().quit()
+
+
+func _on_character_select_pressed():
+	get_tree().change_scene_to_file("res://scenes/character_selection.tscn")
