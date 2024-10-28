@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://bbvrk2te8p67r"]
+[gd_scene load_steps=2 format=3 uid="uid://bbvrk2te8p67r"]
+
+[ext_resource type="Script" path="res://Scripts/character_selection.gd" id="1_m0cl4"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_m0cl4")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -38,3 +41,7 @@ text = "Character 2
 [node name="Character 3" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Character 3"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Character 1" to="." method="_on_character_1_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Character 2" to="." method="_on_character_2_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Character 3" to="." method="_on_character_3_pressed"]
