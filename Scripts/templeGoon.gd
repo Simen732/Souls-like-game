@@ -84,6 +84,7 @@ func handle_attack(delta):
 			if animation_player.current_animation != "attack2":
 				speed = 0
 				animation_player.play("attack1")
+				print("attack111111")
 				await animation_player.animation_finished
 				speed = 2
 				animation_player.play("walk")
@@ -122,7 +123,6 @@ func _on_left_hand_area_entered(area):
 
 
 func _on_right_hand_area_entered(area):
-	print("hello")
 	if area.name == "Player" or area.get_parent().name == "Player" and !rightHandCollisionShape.disabled:
 		Global.enemyDamage = 20
 		if !Global.playerIsDying:
