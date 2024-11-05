@@ -259,6 +259,8 @@ func _on_area_3d_body_entered(body):
 
 #-----------------------------------------------------------------------------------------------------#
 
+
+
 # When the death timer ends and you respawn
 func _on_death_timer_timeout():
 	cam_origin.look_at_from_position(cam_origin.global_position, character_body_3d.global_position, Vector3.UP)
@@ -311,8 +313,6 @@ func _on_bi_gay_player_shank():
 	playertakeDamage()
 
 
-func _on_temple_goon_playertake_damage():
-	playertakeDamage()
 
 
 func fixCamera():
@@ -329,3 +329,17 @@ func fixCamera():
 		Global.Menu_open = false
 		animation_player.play("menuClose")
 		skill_tree.visible = false
+
+func _on_temple_goon_playertake_damage():
+	print("Templegoon1")
+	playertakeDamage()
+
+
+func _on_temple_goon_2_playertake_damage():
+	print("Templegoon2")	
+	playertakeDamage()
+
+
+func _on_temple_goon_3_playertake_damage():
+	print("Templegoon3")	
+	playertakeDamage()

@@ -1,4 +1,5 @@
 extends Node3D
+class_name TempleGoon
 
 @onready var animation_player = $AnimationPlayer
 @onready var right_hand = $Node/Root/ArmR/ElbowR/sphere7/RightHand
