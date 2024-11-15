@@ -1,6 +1,7 @@
 extends Node
 
 signal restart
+signal playerTakeDamage
 
 #-----------------------------------------------------------------------------------------------------#
 
@@ -37,6 +38,6 @@ var locked_on = false
 var stopLockOn = false
 var havePlayedGame = false
 
-var enemyDamage = 30
+var enemiesGettingHit = []
 var isFighting = false
 

@@ -13,14 +13,11 @@ extends Node3D
 @export var attackmove = 0
 
 
-signal playerShank
-
 var ranged_attack_timer = randi_range(60, 180)
 var Health = 300
 var aggro = false
 var speed = 0.75
 var attackstop_distance = 0
-
 
 
 const aggro_range = 30
@@ -158,24 +155,19 @@ func handle_attack(delta):
 # Handle when the sword hits an area
 func _on_sword_area_entered(area: Area3D) -> void:
 	if area.name == "Player" or area.get_parent().name == "Player" and !biGaySword.disabled:
-		Global.enemyDamage = 40
-		emit_signal("playerShank")
+		Global.playerTakeDamage.emit(40)
 
 func _on_foot_area_entered(area: Area3D) -> void:
 	if area.name == "Player" or area.get_parent().name == "Player" and !biGayFoot.disabled:
-		Global.enemyDamage = 60
-		emit_signal("playerShank")
+		Global.playerTakeDamage.emit(60)
 
 func _on_hand_area_entered(area: Area3D) -> void:
 	if area.name == "Player" or area.get_parent().name == "Player" and !biGayHand.disabled:
-		Global.enemyDamage = 20
-		emit_signal("playerShank")
-		
+		Global.playerTakeDamage.emit(20)
 
 func _on_hilt_area_entered(area: Area3D) -> void:
 	if area.name == "Player" or area.get_parent().name == "Player" and !biGayHilt.disabled:
-		Global.enemyDamage = 30
-		emit_signal("playerShank")
+		Global.playerTakeDamage.emit(30)
 
 
 

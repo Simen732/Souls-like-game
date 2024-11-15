@@ -1,5 +1,5 @@
 extends Node3D
-class_name TempleGoon
+class_name templeGoon
 
 @onready var animation_player = $AnimationPlayer
 @onready var right_hand = $Node/Root/ArmR/ElbowR/sphere7/RightHand
@@ -8,8 +8,7 @@ class_name TempleGoon
 @onready var leftHandCollisionShape = $Node/Root/ArmL/ElbowL/sphere4/leftHand/CollisionShape3D
 @onready var hit_box = $Node/Root/templeGoonBody/hitBox
 
-
-
+var unique_id: int # Variable used for differentiating between multiple copies of the scene
 
 @export var attackmove = 0
 @export var rotatable = true
@@ -19,10 +18,10 @@ var Health = 25
 const aggro_range = 30
 var aggro = false
 var speed = 2
-var attackstop_distance = 0
-signal playertakeDamage
+var attackstop_distance = 0.5
 
 func _ready():
+	unique_id = get_instance_id() # Automatically assigns a unique ID
 	Global.restart.connect(on_restart)
 	
 	
@@ -60,8 +59,6 @@ func on_restart():
 	Global.isFighting = false
 	animation_player.stop()	
 	animation_player.play("idle")
-	$".".position = Vector3(0, -29.726, 105)
-	$".".rotation = Vector3(0, 0, 0)
 
 
 # Move towards the player and handle animations
@@ -84,46 +81,41 @@ func handle_attack(delta):
 			if animation_player.current_animation != "attack2":
 				speed = 0
 				animation_player.play("attack1")
-				print("attack111111")
 				await animation_player.animation_finished
 				speed = 2
 				animation_player.play("walk")
 
-	if $".".global_position.distance_to(Global.player_position) == 4:
+	if $".".global_position.distance_to(Global.player_position) == 3.5:
 		if animation_player.current_animation != "attack1":
 			if animation_player.current_animation != "attack2":
+				rotatable = false
 				speed = 0
 				animation_player.play("attack2")
 				await animation_player.animation_finished
 				speed = 2
+				rotatable = true
 				animation_player.play("walk")
 
 
 
-func _on_character_body_3d_player_damage(area):
-		if area.name == "templeGoonBody" or area.get_parent().name == "templeGoonBody":
-			print("temple Goooon")
-			if !hit_box.disabled:
-				Health -= Global.weaponDamage
-				print(Health)
-				if Health <= 0:
-					hit_box.disabled = true
-					aggro = false
-					animation_player.stop()
-					animation_player.play("death")
-					await animation_player.animation_finished
-					queue_free()
+func _on_character_body_3d_player_damage(area, unique_id):
+	print(area.get_parent().unique_id)
+	if area.get_parent().unique_id == unique_id:
+		Health -= Global.weaponDamage
+		if Health <= 0:
+			isDead = true
+			aggro = false
+			animation_player.stop()
+			animation_player.play("death")
+			await animation_player.animation_finished
+			queue_free()
 
 func _on_left_hand_area_entered(area):
 	if area.name == "Player" or area.get_parent().name == "Player" and !leftHandCollisionShape.disabled:
-		Global.enemyDamage = 20
-		if !Global.playerIsDying:
-			emit_signal("playertakeDamage")
+		Global.playerTakeDamage.emit(20)
 
 
 
 func _on_right_hand_area_entered(area):
 	if area.name == "Player" or area.get_parent().name == "Player" and !rightHandCollisionShape.disabled:
-		Global.enemyDamage = 20
-		if !Global.playerIsDying:
-			emit_signal("playertakeDamage")
+		Global.playerTakeDamage.emit(20)

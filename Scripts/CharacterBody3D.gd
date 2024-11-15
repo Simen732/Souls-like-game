@@ -36,6 +36,8 @@ signal playerSwordHitbox
 #-----------------------------------------------------------------------------------------------------#
 
 func _ready():
+	Global.playerTakeDamage.connect(on_playerTakeDamage)
+	
 	if !Global.havePlayedGame:
 		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 		Global.havePlayedGame = true
@@ -229,17 +231,15 @@ func _physics_process(delta):
 
 #-----------------------------------------------------------------------------------------------------#
 
-func playertakeDamage():
-	if Global.Iframes < 1:
-		currentHealth.value -= Global.enemyDamage
+func on_playerTakeDamage(damageTaken):
+	if Global.Iframes < 1 and !Global.playerIsDying:
+		currentHealth.value -= damageTaken
 		$blockbench_export/AnimationPlayer.stop()
 		$blockbench_export/AnimationPlayer.play("hurt")
 		velocity.z = 0
 		velocity.x = 0
 		print("Player hit! Health remaining: " + str(currentHealth.value))
-	# Disable sword hitbox when the attack finishes
 		Global.Iframes = 10
-		print("denne runner")
 
 		if currentHealth.value <= 0:
 			Global.playerIsDying = true
@@ -252,10 +252,6 @@ func playertakeDamage():
 			$blockbench_export/AnimationPlayer.play("death")
 			animation_player.play("deathScreen")
 			sensitivity = 0
-
-# This is what happens when you touch the deathBox and die
-func _on_area_3d_body_entered(body):
-	playertakeDamage()
 
 #-----------------------------------------------------------------------------------------------------#
 
@@ -309,11 +305,6 @@ func _on_skill_tree_health_up():
 	print(currentHealth.max_value)
 
 
-func _on_bi_gay_player_shank():
-	playertakeDamage()
-
-
-
 
 func fixCamera():
 	print("Denne runner")
@@ -329,17 +320,3 @@ func fixCamera():
 		Global.Menu_open = false
 		animation_player.play("menuClose")
 		skill_tree.visible = false
-
-func _on_temple_goon_playertake_damage():
-	print("Templegoon1")
-	playertakeDamage()
-
-
-func _on_temple_goon_2_playertake_damage():
-	print("Templegoon2")	
-	playertakeDamage()
-
-
-func _on_temple_goon_3_playertake_damage():
-	print("Templegoon3")	
-	playertakeDamage()
