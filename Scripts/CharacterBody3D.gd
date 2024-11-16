@@ -41,7 +41,6 @@ func _ready():
 	if !Global.havePlayedGame:
 		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 		Global.havePlayedGame = true
-		print("DSADSADSADSADSADSADSA")
 	# Connect the `area_entered` signal for detecting hits with the sword
 	sword_area.connect("area_entered", Callable(self, "_on_sword_hit_area"))
 
@@ -286,7 +285,7 @@ func _on_menu_show_skill_tree():
 
 func _on_sword_hit_area(area):
 	if !sword_collision.disabled:
-		print(sword_collision.disabled)
+		print(area)
 		emit_signal("playerDamage", area) # Emit damage signal
 
 
@@ -307,7 +306,6 @@ func _on_skill_tree_health_up():
 
 
 func fixCamera():
-	print("Denne runner")
 	if Global.Menu_open == false:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		Global.Menu_open = true

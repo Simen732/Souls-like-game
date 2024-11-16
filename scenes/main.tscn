@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dceftyh3xo01m" path="res://scenes/enemy_lock_on.tscn" id="5_fek2o"]
 [ext_resource type="PackedScene" uid="uid://cavmi5jt8bvd0" path="res://scenes/BiGay.tscn" id="7_6hhxa"]
 [ext_resource type="PackedScene" uid="uid://dt55ba0rjqbdn" path="res://scenes/player_lock_on.tscn" id="8_hlc6o"]
-[ext_resource type="PackedScene" uid="uid://dgv4buxnd8ejl" path="res://scenes/templeGoon.tscn" id="9_rc5vx"]
+[ext_resource type="Script" path="res://scripts/goonSpawner.gd" id="12_6m3jj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ap0yy"]
 albedo_texture = ExtResource("1_m2yxv")
@@ -300,14 +300,10 @@ transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -0.03660
 [node name="playerLockOn" parent="BiGay" instance=ExtResource("8_hlc6o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.25)
 
-[node name="templeGoon" parent="." instance=ExtResource("9_rc5vx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30598, 0.0774317, 15.3462)
-
-[node name="templeGoon2" parent="." instance=ExtResource("9_rc5vx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.900712, -0.760251, -79.7398)
+[node name="goonSpawner" type="Node3D" parent="."]
+script = ExtResource("12_6m3jj")
 
 [connection signal="body_entered" from="spawnPoints/spawnPoint" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
 [connection signal="body_entered" from="spawnPoints/spawnPoint2" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
 [connection signal="body_entered" from="spawnPoints/spawnPoint3" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
 [connection signal="playerDamage" from="CharacterBody3D" to="BiGay" method="_on_character_body_3d_player_damage"]
-[connection signal="playerDamage" from="CharacterBody3D" to="templeGoon" method="_on_character_body_3d_player_damage"]

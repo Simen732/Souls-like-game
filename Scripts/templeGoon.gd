@@ -6,9 +6,8 @@ class_name templeGoon
 @onready var rightHandCollisionShape = $Node/Root/Body/CollisionShape3D
 @onready var left_hand = $Node/Root/ArmL/ElbowL/sphere4/leftHand
 @onready var leftHandCollisionShape = $Node/Root/ArmL/ElbowL/sphere4/leftHand/CollisionShape3D
-@onready var hit_box = $Node/Root/templeGoonBody/hitBox
-
-var unique_id: int # Variable used for differentiating between multiple copies of the scene
+@onready var hit_box = $templeGoonBody/hitBox
+@onready var goonArea = $templeGoonBody
 
 @export var attackmove = 0
 @export var rotatable = true
@@ -18,13 +17,14 @@ var Health = 25
 const aggro_range = 30
 var aggro = false
 var speed = 2
-var attackstop_distance = 0.5
+var attackstop_distance = 0
 
 func _ready():
-	unique_id = get_instance_id() # Automatically assigns a unique ID
 	Global.restart.connect(on_restart)
+	print(goonArea)
 	
-	
+	if not goonArea.is_connected("area_entered", Callable(self, "_on_character_body_3d_player_damage")): #Idk chattern ba meg legge det til
+		goonArea.connect("area_entered", Callable(self, "_on_character_body_3d_player_damage"))
 	
 	if not right_hand.is_connected("area_entered", Callable(self, "_on_hand_area_entered")):
 		right_hand.connect("area_entered", Callable(self, "_on_hand_area_entered"))
@@ -55,10 +55,7 @@ func _process(delta):
 
 
 func on_restart():
-	aggro = false
-	Global.isFighting = false
-	animation_player.stop()	
-	animation_player.play("idle")
+	queue_free()
 
 
 # Move towards the player and handle animations
@@ -97,11 +94,11 @@ func handle_attack(delta):
 				animation_player.play("walk")
 
 
-
-func _on_character_body_3d_player_damage(area, unique_id):
-	print(area.get_parent().unique_id)
-	if area.get_parent().unique_id == unique_id:
+func _on_character_body_3d_player_damage(area):
+	print(self.goonArea)
+	if area == self.goonArea: #Sjekker om areaet som sverdet treffer er samme som goonen sin
 		Health -= Global.weaponDamage
+		print(Health)
 		if Health <= 0:
 			isDead = true
 			aggro = false
@@ -110,10 +107,10 @@ func _on_character_body_3d_player_damage(area, unique_id):
 			await animation_player.animation_finished
 			queue_free()
 
+
 func _on_left_hand_area_entered(area):
 	if area.name == "Player" or area.get_parent().name == "Player" and !leftHandCollisionShape.disabled:
 		Global.playerTakeDamage.emit(20)
-
 
 
 func _on_right_hand_area_entered(area):
