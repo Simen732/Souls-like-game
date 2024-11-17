@@ -2,6 +2,7 @@ extends Node
 
 signal restart
 signal playerTakeDamage
+signal playerDealDamage
 
 #-----------------------------------------------------------------------------------------------------#
 

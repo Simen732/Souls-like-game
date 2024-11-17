@@ -28,6 +28,7 @@ const attack5_minrange = 8
 
 func _ready():
 	Global.restart.connect(on_restart)
+	Global.playerDealDamage.connect(on_playerDealDamage)
 	$Node/Root/LegL/KneeL/FootL/Area3D2/GPUParticles3D2.emitting = false
 	boss_healthbar.max_value = Health
 	boss_healthbar.value = boss_healthbar.max_value
@@ -171,7 +172,7 @@ func _on_hilt_area_entered(area: Area3D) -> void:
 
 
 
-func _on_character_body_3d_player_damage(area):
+func on_playerDealDamage(area):
 		if area.name == "BiGay" or area.get_parent().name == "BiGay":
 			if !$Node/BiGay/BiguyHitbox.disabled:
 				Health -= Global.weaponDamage

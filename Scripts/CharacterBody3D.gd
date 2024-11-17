@@ -74,9 +74,6 @@ func _input(event):
 
 
 func _physics_process(delta):
-	
-	
-	
 	Global.player_position = $".".global_position
 
 	# Add gravity to the character's velocity
@@ -286,7 +283,7 @@ func _on_menu_show_skill_tree():
 func _on_sword_hit_area(area):
 	if !sword_collision.disabled:
 		print(area)
-		emit_signal("playerDamage", area) # Emit damage signal
+		Global.playerDealDamage.emit(area) # Emit damage signal
 
 
 func _on_skill_tree_stamina_up():

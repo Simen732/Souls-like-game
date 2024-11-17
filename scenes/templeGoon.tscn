@@ -37,9 +37,9 @@ transform = Transform3D(0.5, 0.707107, 0.5, -0.5, 0.707107, -0.5, -0.707106, 8.9
 [node name="ElbowR" parent="Node/Root/ArmR" index="2"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.4375, 0, 0)
 
-[node name="RightHand" type="Area3D" parent="Node/Root/ArmR/ElbowR/sphere7" index="0"]
+[node name="rightHand" type="Area3D" parent="Node/Root/ArmR/ElbowR/sphere7" index="0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Root/ArmR/ElbowR/sphere7/RightHand" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Root/ArmR/ElbowR/sphere7/rightHand" index="0"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("SphereShape3D_6v8eq")
 disabled = true
@@ -63,12 +63,9 @@ physics_material_override = SubResource("PhysicsMaterial_ndqt8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_63yck")
 
-[node name="templeGoonBody" type="Area3D" parent="." index="3"]
+[node name="templeGoon" type="Area3D" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1.4375, 0)
 
-[node name="hitBox" type="CollisionShape3D" parent="templeGoonBody" index="0"]
+[node name="hitBox" type="CollisionShape3D" parent="templeGoon" index="0"]
 transform = Transform3D(1, 5.82077e-11, 0, 5.82077e-11, 1, -7.45058e-09, 0, -7.45058e-09, 1, 0, -0.5, 0)
 shape = SubResource("CapsuleShape3D_xa0ot")
-
-[connection signal="area_entered" from="Node/Root/ArmL/ElbowL/sphere4/leftHand" to="." method="_on_left_hand_area_entered"]
-[connection signal="area_entered" from="Node/Root/ArmR/ElbowR/sphere7/RightHand" to="." method="_on_right_hand_area_entered"]

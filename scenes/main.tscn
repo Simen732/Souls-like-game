@@ -301,6 +301,7 @@ transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -0.03660
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.25)
 
 [node name="goonSpawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.620844, -0.249383, -36.7993)
 script = ExtResource("12_6m3jj")
 
 [connection signal="body_entered" from="spawnPoints/spawnPoint" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
