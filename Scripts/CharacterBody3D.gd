@@ -7,8 +7,8 @@ extends CharacterBody3D
 @export var sensitivity = 0.05
 @onready var death_timer = $deathTimer
 @onready var animation_player = $AnimationPlayer
-@onready var character_body_3d = $"." 
-@onready var spawn_point = $".".global_position
+@onready var character_body_3d = self 
+@onready var spawn_point = self.global_position
 @onready var currentHealth = $Health
 @onready var currentStamina = $Stamina
 @onready var death_counter = $deathCounter
@@ -74,7 +74,7 @@ func _input(event):
 
 
 func _physics_process(delta):
-	Global.player_position = $".".global_position
+	Global.player_position = self.global_position
 
 	# Add gravity to the character's velocity
 	if not is_on_floor():
@@ -96,7 +96,7 @@ func _physics_process(delta):
 		$blockbench_export.rotation.y = lerp_angle($blockbench_export.rotation.y, target_rotation_y, 0.1)
 
 #Lock on logic
-	if Input.is_action_just_pressed("lock on") and Global.isFighting and !Global.stopLockOn:
+	if Input.is_action_just_pressed("lock on") and Global.isFighting:
 		if !Global.locked_on:
 			Global.locked_on = true
 		elif Global.locked_on:
@@ -272,7 +272,7 @@ func _on_death_timer_timeout():
 
 # When you touch a checkpoint
 func _on_spawn_point_body_entered(body):
-	spawn_point = $".".global_position
+	spawn_point = self.global_position
 
 
 func _on_menu_show_skill_tree():

@@ -7,18 +7,17 @@ extends Node3D
 @onready var biGayFoot: Area3D = $Node/Root/LegL/KneeL/FootL/Area3D2
 @onready var biGayHand: Area3D = $Node/Root/Body/ArmL/ElbowL/HandL/Area3D2
 @onready var boss_healthbar = $"../CharacterBody3D/BossHealthbar"
-
+@onready var hitbox = $Node/BiGay/BiguyHitbox
+@onready var hitArea = $Node/BiGay
 
 @export var rotatable = true
 @export var attackmove = 0
-
 
 var ranged_attack_timer = randi_range(60, 180)
 var Health = 300
 var aggro = false
 var speed = 0.75
 var attackstop_distance = 0
-
 
 const aggro_range = 30
 const attack124_range = 3  # Distance at which bro uses 1st 2nd and 4th attack
@@ -50,7 +49,7 @@ func _process(delta):
 	
 
 	
-	if !aggro and $".".global_position.distance_to(Global.player_position) <= aggro_range and !Global.playerIsDying and Health > 0:
+	if !aggro and self.global_position.distance_to(Global.player_position) <= aggro_range and !Global.playerIsDying and Health > 0:
 		aggro = true
 		Global.isFighting = true
 		music.playing = true
@@ -60,7 +59,7 @@ func _process(delta):
 	if aggro:
 		move_towards_player(delta)
 		handle_attack(delta)
-		if $".".global_position.distance_to(Global.player_position) > aggro_range or Health <= 1:
+		if self.global_position.distance_to(Global.player_position) > aggro_range or Health <= 1:
 			aggro = false
 			Health = boss_healthbar.max_value
 			boss_healthbar.value = Health
@@ -83,74 +82,61 @@ func on_restart():
 	boss_healthbar.visible = false
 	animation_player.stop()	
 	animation_player.play("idle")
-	$".".position = Vector3(0, -29.726, 105)
-	$".".rotation = Vector3(0, 0, 0)
+	self.position = Vector3(0, -29.726, 105)
+	self.rotation = Vector3(0, 0, 0)
 
 
 # Move towards the player and handle animations
 func move_towards_player(delta):
-	var direction = Vector3(Global.enemy_lock_on_position.x - $".".global_position.x, 0, Global.enemy_lock_on_position.z - $".".global_position.z)
+	var direction = Vector3(Global.enemy_lock_on_position.x - self.global_position.x, 0, Global.enemy_lock_on_position.z - self.global_position.z)
 	direction = direction.normalized()
-	if $".".global_position.distance_to(Global.player_position) >= attackstop_distance:
-		$".".global_position += (speed + attackmove) * direction * delta
+	if self.global_position.distance_to(Global.player_position) >= attackstop_distance:
+		self.global_position += (speed + attackmove) * direction * delta
 	if rotatable:
 		var target_rotation_y = atan2(-direction.x, -direction.z)
-		$".".rotation.y = lerp_angle($".".rotation.y, target_rotation_y, 0.05)
+		self.rotation.y = lerp_angle(self.rotation.y, target_rotation_y, 0.05)
 
 
 # Handle attacking logic
 func handle_attack(delta):
-	if $".".global_position.distance_to(Global.player_position) >= attack3_range:
+	var attackAnim = ["attack1", "attack2", "attack3", "attack4", "attack5"] #Array med liste av alle attacks
+
+	if self.global_position.distance_to(Global.player_position) >= attack3_range:
 		ranged_attack_timer -= 1
 
 
 #Close range attacks
-	if $".".global_position.distance_to(Global.player_position) <= attack124_range:
+	if self.global_position.distance_to(Global.player_position) <= attack124_range and animation_player.current_animation not in attackAnim: #sjekker om den er i midten av et angrep
 		var animations = ["attack1", "attack2", "attack4"]
 		var random_animation = animations[randi() % animations.size()]
-		if animation_player.current_animation != "attack1":
-			if animation_player.current_animation != "attack2":
-				if animation_player.current_animation != "attack3":
-					if animation_player.current_animation != "attack4":
-						if animation_player.current_animation != "attack5":
-							speed = 0
-							animation_player.play(random_animation)
-							await animation_player.animation_finished
-							speed = 0.75
-							animation_player.play("walk")
+		speed = 0
+		animation_player.play(random_animation)
+		await animation_player.animation_finished
+		speed = 0.75
+		animation_player.play("walk")
 
 #Attack3
-	elif $".".global_position.distance_to(Global.player_position) <= attack3_range:
-		if animation_player.current_animation != "attack1":
-			if animation_player.current_animation != "attack2":
-				if animation_player.current_animation != "attack3":
-					if animation_player.current_animation != "attack4":
-						if animation_player.current_animation != "attack5":
-							attackstop_distance = 2
-							speed = 0
-							animation_player.play("attack3")
-							await animation_player.animation_finished
-							speed = 0.75
-							attackstop_distance = 0
-							ranged_attack_timer = randi_range(60, 180)
-							animation_player.play("walk")
+	elif self.global_position.distance_to(Global.player_position) <= attack3_range and animation_player.current_animation not in attackAnim:
+		attackstop_distance = 2
+		speed = 0
+		animation_player.play("attack3")
+		await animation_player.animation_finished
+		speed = 0.75
+		attackstop_distance = 0
+		ranged_attack_timer = randi_range(60, 180)
+		animation_player.play("walk")
 
 #ULTIMATE PERFECT ATTACK
-	elif $".".global_position.distance_to(Global.player_position) >= attack5_minrange:
-		if animation_player.current_animation != "attack1":
-			if animation_player.current_animation != "attack2":
-				if animation_player.current_animation != "attack3":
-					if animation_player.current_animation != "attack4":
-						if animation_player.current_animation != "attack5":
-							if ranged_attack_timer <= 0:
-								attackstop_distance = 5
-								speed = 0
-								animation_player.play("attack5")
-								await animation_player.animation_finished
-								speed = 0.75
-								attackstop_distance = 6
-								ranged_attack_timer = randi_range(60, 180)
-								animation_player.play("walk")
+	elif self.global_position.distance_to(Global.player_position) >= attack5_minrange and animation_player.current_animation not in attackAnim:
+		if ranged_attack_timer <= 0:
+			attackstop_distance = 5
+			speed = 0
+			animation_player.play("attack5")
+			await animation_player.animation_finished
+			speed = 0.75
+			attackstop_distance = 6
+			ranged_attack_timer = randi_range(60, 180)
+			animation_player.play("walk")
 
 
 # Handle when the sword hits an area
@@ -173,18 +159,17 @@ func _on_hilt_area_entered(area: Area3D) -> void:
 
 
 func on_playerDealDamage(area):
-		if area.name == "BiGay" or area.get_parent().name == "BiGay":
-			if !$Node/BiGay/BiguyHitbox.disabled:
-				Health -= Global.weaponDamage
-				boss_healthbar.value = Health
-				print("Bigay hit! Health remaining: " + str(boss_healthbar.value))
-				if Health <= 0:
-					$Node/BiGay/BiguyHitbox.disabled = true
-					aggro = false
-					animation_player.stop()
-					animation_player.play("dafeeted")
-					await animation_player.animation_finished
-					boss_healthbar.visible = false
-					Global.stopLockOn = true
-					Global.locked_on = false
-					queue_free()
+	if area == self.hitArea and !hitbox.disabled:
+		Health -= Global.weaponDamage
+		boss_healthbar.value = Health
+		print("Bigay hit! Health remaining: " + str(boss_healthbar.value))
+		if Health <= 0:
+			hitbox.disabled = true
+			aggro = false
+			animation_player.stop()
+			animation_player.play("dafeeted")
+			await animation_player.animation_finished
+			boss_healthbar.visible = false
+			Global.stopLockOn = true
+			Global.locked_on = false
+			queue_free()

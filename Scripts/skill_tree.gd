@@ -8,7 +8,7 @@ extends Control
 @onready var stamina_label = $MarginContainer4/StaminaUp/MarginContainer/StaminaLabel
 @onready var health_panel = $MarginContainer6/healthPanel
 @onready var health_label = $MarginContainer6/healthUp/healthContainer/healthLabel
-@onready var skill_tree = $"."
+@onready var skill_tree = self
 
 
 
