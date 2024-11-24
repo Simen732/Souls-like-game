@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cnijba7hn7opy"]
+[gd_scene load_steps=18 format=3 uid="uid://cnijba7hn7opy"]
 
 [ext_resource type="Texture2D" uid="uid://ccq8rwy18sim3" path="res://Textures/696.jpg" id="1_m2yxv"]
 [ext_resource type="Shader" path="res://addons/simplegrasstextured/shaders/grass.gdshader" id="2_08o17"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cavmi5jt8bvd0" path="res://scenes/BiGay.tscn" id="7_6hhxa"]
 [ext_resource type="PackedScene" uid="uid://dt55ba0rjqbdn" path="res://scenes/player_lock_on.tscn" id="8_hlc6o"]
 [ext_resource type="Script" path="res://scripts/goonSpawner.gd" id="12_6m3jj"]
+[ext_resource type="Script" path="res://scripts/eliteSpawner.gd" id="12_y01gs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ap0yy"]
 albedo_texture = ExtResource("1_m2yxv")
@@ -245,6 +246,7 @@ transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -1.00149
 mesh = SubResource("BoxMesh_mvu4d")
 
 [node name="EnemyLockOn" parent="." instance=ExtResource("5_fek2o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("5_0gych")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, -40)
@@ -301,8 +303,16 @@ transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, -29.7
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.25)
 
 [node name="goonSpawner" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.620844, -0.249383, -7.7993)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 35)
 script = ExtResource("12_6m3jj")
+
+[node name="eliteSpawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -0.75, -60)
+script = ExtResource("12_y01gs")
+
+[node name="eliteSpawner2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -0.75, -60)
+script = ExtResource("12_y01gs")
 
 [connection signal="body_entered" from="spawnPoints/spawnPoint" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
 [connection signal="body_entered" from="spawnPoints/spawnPoint2" to="CharacterBody3D" method="_on_spawn_point_body_entered"]

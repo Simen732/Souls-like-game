@@ -3,8 +3,8 @@ extends Node3D
 @onready var animation_player = $AnimationPlayer
 @onready var leftHand: Area3D = $Node/Root/ArmL/ElbowL/sphere4/leftHand
 @onready var rightHand: Area3D = $Node/Root/ArmR/ElbowR/sphere7/rightHand
-@onready var hitArea = $templeGoon
-@onready var hitbox = $templeGoon/hitBox
+@onready var hitArea = $Node/templeGoon
+@onready var hitbox = $Node/templeGoon/hitBox
 
 @export var rotatable = true
 @export var attackmove = 0

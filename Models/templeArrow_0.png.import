@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cc263xjv4m0hg"
-path.s3tc="res://.godot/imported/templeEliteBottom_0.png-77c6f5b22cb4336194a9a626929a2c9d.s3tc.ctex"
+uid="uid://i10diox2jrsd"
+path.s3tc="res://.godot/imported/templeArrow_0.png-1afaf84a622a0487035163e0ca666967.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "f5cde0a4f3e0baf7b19f3efda476f000"
+"md5": "c4408de6b98b024eb6982f10ed6ad80b"
 }
 
 [deps]
 
-source_file="res://Models/templeEliteBottom_0.png"
-dest_files=["res://.godot/imported/templeEliteBottom_0.png-77c6f5b22cb4336194a9a626929a2c9d.s3tc.ctex"]
+source_file="res://Models/templeArrow_0.png"
+dest_files=["res://.godot/imported/templeArrow_0.png-1afaf84a622a0487035163e0ca666967.s3tc.ctex"]
 
 [params]
 

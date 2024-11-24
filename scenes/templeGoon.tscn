@@ -5,11 +5,11 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6v8eq"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xa0ot"]
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ndqt8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_63yck"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xa0ot"]
 
 [node name="templeGoon" instance=ExtResource("1_bodcd")]
 script = ExtResource("2_8y2fm")
@@ -56,16 +56,16 @@ transform = Transform3D(0.998182, -0.0313983, 0.0514423, 0.0120395, 0.940248, 0.
 [node name="KneeR" parent="Node/Root/LegR" index="2"]
 transform = Transform3D(1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5, 0, -0.625, 0)
 
+[node name="templeGoon" type="Area3D" parent="Node" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1.4375, 0)
+
+[node name="hitBox" type="CollisionShape3D" parent="Node/templeGoon" index="0"]
+transform = Transform3D(1, 5.82077e-11, 0, 5.82077e-11, 1, -7.45058e-09, 0, -7.45058e-09, 1, 0, -0.5, 0)
+shape = SubResource("CapsuleShape3D_xa0ot")
+
 [node name="RigidBody3D" type="RigidBody3D" parent="." index="2"]
 physics_material_override = SubResource("PhysicsMaterial_ndqt8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_63yck")
-
-[node name="templeGoon" type="Area3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1.4375, 0)
-
-[node name="hitBox" type="CollisionShape3D" parent="templeGoon" index="0"]
-transform = Transform3D(1, 5.82077e-11, 0, 5.82077e-11, 1, -7.45058e-09, 0, -7.45058e-09, 1, 0, -0.5, 0)
-shape = SubResource("CapsuleShape3D_xa0ot")
