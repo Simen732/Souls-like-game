@@ -16,6 +16,8 @@ func _process(delta):
 	if lifetime > 0:
 		lifetime -= 1
 	global_translate(transform.basis.z * speed * delta)
+	if lifetime <= 0:
+		queue_free()
 
 
 func _on_hurtbox_area_entered(area: Area3D) -> void:
