@@ -1401,7 +1401,7 @@ mesh = SubResource("ArrayMesh_u65ye")
 skeleton = NodePath("")
 
 [node name="KneeR" type="Node3D" parent="bottom/Node/Root/Body/LegR"]
-transform = Transform3D(1, 0, 0, 0, 0.793353, 0.60876, 0, -0.60876, 0.793353, 0, -0.546875, 0)
+transform = Transform3D(1, 0, 0, 0, 0.793352, 0.608761, 0, -0.608761, 0.793352, 0, -0.546875, 0)
 
 [node name="sphere2" type="MeshInstance3D" parent="bottom/Node/Root/Body/LegR/KneeR"]
 mesh = SubResource("ArrayMesh_6trux")
