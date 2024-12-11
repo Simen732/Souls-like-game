@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://d0woibuclp7jv"]
+[gd_scene load_steps=105 format=3 uid="uid://d0woibuclp7jv"]
 
 [ext_resource type="Script" path="res://scripts/templeElite.gd" id="1_jelvv"]
 [ext_resource type="Texture2D" uid="uid://cc263xjv4m0hg" path="res://Models/templeEliteBottom_0.png" id="1_lh5yk"]
@@ -637,8 +637,84 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_wfgf1")
 
+[sub_resource type="Animation" id="Animation_ktyc4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area3D2/GPUParticles3D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area3D2/GPUParticles3D2:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Area3D2/CollisionShape3D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.01, 0.001, 0.01)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Area3D2/GPUParticles3D2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2, 2, 2)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Area3D2/GPUParticles3D2:transparency")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Area3D2/CollisionShape3D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vj7v1"]
 _data = {
+"RESET": SubResource("Animation_ktyc4"),
 "aggro": ExtResource("7_7txyf"),
 "aggroidle": ExtResource("14_otw7s"),
 "attack1": ExtResource("12_qobsq"),
@@ -649,6 +725,78 @@ _data = {
 "death": ExtResource("13_tedue"),
 "idle": ExtResource("6_vv617")
 }
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sydeh"]
+
+[sub_resource type="Curve" id="Curve_xdla1"]
+min_value = 90.0
+max_value = 180.0
+_data = [Vector2(0, 360), 0.0, 0.0, 0, 0, Vector2(1, -360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6dd56"]
+curve = SubResource("Curve_xdla1")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_hpbxu"]
+
+[sub_resource type="Curve" id="Curve_ynjsf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 1.4, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_peglu"]
+curve = SubResource("Curve_ynjsf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3cnku"]
+lifetime_randomness = 0.1
+particle_flag_align_y = true
+particle_flag_rotate_y = true
+emission_shape = 6
+emission_ring_axis = Vector3(1, 1, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 1.0
+angle_max = 180.0
+angle_curve = SubResource("CurveTexture_6dd56")
+velocity_pivot = Vector3(0, -10, 0)
+direction = Vector3(1, 0, 1)
+spread = 0.0
+angular_velocity_max = 10.0
+directional_velocity_min = -1.0
+directional_velocity_max = 1.0
+directional_velocity_curve = SubResource("CurveXYZTexture_hpbxu")
+orbit_velocity_max = 3.0
+radial_velocity_max = 10.0
+gravity = Vector3(0, -15, 0)
+linear_accel_max = 2.0
+radial_accel_max = 5.0
+scale_min = 0.25
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_peglu")
+color = Color(0.313726, 0.2, 0, 1)
+hue_variation_max = 0.25
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_1nlh4"]
+
+[sub_resource type="Curve" id="Curve_eb4n8"]
+min_value = 0.25
+_data = [Vector2(0, 0.25), 0.0, 1.05, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mnama"]
+curve = SubResource("Curve_eb4n8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uioff"]
+gravity = Vector3(0, 0, 0)
+scale_min = 2.5
+scale_max = 2.5
+scale_curve = SubResource("CurveTexture_mnama")
+
+[sub_resource type="TorusMesh" id="TorusMesh_gby38"]
+inner_radius = 1.0
+outer_radius = 0.9
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h1ke0"]
 resource_name = "material_0"
@@ -1236,7 +1384,7 @@ script = ExtResource("1_jelvv")
 [node name="Node" type="Node3D" parent="top"]
 
 [node name="Root" type="Node3D" parent="top/Node"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28125, 0)
+transform = Transform3D(1, 0, 0, 0, 0.382683, 0.92388, 0, -0.92388, 0.382683, 0, 1.28125, 0)
 
 [node name="body" type="Node3D" parent="top/Node/Root"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.53125, 0)
@@ -1247,7 +1395,7 @@ mesh = SubResource("ArrayMesh_xyta5")
 skeleton = NodePath("")
 
 [node name="ArmL" type="Node3D" parent="top/Node/Root/body"]
-transform = Transform3D(0.0871557, -0.996195, 0, 0.996195, 0.0871557, 0, 0, 0, 1, -0.53125, 0.3125, 0)
+transform = Transform3D(0.015134, -0.996195, -0.0858317, 0.172987, 0.0871557, -0.98106, 0.984808, -4.17233e-07, 0.173648, -0.53125, 0.3125, 0)
 
 [node name="cylinder" type="MeshInstance3D" parent="top/Node/Root/body/ArmL"]
 transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, -0.25, 0, 0)
@@ -1260,7 +1408,7 @@ mesh = SubResource("ArrayMesh_qtnrm")
 skeleton = NodePath("")
 
 [node name="ElbowL" type="Node3D" parent="top/Node/Root/body/ArmL"]
-transform = Transform3D(0.996195, -0.0871558, 0, 0.0871558, 0.996195, 0, 0, 0, 1, -0.75, 0, 0)
+transform = Transform3D(0.704416, -0.0871558, -0.704416, 0.0616284, 0.996195, -0.0616284, 0.707107, -3.72529e-09, 0.707107, -0.75, 0, 0)
 
 [node name="cylinder2" type="MeshInstance3D" parent="top/Node/Root/body/ArmL/ElbowL"]
 transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, -0.1875, 0, 0)
@@ -1286,7 +1434,7 @@ shape = SubResource("CapsuleShape3D_3cktu")
 disabled = true
 
 [node name="ArmR" type="Node3D" parent="top/Node/Root/body"]
-transform = Transform3D(0.0871557, 0.996195, 0, -0.996195, 0.0871557, 0, 0, 0, 1, 0.53125, 0.3125, 0)
+transform = Transform3D(0.0225579, 0.996195, 0.084186, -0.257834, 0.0871559, -0.96225, -0.965926, 2.98023e-07, 0.258819, 0.53125, 0.3125, 0)
 
 [node name="cylinder3" type="MeshInstance3D" parent="top/Node/Root/body/ArmR"]
 transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0.25, 0, 0)
@@ -1299,7 +1447,7 @@ mesh = SubResource("ArrayMesh_qyi82")
 skeleton = NodePath("")
 
 [node name="ElbowR" type="Node3D" parent="top/Node/Root/body/ArmR"]
-transform = Transform3D(0.996195, 0.0871557, 0, -0.0871557, 0.996195, 0, 0, 0, 1, 0.75, 0, 0)
+transform = Transform3D(0.704416, 0.0871558, 0.704416, -0.0616284, 0.996195, -0.0616284, -0.707107, -3.72529e-09, 0.707107, 0.75, 0, 0)
 
 [node name="cylinder4" type="MeshInstance3D" parent="top/Node/Root/body/ArmR/ElbowR"]
 transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0.1875, 0, 0)
@@ -1372,6 +1520,36 @@ libraries = {
 "": SubResource("AnimationLibrary_vj7v1")
 }
 autoplay = "idle"
+
+[node name="Area3D2" type="Area3D" parent="top"]
+transform = Transform3D(9.99048, -0.436192, 1.19356e-06, 0.436192, 9.99048, -7.54995e-09, -1.19209e-06, 5.96047e-08, 10, 0, -0.16, -1.75268)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="top/Area3D2"]
+transform = Transform3D(0.01, -1.5522e-11, 2.98023e-10, 1.5522e-10, 0.001, -1.16415e-11, -2.98023e-10, 1.16415e-12, 0.01, 0, 0, 0)
+shape = SubResource("CylinderShape3D_sydeh")
+disabled = true
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="top/Area3D2"]
+transform = Transform3D(0.2, -1.86264e-08, 1.86265e-08, 7.45058e-08, 0.05, -1.16415e-09, -1.86265e-08, 2.91038e-10, 0.2, -1.04308e-07, 3.12459e-07, -3.72529e-09)
+emitting = false
+amount = 25
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB(-1, -1, -1, 2, 2, 2)
+process_material = SubResource("ParticleProcessMaterial_3cnku")
+draw_pass_1 = SubResource("BoxMesh_1nlh4")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="top/Area3D2"]
+transform = Transform3D(2, 1.49012e-08, 1.94289e-16, -1.49012e-08, 2, 2.6077e-08, -1.32349e-23, -2.6077e-08, 2, 0, 0.05, 0)
+transparency = 1.0
+cast_shadow = 0
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+visibility_aabb = AABB(-0.001, -4, -0.001, 0.002, 8, 0.002)
+process_material = SubResource("ParticleProcessMaterial_uioff")
+draw_pass_1 = SubResource("TorusMesh_gby38")
 
 [node name="bottom" type="Node3D" parent="."]
 

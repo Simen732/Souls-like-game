@@ -15,16 +15,16 @@ max_value = 180.0
 _data = [Vector2(0, 360), 0.0, 0.0, 0, 0, Vector2(1, -360), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_m8vfx"]
+[sub_resource type="CurveTexture" id="CurveTexture_hyu0p"]
 curve = SubResource("Curve_mda4a")
 
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_xc5cp"]
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_q8l43"]
 
 [sub_resource type="Curve" id="Curve_bs4xc"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 1.4, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_nlfw1"]
+[sub_resource type="CurveTexture" id="CurveTexture_jqbr2"]
 curve = SubResource("Curve_bs4xc")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ift0s"]
@@ -37,14 +37,14 @@ emission_ring_height = 0.0
 emission_ring_radius = 1.0
 emission_ring_inner_radius = 1.0
 angle_max = 180.0
-angle_curve = SubResource("CurveTexture_m8vfx")
+angle_curve = SubResource("CurveTexture_hyu0p")
 velocity_pivot = Vector3(0, -10, 0)
 direction = Vector3(1, 0, 1)
 spread = 0.0
 angular_velocity_max = 10.0
 directional_velocity_min = -1.0
 directional_velocity_max = 1.0
-directional_velocity_curve = SubResource("CurveXYZTexture_xc5cp")
+directional_velocity_curve = SubResource("CurveXYZTexture_q8l43")
 orbit_velocity_max = 3.0
 radial_velocity_max = 10.0
 gravity = Vector3(0, -15, 0)
@@ -52,7 +52,7 @@ linear_accel_max = 2.0
 radial_accel_max = 5.0
 scale_min = 0.25
 scale_max = 0.5
-scale_curve = SubResource("CurveTexture_nlfw1")
+scale_curve = SubResource("CurveTexture_jqbr2")
 color = Color(0.313726, 0.2, 0, 1)
 hue_variation_max = 0.25
 collision_mode = 1
@@ -68,14 +68,14 @@ min_value = 0.25
 _data = [Vector2(0, 0.25), 0.0, 1.05, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_akhlu"]
+[sub_resource type="CurveTexture" id="CurveTexture_rsmx2"]
 curve = SubResource("Curve_e2qny")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yhmmq"]
 gravity = Vector3(0, 0, 0)
 scale_min = 2.5
 scale_max = 2.5
-scale_curve = SubResource("CurveTexture_akhlu")
+scale_curve = SubResource("CurveTexture_rsmx2")
 
 [sub_resource type="TorusMesh" id="TorusMesh_8g8e7"]
 inner_radius = 1.0
@@ -94,22 +94,22 @@ script = ExtResource("2_be8mv")
 attackmove = -1.0
 
 [node name="Root" parent="Node" index="0"]
-transform = Transform3D(-0.293578, 0.0650847, -0.953717, 0.21644, 0.976296, -1.49012e-08, 0.93111, -0.206422, -0.300706, 0, 1.5, 0)
+transform = Transform3D(-0.293578, 0.0650847, -0.953717, 0.21644, 0.976296, -1.49012e-08, 0.93111, -0.206422, -0.300706, 0, 1.4995, 0)
 
 [node name="Body" parent="Node/Root" index="1"]
-transform = Transform3D(0.939691, 0, -0.34202, 0, 0.999999, 0, 0.34202, 0, 0.939692, 0, 0.1875, 0)
+transform = Transform3D(0.888584, -0.0665942, -0.453852, 0.0706786, 0.997466, -0.00797964, 0.453234, -0.0249871, 0.891041, 0, 0.1875, 0)
 
 [node name="Head" parent="Node/Root/Body" index="3"]
-transform = Transform3D(0.793353, 0, 0.608761, 0, 1, 0, -0.608761, 0, 0.793353, -0.1875, 0.875, 0)
+transform = Transform3D(0.745078, 0, 0.666977, 0, 1, 0, -0.666977, 0, 0.745078, -0.1875, 0.875, 0)
 
 [node name="ArmL" parent="Node/Root/Body" index="4"]
-transform = Transform3D(0.185482, -0.822324, -0.537941, -0.000420571, 0.547373, -0.836889, 0.982648, 0.155454, 0.101182, 0, 0.6875, 0.4375)
+transform = Transform3D(0.172366, -0.825186, -0.53792, -0.0011186, 0.545929, -0.837831, 0.985033, 0.145015, 0.0931765, 0, 0.6875, 0.4375)
 
 [node name="ElbowL" parent="Node/Root/Body/ArmL" index="1"]
-transform = Transform3D(0.649161, 0.226006, -0.7263, -0.127943, 0.973678, 0.18863, 0.749813, -0.0295265, 0.660991, 0, 0, 0.8125)
+transform = Transform3D(0.656686, 0.210838, -0.724093, -0.124731, 0.977267, 0.171437, 0.743777, -0.0222633, 0.668057, 0, 0, 0.8125)
 
 [node name="HandL" parent="Node/Root/Body/ArmL/ElbowL" index="1"]
-transform = Transform3D(0.336144, -0.935926, -0.10511, 0.940511, 0.339441, -0.0146953, 0.0494324, -0.0939175, 0.994352, 0, 0, 0.875)
+transform = Transform3D(0.262635, -0.946555, -0.187229, 0.963744, 0.247866, 0.0987803, -0.0470933, -0.206384, 0.977337, 0, 0, 0.875)
 
 [node name="Area3D2" type="Area3D" parent="Node/Root/Body/ArmL/ElbowL/HandL" index="1"]
 transform = Transform3D(0.749286, -0.0327145, 0, 0.0327145, 0.749286, 0, 0, 0, 0.75, 0, 0, 0.1)
@@ -120,16 +120,16 @@ shape = SubResource("SphereShape3D_el6w0")
 disabled = true
 
 [node name="ArmR" parent="Node/Root/Body" index="5"]
-transform = Transform3D(0.308054, 0.949232, 0.0637447, -0.295851, 0.0319002, 0.954701, 0.9042, -0.312958, 0.290657, 0, 0.6875, -0.4375)
+transform = Transform3D(0.308054, 0.950183, 0.0475141, -0.295851, 0.0482102, 0.954016, 0.9042, -0.307946, 0.295963, 0, 0.6875, -0.4375)
 
 [node name="ElbowR" parent="Node/Root/Body/ArmR" index="1"]
-transform = Transform3D(0.777556, -0.627022, 0.0474248, 0.444297, 0.601199, 0.664198, -0.444979, -0.49538, 0.746051, 0, 0, -0.8125)
+transform = Transform3D(0.745246, -0.66016, 0.0937865, 0.433918, 0.58695, 0.683524, -0.506283, -0.468697, 0.723878, 0, 0, -0.8125)
 
 [node name="HandR" parent="Node/Root/Body/ArmR/ElbowR" index="1"]
-transform = Transform3D(0.134702, 0.98884, 0.0636459, 0.9907, -0.133153, -0.0279953, -0.0192082, 0.066825, -0.99758, 0, 0, -0.875)
+transform = Transform3D(0.0806975, 0.996179, 0.0333828, 0.996203, -0.0795112, -0.0354556, -0.0326658, 0.0361172, -0.998814, 0, 0, -0.875)
 
 [node name="Sword" parent="Node/Root/Body/ArmR/ElbowR/HandR" index="1"]
-transform = Transform3D(0.99908, -0.0428745, 4.24519e-06, 0.0428716, 0.999016, 0.0113868, -0.000492442, -0.0113761, 0.999936, -0.25, -0.046875, 0.125)
+transform = Transform3D(0.99908, -0.0420376, 0.00842971, 0.0428716, 0.981773, -0.185159, -0.000492441, 0.18535, 0.982673, -0.25, -0.046875, 0.125)
 
 [node name="Area3D" type="Area3D" parent="Node/Root/Body/ArmR/ElbowR/HandR/Sword" index="5"]
 
@@ -165,13 +165,13 @@ shape = SubResource("CapsuleShape3D_kb1e4")
 disabled = true
 
 [node name="LegL" parent="Node/Root" index="2"]
-transform = Transform3D(0.573576, 0.819152, 0, -0.819152, 0.573576, 0, 0, 0, 1, 0, 0, 0.3125)
+transform = Transform3D(0.575052, 0.818116, 0, -0.818116, 0.575052, 0, 0, 0, 1, 0, 0, 0.3125)
 
 [node name="KneeL" parent="Node/Root/LegL" index="1"]
-transform = Transform3D(0.766044, -0.642788, 0, 0.642788, 0.766044, 0, 0, 0, 1, 0, -0.6875, 0)
+transform = Transform3D(0.76474, -0.644338, 0, 0.644338, 0.76474, 0, 0, 0, 1, 0, -0.6875, 0)
 
 [node name="FootL" parent="Node/Root/LegL/KneeL" index="1"]
-transform = Transform3D(0.999048, -0.0436194, 0, 0.0436194, 0.999048, 0, 0, 0, 1, 0, -0.84375, 0)
+transform = Transform3D(0.998978, -0.0451897, 0, 0.0451897, 0.998978, 0, 0, 0, 1, 0, -0.84375, 0)
 
 [node name="Area3D2" type="Area3D" parent="Node/Root/LegL/KneeL/FootL" index="1"]
 transform = Transform3D(9.99048, -0.436192, 1.19356e-06, 0.436192, 9.99048, -7.54995e-09, -1.19209e-06, 5.96047e-08, 10, 0, -0.16, 0)
@@ -203,13 +203,13 @@ process_material = SubResource("ParticleProcessMaterial_yhmmq")
 draw_pass_1 = SubResource("TorusMesh_8g8e7")
 
 [node name="LegR" parent="Node/Root" index="3"]
-transform = Transform3D(0.907673, -0.229041, -0.351667, 0.24321, 0.969965, -0.00399849, 0.34202, -0.0818996, 0.936117, 0, 0, -0.3125)
+transform = Transform3D(0.907291, -0.230441, -0.351738, 0.24471, 0.969588, -0.00400609, 0.341964, -0.0824392, 0.93609, 0, 0, -0.3125)
 
 [node name="KneeR" parent="Node/Root/LegR" index="1"]
-transform = Transform3D(0.999048, -0.0436194, 0, 0.0436194, 0.999048, 0, 0, 0, 1, 0, -0.6875, 0)
+transform = Transform3D(0.999109, -0.0421958, 0, 0.0421958, 0.999109, 0, 0, 0, 1, 0, -0.6875, 0)
 
 [node name="FootR" parent="Node/Root/LegR/KneeR" index="1"]
-transform = Transform3D(0.764372, 0.443457, -0.468061, -0.356433, 0.89554, 0.266389, 0.5373, -0.0367882, 0.842589, 0, -0.84375, 0)
+transform = Transform3D(0.762739, 0.444246, -0.469974, -0.35646, 0.895156, 0.267641, 0.539598, -0.0366137, 0.841126, 0, -0.84375, 0)
 
 [node name="BiGay" type="Area3D" parent="Node" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.8, 0, 0, 0, 1, 0, 1.5, -0.25)
@@ -234,6 +234,6 @@ unit_size = 40.0
 max_distance = 40.0
 emission_angle_filter_attenuation_db = 0.0
 
-[connection signal="area_entered" from="Node/Root/Body/ArmL/ElbowL/HandL/Area3D2" to="." method="_on_area_3d_2_area_entered"]
 [connection signal="area_entered" from="Node/Root/Body/ArmL/ElbowL/HandL/Area3D2" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_entered" from="Node/Root/Body/ArmL/ElbowL/HandL/Area3D2" to="." method="_on_area_3d_2_area_entered"]
 [connection signal="area_entered" from="Node/Root/Body/ArmR/ElbowR/HandR/Sword/Area3D" to="." method="_on_area_3d_area_entered"]

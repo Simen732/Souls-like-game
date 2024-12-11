@@ -310,10 +310,6 @@ script = ExtResource("12_6m3jj")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -0.75, -60)
 script = ExtResource("12_y01gs")
 
-[node name="eliteSpawner2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -0.75, -60)
-script = ExtResource("12_y01gs")
-
 [connection signal="body_entered" from="spawnPoints/spawnPoint" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
 [connection signal="body_entered" from="spawnPoints/spawnPoint2" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
 [connection signal="body_entered" from="spawnPoints/spawnPoint3" to="CharacterBody3D" method="_on_spawn_point_body_entered"]

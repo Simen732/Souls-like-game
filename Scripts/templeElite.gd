@@ -9,6 +9,7 @@ const TEMPLE_ARROW = preload("res://scenes/templeArrow.tscn")
 @onready var hitArea = $hitBox
 @onready var hitbox = $hitBox/CollisionShape3D
 @export var rotatable = true
+@onready var area_3d_2 = $top/Area3D2
 
 var Health = 30
 var aggro = false
@@ -28,7 +29,10 @@ func _ready():
 	
 	if not rightHand.is_connected("area_entered", Callable(self, "_on_rightHand_area_entered")):
 		rightHand.connect("area_entered", Callable(self, "_on_rightHand_area_entered"))
-		
+	
+	if not area_3d_2.is_connected("area_entered", Callable(self, "_on_area_3d_2_area_entered")):
+		area_3d_2.connect("area_entered", Callable(self, "_on_area_3d_2_area_entered"))
+
 func _process(delta):
 	if !aggro and self.global_position.distance_to(Global.player_position) <= aggro_range and !Global.playerIsDying and Health > 0:
 		aggro = true
@@ -90,7 +94,10 @@ func handle_attack(delta):
 		await animation_playerTop.animation_finished
 		attackCooldown = 60
 	if self.global_position.distance_to(Global.player_position) <= melee_range and animation_playerTop.current_animation not in attackAnim and attackCooldown == 0:
-		animation_playerTop.play("attack3")
+		var animations = ["attack2", "attack3", "attack4"]
+		var random_animation = animations[randi() % animations.size()]
+		speed = 0
+		animation_playerTop.play(random_animation)
 		await animation_playerTop.animation_finished
 		attackCooldown = 60
 		
@@ -100,6 +107,10 @@ func _on_leftHand_area_entered(area: Area3D) -> void:
 		
 func _on_rightHand_area_entered(area: Area3D) -> void:
 	if area.name == "Player" or area.get_parent().name == "Player" and !rightHand.disabled:
+		Global.playerTakeDamage.emit(30)
+		
+func _on_area_3d_2_area_entered(area: Area3D) -> void:
+	if area.name == "Player" or area.get_parent().name == "Player" and !area_3d_2.disabled:
 		Global.playerTakeDamage.emit(30)
 		
 func on_playerDealDamage(area):
