@@ -3,8 +3,10 @@ extends Node3D
 @onready var animation_player = $AnimationPlayer
 @onready var leftHand: Area3D = $Node/Root/ArmL/ElbowL/sphere4/leftHand
 @onready var rightHand: Area3D = $Node/Root/ArmR/ElbowR/sphere7/rightHand
-@onready var hitArea = $Node/templeGoon
-@onready var hitbox = $Node/templeGoon/hitBox
+@onready var ball: Area3D = $Node/Root/sphere/ball
+
+@onready var hitArea = $Node/Root/templeGoon
+@onready var hitbox = $Node/Root/templeGoon/hitBox
 
 @export var rotatable = true
 @export var attackmove = 0
@@ -28,6 +30,9 @@ func _ready():
 	
 	if not rightHand.is_connected("area_entered", Callable(self, "_on_rightHand_area_entered")):
 		rightHand.connect("area_entered", Callable(self, "_on_rightHand_area_entered"))
+	
+	if not ball.is_connected("area_entered", Callable(self, "_on_ball_area_entered")):
+		ball.connect("area_entered", Callable(self, "_on_ball_area_entered"))
 	
 	animation_player.play("idle")
 
@@ -93,6 +98,11 @@ func _on_leftHand_area_entered(area: Area3D) -> void:
 
 func _on_rightHand_area_entered(area: Area3D) -> void:
 	if area.name == "Player" or area.get_parent().name == "Player" and !rightHand.disabled:
+		Global.playerTakeDamage.emit(20)
+
+
+func _on_ball_area_entered(area: Area3D) -> void:
+	if area.name == "Player" or area.get_parent().name == "Player" and !ball.disabled:
 		Global.playerTakeDamage.emit(20)
 
 

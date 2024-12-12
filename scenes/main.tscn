@@ -249,7 +249,7 @@ mesh = SubResource("BoxMesh_mvu4d")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("5_0gych")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, -40)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
 
 [node name="Health" type="ProgressBar" parent="CharacterBody3D"]
 modulate = Color(1, 0, 0, 1)

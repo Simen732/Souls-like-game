@@ -11,7 +11,7 @@ const TEMPLE_ARROW = preload("res://scenes/templeArrow.tscn")
 @export var rotatable = true
 @onready var area_3d_2 = $top/Area3D2
 
-var Health = 30
+var Health = 75
 var aggro = false
 var speed = 1.5
 var attackstop_distance = 0
@@ -39,9 +39,11 @@ func _process(delta):
 		Global.isFighting = true
 		animation_playerTop.play("aggro")
 		animation_playerBottom.play("walk")
-		await animation_playerTop.animation_finished
 		animation_playerTop.play("aggroidle")
+
 	if aggro:
+		if animation_playerTop.current_animation == "attack2":
+				animation_playerBottom.play("idle")
 		move_towards_player(delta)
 		handle_attack(delta)
 		if self.global_position.distance_to(Global.player_position) > aggro_range or Health <= 1:
@@ -49,7 +51,6 @@ func _process(delta):
 			Global.isFighting = false
 			if animation_playerBottom.current_animation != "walk":
 				animation_playerTop.play("deaggro")
-				animation_playerBottom.play("idle")
 				await animation_playerTop.animation_finished
 				animation_playerTop.play("idle")
 			else:
@@ -76,6 +77,8 @@ func move_towards_player(delta):
 	else:
 		bottomDirection = Vector3(-topDirection)
 	bottomDirection = bottomDirection.normalized()
+	if animation_playerTop.current_animation == "attack4":
+		bottomDirection = Vector3(topDirection)
 	if self.global_position.distance_to(Global.player_position) >= attackstop_distance and speed > 0:
 		self.global_position += (speed) * bottomDirection * delta
 	var bottomTarget_rotation_y = atan2(-bottomDirection.x, -bottomDirection.z)
@@ -94,11 +97,13 @@ func handle_attack(delta):
 		await animation_playerTop.animation_finished
 		attackCooldown = 60
 	if self.global_position.distance_to(Global.player_position) <= melee_range and animation_playerTop.current_animation not in attackAnim and attackCooldown == 0:
-		var animations = ["attack2", "attack3", "attack4"]
+		var animations = ["attack2", "attack4"]
 		var random_animation = animations[randi() % animations.size()]
-		speed = 0
+		if random_animation == "attack2":
+			speed = 0
 		animation_playerTop.play(random_animation)
 		await animation_playerTop.animation_finished
+		speed = 1.5
 		attackCooldown = 60
 		
 func _on_leftHand_area_entered(area: Area3D) -> void:

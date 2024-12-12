@@ -46,23 +46,24 @@ func _ready():
 
 
 func _process(delta):
-	
-
-	
 	if !aggro and self.global_position.distance_to(Global.player_position) <= aggro_range and !Global.playerIsDying and Health > 0:
 		aggro = true
 		Global.isFighting = true
 		music.playing = true
 		boss_healthbar.visible = true
+		boss_healthbar.value = Health
 		animation_player.play("walk")
 
 	if aggro:
+		if boss_healthbar.value > Health:
+			boss_healthbar.value -= boss_healthbar.max_value/100
+		if boss_healthbar.value < Health:
+			boss_healthbar.value += boss_healthbar.max_value/100
 		move_towards_player(delta)
 		handle_attack(delta)
 		if self.global_position.distance_to(Global.player_position) > aggro_range or Health <= 1:
 			aggro = false
 			Health = boss_healthbar.max_value
-			boss_healthbar.value = Health
 			Global.isFighting = false
 			music.playing = false
 			boss_healthbar.visible = false
@@ -161,7 +162,6 @@ func _on_hilt_area_entered(area: Area3D) -> void:
 func on_playerDealDamage(area):
 	if area == self.hitArea and !hitbox.disabled:
 		Health -= Global.weaponDamage
-		boss_healthbar.value = Health
 		print("Bigay hit! Health remaining: " + str(boss_healthbar.value))
 		if Health <= 0:
 			hitbox.disabled = true

@@ -9,7 +9,7 @@ extends CharacterBody3D
 @onready var animation_player = $AnimationPlayer
 @onready var character_body_3d = self 
 @onready var spawn_point = self.global_position
-@onready var currentHealth = $Health
+@onready var healthbar = $Health
 @onready var currentStamina = $Stamina
 @onready var death_counter = $deathCounter
 @onready var menu = $Menu
@@ -25,6 +25,7 @@ extends CharacterBody3D
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var pitch = 0.0
 
+var currentHealth = 200
 var lock_on_position = Vector3(0, 0, 0)
 var jumpDamage = Global.weaponDamage * 1.25
 var staminaLevel = 0
@@ -47,8 +48,8 @@ func _ready():
 	menu.visible = false
 	currentStamina.max_value = Global.maxStamina
 	currentStamina.value = currentStamina.max_value
-	currentHealth.max_value = Global.maxHealth
-	currentHealth.value = currentHealth.max_value
+	healthbar.max_value = Global.maxHealth
+	currentHealth = Global.maxHealth
 
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -56,6 +57,11 @@ func _ready():
 	fixCamera()
 
 
+func _process(delta):
+	if healthbar.value > currentHealth:
+			healthbar.value -= Global.maxHealth/100
+	if healthbar.value < currentHealth:
+			healthbar.value += Global.maxHealth/100
 #-----------------------------------------------------------------------------------------------------#
 
 
@@ -188,7 +194,8 @@ func _physics_process(delta):
 
 		# Handle running logic
 		if Input.is_action_pressed("run") and currentStamina.value > 0 and !Global.flinch and $blockbench_export/AnimationPlayer.current_animation != "attack1":
-			currentStamina.value -= 1
+			if Global.isFighting:
+				currentStamina.value -= 1
 			velocity.x *= Global.runSpeed
 			velocity.z *= Global.runSpeed
 			$blockbench_export/AnimationPlayer.play("running")  # Play running animation
@@ -229,15 +236,15 @@ func _physics_process(delta):
 
 func on_playerTakeDamage(damageTaken):
 	if Global.Iframes < 1 and !Global.playerIsDying:
-		currentHealth.value -= damageTaken
+		currentHealth -= damageTaken
 		$blockbench_export/AnimationPlayer.stop()
 		$blockbench_export/AnimationPlayer.play("hurt")
 		velocity.z = 0
 		velocity.x = 0
-		print("Player hit! Health remaining: " + str(currentHealth.value))
+		print("Player hit! Health remaining: " + str(currentHealth))
 		Global.Iframes = 10
 
-		if currentHealth.value <= 0:
+		if currentHealth <= 0:
 			Global.playerIsDying = true
 			Global.deathCount += 1
 			death_counter.text = "Deaths:  " + str(Global.deathCount)
@@ -262,7 +269,7 @@ func _on_death_timer_timeout():
 	Engine.time_scale = 1
 	animation_player.play("RESET")
 	$blockbench_export/AnimationPlayer.play("idle")
-	currentHealth.value = Global.maxHealth
+	currentHealth = Global.maxHealth
 	Global.playerIsDying = false
 	Global.restart.emit()
 	menu.visible = false
@@ -295,10 +302,10 @@ func _on_skill_tree_stamina_up():
 
 func _on_skill_tree_health_up():
 	Global.maxHealth += 50 * 1.05
-	currentHealth.max_value = Global.maxHealth
-	currentHealth.value += currentHealth.max_value/10 
-	print(currentHealth.value)
-	print(currentHealth.max_value)
+	currentHealth = Global.maxHealth
+	currentHealth += currentHealth.max_value/10 
+	print(currentHealth)
+	print(healthbar.max_value)
 
 
 
