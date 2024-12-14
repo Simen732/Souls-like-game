@@ -1434,7 +1434,7 @@ shape = SubResource("CapsuleShape3D_3cktu")
 disabled = true
 
 [node name="ArmR" type="Node3D" parent="top/Node/Root/body"]
-transform = Transform3D(0.0151285, 0.996195, 0.0858292, -0.172984, 0.0871523, -0.981061, -0.984809, -5.126e-06, 0.173644, 0.53125, 0.3125, 0)
+transform = Transform3D(0.0151261, 0.996195, 0.0858282, -0.172982, 0.0871509, -0.981061, -0.984809, -7.15256e-06, 0.173642, 0.53125, 0.3125, 0)
 
 [node name="cylinder3" type="MeshInstance3D" parent="top/Node/Root/body/ArmR"]
 transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0.25, 0, 0)
@@ -1657,8 +1657,6 @@ libraries = {
 autoplay = "idle"
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
-collision_layer = 3
-collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_0pgsx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]

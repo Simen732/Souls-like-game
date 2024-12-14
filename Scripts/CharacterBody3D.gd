@@ -29,6 +29,8 @@ var currentHealth = 200
 var lock_on_position = Vector3(0, 0, 0)
 var jumpDamage = Global.weaponDamage * 1.25
 var staminaLevel = 0
+var isParrying = false
+var parryTimer = 0
 #-----------------------------------------------------------------------------------------------------#
 
 signal playerDamage
@@ -161,7 +163,8 @@ func _physics_process(delta):
 			animation_player.play("menuClose")
 			skill_tree.visible = false
 
-
+		
+		
 	if  $blockbench_export/AnimationPlayer.current_animation == "hurt":
 		Global.flinch = true
 	else:
@@ -170,6 +173,16 @@ func _physics_process(delta):
 		
 	if Global.dodgeCooldown > 0:
 		Global.dodgeCooldown -= 1
+
+	if parryTimer > 0:
+		parryTimer -= 1
+		isParrying = true
+		
+		
+	if Input.is_action_just_pressed("Parry") and is_on_floor() and !Global.playerIsDying:
+		parryTimer = 30
+		print("parry")
+		
 
 
 	if !Global.flinch and direction == Vector3.ZERO and !Global.isDodging and !Global.playerIsDying and $blockbench_export/AnimationPlayer.current_animation != "attack1":
@@ -214,6 +227,8 @@ func _physics_process(delta):
 			$blockbench_export/AnimationPlayer.play("dodge")  # Play dodge animation
 			Global.dodgeCooldown = 45  # Reset dodge cooldown
 
+
+		
 	# Smooth dodging
 	if Global.isDodging:
 		Global.dashStartTime += delta
@@ -236,7 +251,7 @@ func _physics_process(delta):
 #-----------------------------------------------------------------------------------------------------#
 
 func on_playerTakeDamage(damageTaken):
-	if Global.Iframes < 1 and !Global.playerIsDying:
+	if Global.Iframes < 1 and !Global.playerIsDying and parryTimer < 1:
 		currentHealth -= damageTaken
 		$blockbench_export/AnimationPlayer.stop()
 		$blockbench_export/AnimationPlayer.play("hurt")
@@ -256,6 +271,8 @@ func on_playerTakeDamage(damageTaken):
 			$blockbench_export/AnimationPlayer.play("death")
 			animation_player.play("deathScreen")
 			sensitivity = 0
+	elif parryTimer > 1:
+		print("Parry yiiiiipppppppppppppppiiiiiiiiiiiiiii")
 
 #-----------------------------------------------------------------------------------------------------#
 
