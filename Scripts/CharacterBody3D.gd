@@ -37,6 +37,7 @@ signal playerSwordHitbox
 #-----------------------------------------------------------------------------------------------------#
 
 func _ready():
+	
 	Global.playerTakeDamage.connect(on_playerTakeDamage)
 	
 	if !Global.havePlayedGame:

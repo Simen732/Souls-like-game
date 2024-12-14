@@ -93,15 +93,18 @@ func handle_attack(delta):
 # Handle when the sword hits an area
 func _on_leftHand_area_entered(area: Area3D) -> void:
 	if area.name == "Player" or area.get_parent().name == "Player" and !leftHand.disabled:
+		print("LeftHand")
 		Global.playerTakeDamage.emit(20)
 
 
 func _on_rightHand_area_entered(area: Area3D) -> void:
+	print("RightHand")		
 	if area.name == "Player" or area.get_parent().name == "Player" and !rightHand.disabled:
 		Global.playerTakeDamage.emit(20)
 
 
 func _on_ball_area_entered(area: Area3D) -> void:
+	print("Ball")		
 	if area.name == "Player" or area.get_parent().name == "Player" and !ball.disabled:
 		Global.playerTakeDamage.emit(20)
 
