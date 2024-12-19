@@ -233,6 +233,6 @@ unit_size = 40.0
 max_distance = 40.0
 emission_angle_filter_attenuation_db = 0.0
 
-[connection signal="area_entered" from="Node/Root/Body/ArmL/ElbowL/HandL/Area3D2" to="." method="_on_area_3d_2_area_entered"]
 [connection signal="area_entered" from="Node/Root/Body/ArmL/ElbowL/HandL/Area3D2" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_entered" from="Node/Root/Body/ArmL/ElbowL/HandL/Area3D2" to="." method="_on_area_3d_2_area_entered"]
 [connection signal="area_entered" from="Node/Root/Body/ArmR/ElbowR/HandR/Sword/Area3D" to="." method="_on_area_3d_area_entered"]

@@ -39,6 +39,7 @@ func _process(delta):
 		Global.isFighting = true
 		animation_playerTop.play("aggro")
 		animation_playerBottom.play("walk")
+		await animation_playerTop.animation_finished
 		animation_playerTop.play("aggroidle")
 
 	if aggro:
