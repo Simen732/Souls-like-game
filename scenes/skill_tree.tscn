@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/skill_tree.gd" id="1_jskla"]
 [ext_resource type="Texture2D" uid="uid://btfnal72lqsjw" path="res://Img/skillTreeBackground.jpg" id="2_887du"]
 [ext_resource type="Texture2D" uid="uid://bdc8wtip2cm20" path="res://Img/Spirit_icon.png" id="3_bh5te"]
-[ext_resource type="Texture2D" uid="uid://b7anuvpap4ms" path="res://Img/sebaspill-icon.svg" id="4_5k8rg"]
+[ext_resource type="Texture2D" uid="uid://b7anuvpap4ms" path="res://Game/Img/sebaspill-icon.svg" id="4_5k8rg"]
 [ext_resource type="Texture2D" uid="uid://dj8xjk5sq4vq1" path="res://Img/Tenacity_icon.png" id="5_018lo"]
 [ext_resource type="Texture2D" uid="uid://bvlef8luaxdvf" path="res://Img/Fortitude_icon.png" id="6_iytla"]
 [ext_resource type="Texture2D" uid="uid://dlvg85i4hqokq" path="res://Img/Pure_Soul.png" id="7_6a7uk"]

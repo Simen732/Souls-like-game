@@ -1,8 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://cnijba7hn7opy"]
+[gd_scene load_steps=17 format=3 uid="uid://cnijba7hn7opy"]
 
 [ext_resource type="Texture2D" uid="uid://ccq8rwy18sim3" path="res://Textures/696.jpg" id="1_m2yxv"]
 [ext_resource type="Shader" path="res://addons/simplegrasstextured/shaders/grass.gdshader" id="2_08o17"]
-[ext_resource type="PackedScene" uid="uid://rf85mfsp141o" path="res://scenes/pillar.tscn" id="2_i73u5"]
 [ext_resource type="Texture2D" uid="uid://c4ggdp0kg5wjk" path="res://addons/simplegrasstextured/textures/grassbushcc008.png" id="3_ck05y"]
 [ext_resource type="PackedScene" uid="uid://c3opd7ufh7nps" path="res://scenes/spawn_point.tscn" id="4_50kp5"]
 [ext_resource type="Script" path="res://addons/simplegrasstextured/grass.gd" id="4_ght80"]
@@ -87,6 +86,30 @@ use_collision = true
 size = Vector3(20, 1, 4.99268)
 material = SubResource("StandardMaterial3D_ap0yy")
 
+[node name="CSGBox3D22" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 5.88628, 4.74778, -20.6068)
+use_collision = true
+size = Vector3(11.1354, 1, 5.88648)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D24" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.2222e-08, -0.965926, 0.258819, 1, -4.37114e-08, 0, 1.13133e-08, 0.258819, 0.965926, -4.03353, 4.95385, -18.2473)
+use_collision = true
+size = Vector3(10.2807, 1, 5.71326)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D25" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.2222e-08, -0.965926, -0.258819, 1, -4.37114e-08, 0, -1.13133e-08, -0.258819, 0.965926, 1.92024, 5.02645, -18.1558)
+use_collision = true
+size = Vector3(10.5912, 1, 5.5238)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D23" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -8.28121, 4.88573, -20.672)
+use_collision = true
+size = Vector3(10.8954, 1, 5.88648)
+material = SubResource("StandardMaterial3D_ap0yy")
+
 [node name="CSGBox3D20" type="CSGBox3D" parent="Terrain"]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 15.6351, -0.810251, -72.3176)
 use_collision = true
@@ -140,7 +163,10 @@ material = SubResource("StandardMaterial3D_ap0yy")
 
 [node name="CSGBox3D10" type="CSGBox3D" parent="Terrain"]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 5.81724, 0, -1.74846e-07, 0, 1, 13.9985, -19.706, 95.3612)
+layers = 3
 use_collision = true
+collision_layer = 3
+collision_mask = 3
 size = Vector3(1, 4.99316, 30)
 material = SubResource("StandardMaterial3D_ap0yy")
 
@@ -199,7 +225,7 @@ size = Vector3(15, 1, 7)
 material = SubResource("StandardMaterial3D_ap0yy")
 
 [node name="CSGBox3D19" type="CSGBox3D" parent="Terrain"]
-transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -1.00149, -5, 69.8612)
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -1.00149, -5, 69.6903)
 use_collision = true
 size = Vector3(20, 1, 21)
 material = SubResource("StandardMaterial3D_ap0yy")
@@ -222,22 +248,7 @@ sky_mode = 1
 
 [node name="Pillars" type="Node" parent="."]
 
-[node name="Pillar1" parent="Pillars" instance=ExtResource("2_i73u5")]
-transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -2.83885, 1, 0.493767)
-
 [node name="spawnPoints" type="Node" parent="."]
-
-[node name="spawnPoint" parent="spawnPoints" instance=ExtResource("4_50kp5")]
-transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 6.9985, 0.5, 15.3612)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="spawnPoints/spawnPoint"]
-mesh = SubResource("BoxMesh_mvu4d")
-
-[node name="spawnPoint2" parent="spawnPoints" instance=ExtResource("4_50kp5")]
-transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 6.85568, 0.5, 18.7603)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="spawnPoints/spawnPoint2"]
-mesh = SubResource("BoxMesh_mvu4d")
 
 [node name="spawnPoint3" parent="spawnPoints" instance=ExtResource("4_50kp5")]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -1.00149, -4, 76.3612)
@@ -249,7 +260,7 @@ mesh = SubResource("BoxMesh_mvu4d")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("5_0gych")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.90916, 72.7942)
 
 [node name="Health" type="ProgressBar" parent="CharacterBody3D"]
 modulate = Color(1, 0, 0, 1)
@@ -297,20 +308,38 @@ offset_bottom = 1.0
 text = "Biguy the Big Guy"
 
 [node name="BiGay" parent="." instance=ExtResource("7_6hhxa")]
-transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, -29.75, 105)
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, -29.75, 281.113)
 
 [node name="playerLockOn" parent="BiGay" instance=ExtResource("8_hlc6o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.25)
 
 [node name="goonSpawner" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 35)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.03074)
+script = ExtResource("12_6m3jj")
+
+[node name="goonSpawner2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.491, 62.228)
+script = ExtResource("12_6m3jj")
+
+[node name="goonSpawner3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.89732, -4.491, 63.1426)
+script = ExtResource("12_6m3jj")
+
+[node name="goonSpawner4" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.23534, -4.491, 63.1426)
 script = ExtResource("12_6m3jj")
 
 [node name="eliteSpawner" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -0.75, -60)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.36727, -0.756418, -46.9547)
 script = ExtResource("12_y01gs")
 
-[connection signal="body_entered" from="spawnPoints/spawnPoint" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
-[connection signal="body_entered" from="spawnPoints/spawnPoint2" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
+[node name="eliteSpawner2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.36727, -29.5952, 97.0137)
+script = ExtResource("12_y01gs")
+
+[node name="eliteSpawner3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09883, -29.5952, 97.0137)
+script = ExtResource("12_y01gs")
+
 [connection signal="body_entered" from="spawnPoints/spawnPoint3" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
 [connection signal="playerDamage" from="CharacterBody3D" to="BiGay" method="_on_character_body_3d_player_damage"]
