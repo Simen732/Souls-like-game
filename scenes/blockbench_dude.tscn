@@ -38,7 +38,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.
 transform = Transform3D(1, -2.98023e-08, -2.98023e-08, 2.98023e-08, 1, 0, 0, 5.96046e-08, 1, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Pelvis/Body/Rarm/Relbow/Sword/Area3D" index="0"]
-transform = Transform3D(1, -2.20537e-06, -5.96046e-08, 5.96046e-08, 1, 5.96046e-08, 2.08616e-07, 4.47035e-07, 1, 0.0015385, -0.408438, -0.00365779)
+transform = Transform3D(1.5, -7.45059e-08, -3.12924e-07, 8.9407e-08, 1.25, -6.70552e-07, 3.12924e-07, 5.58794e-07, 1.5, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_58acl")
 disabled = true
 

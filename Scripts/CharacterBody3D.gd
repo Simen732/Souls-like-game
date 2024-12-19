@@ -39,7 +39,6 @@ signal playerSwordHitbox
 #-----------------------------------------------------------------------------------------------------#
 
 func _ready():
-	
 	Global.playerTakeDamage.connect(on_playerTakeDamage)
 	
 	if !Global.havePlayedGame:
@@ -60,11 +59,6 @@ func _ready():
 	fixCamera()
 
 
-func _process(delta):
-	if healthbar.value > currentHealth:
-			healthbar.value -= Global.maxHealth/100
-	if healthbar.value < currentHealth:
-			healthbar.value += Global.maxHealth/100
 #-----------------------------------------------------------------------------------------------------#
 
 
@@ -83,6 +77,13 @@ func _input(event):
 
 
 func _physics_process(delta):
+	move_and_slide()
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+	if healthbar.value > currentHealth:
+			healthbar.value -= Global.maxHealth/100
+	if healthbar.value < currentHealth:
+			healthbar.value += Global.maxHealth/100
 	Global.player_position = self.global_position
 
 	# Add gravity to the character's velocity
@@ -196,6 +197,9 @@ func _physics_process(delta):
 	if Global.dashboost > 0:
 		Global.dashboost -= 1
 
+	if Global.isFighting == false and currentStamina.value < Global.maxStamina:
+		currentStamina.value += 1 + (staminaLevel/5)
+
 	if !Input.is_action_pressed("run") and is_on_floor() and !Global.isDodging and currentStamina.value < Global.maxStamina and $blockbench_export/AnimationPlayer.current_animation != "attack1":
 		currentStamina.value += 1 + (staminaLevel/5)
 
@@ -244,9 +248,6 @@ func _physics_process(delta):
 				Global.Iframes = 2
 		else:
 			Global.isDodging = false
-
-	# Move the character
-	move_and_slide()
 
 #-----------------------------------------------------------------------------------------------------#
 

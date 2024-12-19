@@ -15,6 +15,10 @@
 [ext_resource type="Animation" uid="uid://cs16nidwqtgc8" path="res://Animations/TempleElite/deathTop.res" id="13_tedue"]
 [ext_resource type="Animation" uid="uid://2qbioyrqsbya" path="res://Animations/TempleElite/aggroidleTop.res" id="14_otw7s"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7ac8y"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_f2gnb"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ohxf"]
 resource_name = "material_0"
 transparency = 2
@@ -1372,12 +1376,16 @@ _data = {
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0pgsx"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7ac8y"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_f2gnb"]
-
-[node name="templeElite" type="Node3D"]
+[node name="templeElite" type="CharacterBody3D"]
 script = ExtResource("1_jelvv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0.75, 0)
+shape = SubResource("CapsuleShape3D_7ac8y")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 1.75, 0)
+shape = SubResource("SphereShape3D_f2gnb")
 
 [node name="top" type="Node3D" parent="."]
 
@@ -1395,7 +1403,7 @@ mesh = SubResource("ArrayMesh_xyta5")
 skeleton = NodePath("")
 
 [node name="ArmL" type="Node3D" parent="top/Node/Root/body"]
-transform = Transform3D(0.0871555, -0.996195, 0, 0.996195, 0.0871555, 0, 0, 0, 1, -0.53125, 0.3125, 0)
+transform = Transform3D(0.0871556, -0.996195, 0, 0.996195, 0.0871556, 0, 0, 0, 1, -0.53125, 0.3125, 0)
 
 [node name="cylinder" type="MeshInstance3D" parent="top/Node/Root/body/ArmL"]
 transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, -0.25, 0, 0)
@@ -1434,7 +1442,7 @@ shape = SubResource("CapsuleShape3D_3cktu")
 disabled = true
 
 [node name="ArmR" type="Node3D" parent="top/Node/Root/body"]
-transform = Transform3D(0.0151338, 0.996195, 0.0858313, -0.172987, 0.0871554, -0.98106, -0.984808, -5.66244e-07, 0.173648, 0.53125, 0.3125, 0)
+transform = Transform3D(0.0151261, 0.996195, 0.0858282, -0.172982, 0.0871509, -0.981061, -0.984809, -7.15256e-06, 0.173642, 0.53125, 0.3125, 0)
 
 [node name="cylinder3" type="MeshInstance3D" parent="top/Node/Root/body/ArmR"]
 transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0.25, 0, 0)
@@ -1658,14 +1666,6 @@ autoplay = "idle"
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_0pgsx")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0.75, 0)
-shape = SubResource("CapsuleShape3D_7ac8y")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="RigidBody3D"]
-transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 1.75, 0)
-shape = SubResource("SphereShape3D_f2gnb")
 
 [node name="hitBox" type="Area3D" parent="."]
 

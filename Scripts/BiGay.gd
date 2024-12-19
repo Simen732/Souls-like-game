@@ -1,4 +1,4 @@
-extends Node3D
+extends CharacterBody3D
 
 @onready var animation_player = $AnimationPlayer
 @onready var music = $AudioStreamPlayer3D
@@ -13,8 +13,9 @@ extends Node3D
 @export var rotatable = true
 @export var attackmove = 0
 
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var ranged_attack_timer = randi_range(60, 180)
-var Health = 300
+var Health = 200
 var aggro = false
 var speed = 0.75
 var attackstop_distance = 0
@@ -45,7 +46,10 @@ func _ready():
 		biGayHilt.connect("area_entered", Callable(self, "_on_hilt_area_entered"))
 
 
-func _process(delta):
+func _physics_process(delta):
+	move_and_slide()
+	if not is_on_floor():
+		velocity.y -= gravity * delta
 	if !aggro and self.global_position.distance_to(Global.player_position) <= aggro_range and !Global.playerIsDying and Health > 0:
 		aggro = true
 		Global.isFighting = true
@@ -59,7 +63,8 @@ func _process(delta):
 			boss_healthbar.value -= boss_healthbar.max_value/100
 		if boss_healthbar.value < Health:
 			boss_healthbar.value += boss_healthbar.max_value/100
-		move_towards_player(delta)
+		if typeof(Global.enemy_lock_on_position) == TYPE_VECTOR3:
+			move_towards_player(delta)
 		handle_attack(delta)
 		if self.global_position.distance_to(Global.player_position) > aggro_range or Health <= 1:
 			aggro = false
@@ -166,6 +171,7 @@ func on_playerDealDamage(area):
 		if Health <= 0:
 			hitbox.disabled = true
 			aggro = false
+			Global.isFighting = false
 			animation_player.stop()
 			animation_player.play("dafeeted")
 			await animation_player.animation_finished

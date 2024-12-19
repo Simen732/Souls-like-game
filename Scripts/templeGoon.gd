@@ -1,4 +1,4 @@
-extends Node3D
+extends CharacterBody3D
 
 @onready var animation_player = $AnimationPlayer
 @onready var leftHand: Area3D = $Node/Root/ArmL/ElbowL/sphere4/leftHand
@@ -11,6 +11,7 @@ extends Node3D
 @export var rotatable = true
 @export var attackmove = 0
 
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var Health = 30
 var aggro = false
 var speed = 2
@@ -37,14 +38,18 @@ func _ready():
 	animation_player.play("idle")
 
 
-func _process(delta):
+func _physics_process(delta):
+	move_and_slide()
+	if not is_on_floor():
+		velocity.y -= gravity * delta
 	if !aggro and self.global_position.distance_to(Global.player_position) <= aggro_range and !Global.playerIsDying and Health > 0:
 		aggro = true
 		Global.isFighting = true
 		animation_player.play("walk")
 
 	if aggro:
-		move_towards_player(delta)
+		if typeof(Global.enemy_lock_on_position) == TYPE_VECTOR3:
+			move_towards_player(delta)
 		handle_attack(delta)
 		if self.global_position.distance_to(Global.player_position) > aggro_range or Health <= 1:
 			aggro = false
@@ -55,10 +60,10 @@ func _process(delta):
 			else:
 				animation_player.stop
 				animation_player.play("idle")
+				
 
 func _on_restart():
 	queue_free()
-
 
 # Move towards the player and handle animations
 func move_towards_player(delta):
@@ -116,6 +121,7 @@ func on_playerDealDamage(area):
 			if Health <= 0:
 				hitbox.disabled = true
 				aggro = false
+				Global.isFighting = false
 				animation_player.stop()
 				animation_player.play("death")
 				await animation_player.animation_finished

@@ -1,5 +1,6 @@
-extends Node3D
+extends CharacterBody3D
 const TEMPLE_ARROW = preload("res://scenes/templeArrow.tscn")
+
 @onready var top = $top
 @onready var bottom = $bottom
 @onready var animation_playerTop = $top/AnimationPlayer
@@ -11,6 +12,7 @@ const TEMPLE_ARROW = preload("res://scenes/templeArrow.tscn")
 @export var rotatable = true
 @onready var area_3d_2 = $top/Area3D2
 
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var Health = 75
 var aggro = false
 var speed = 1.5
@@ -33,7 +35,10 @@ func _ready():
 	if not area_3d_2.is_connected("area_entered", Callable(self, "_on_area_3d_2_area_entered")):
 		area_3d_2.connect("area_entered", Callable(self, "_on_area_3d_2_area_entered"))
 
-func _process(delta):
+func _physics_process(delta):
+	move_and_slide()
+	if not is_on_floor():
+		velocity.y -= gravity * delta
 	if !aggro and self.global_position.distance_to(Global.player_position) <= aggro_range and !Global.playerIsDying and Health > 0:
 		aggro = true
 		Global.isFighting = true
@@ -45,7 +50,8 @@ func _process(delta):
 	if aggro:
 		if animation_playerTop.current_animation == "attack2":
 				animation_playerBottom.play("idle")
-		move_towards_player(delta)
+		if typeof(Global.enemy_lock_on_position) == TYPE_VECTOR3:
+			move_towards_player(delta)
 		handle_attack(delta)
 		if self.global_position.distance_to(Global.player_position) > aggro_range or Health <= 1:
 			aggro = false
@@ -97,6 +103,7 @@ func handle_attack(delta):
 		$top/Node/Root/body/ArmR/ElbowR/arrowSpawner.add_child(instance)
 		await animation_playerTop.animation_finished
 		attackCooldown = 60
+	
 	if self.global_position.distance_to(Global.player_position) <= melee_range and animation_playerTop.current_animation not in attackAnim and attackCooldown == 0:
 		var animations = ["attack2", "attack4"]
 		var random_animation = animations[randi() % animations.size()]
@@ -106,7 +113,13 @@ func handle_attack(delta):
 		await animation_playerTop.animation_finished
 		speed = 1.5
 		attackCooldown = 60
-		
+	
+	if self.global_position.distance_to(Global.player_position) <= ranged_range and self.global_position.distance_to(Global.player_position) <= melee_range - 1 and animation_playerTop.current_animation not in attackAnim and attackCooldown == 0:
+		animation_playerTop.play("attack3")
+		await animation_playerTop.animation_finished
+		attackCooldown = 30
+
+
 func _on_leftHand_area_entered(area: Area3D) -> void:
 	if area.name == "Player" or area.get_parent().name == "Player" and !leftHand.disabled:
 		Global.playerTakeDamage.emit(30)
@@ -126,6 +139,7 @@ func on_playerDealDamage(area):
 			if Health <= 0:
 				hitbox.disabled = true
 				aggro = false
+				Global.isFighting = false
 				animation_playerTop.stop()
 				animation_playerTop.play("death")
 				animation_playerBottom.stop()
