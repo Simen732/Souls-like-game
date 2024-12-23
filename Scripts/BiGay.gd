@@ -88,7 +88,7 @@ func on_restart():
 	boss_healthbar.visible = false
 	animation_player.stop()	
 	animation_player.play("idle")
-	self.position = Vector3(0, -29.726, 105)
+	self.position = Vector3(0, -29.75, 105)
 	self.rotation = Vector3(0, 0, 0)
 
 
@@ -167,7 +167,7 @@ func _on_hilt_area_entered(area: Area3D) -> void:
 func on_playerDealDamage(area):
 	if area == self.hitArea and !hitbox.disabled:
 		Health -= Global.weaponDamage
-		print("Bigay hit! Health remaining: " + str(boss_healthbar.value))
+		print("Bigay hit! Health remaining: " + str(Health))
 		if Health <= 0:
 			hitbox.disabled = true
 			aggro = false

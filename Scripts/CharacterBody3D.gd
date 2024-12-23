@@ -26,7 +26,10 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var pitch = 0.0
 
 var currentHealth = 200
-var lock_on_position = Vector3(0, 0, 0)
+var lockOnTarget = Vector3()
+var lockOnRange = 30
+var minTargetRange = INF  # Start with a very large number
+var closestTarget = null
 var jumpDamage = Global.weaponDamage * 1.25
 var staminaLevel = 0
 var isParrying = false
@@ -106,22 +109,29 @@ func _physics_process(delta):
 		$blockbench_export.rotation.y = lerp_angle($blockbench_export.rotation.y, target_rotation_y, 0.1)
 
 #Lock on logic
-	if Input.is_action_just_pressed("lock on") and Global.isFighting:
-		if !Global.locked_on:
-			Global.locked_on = true
-		elif Global.locked_on:
-			Global.locked_on = false
+	if Input.is_action_just_pressed("lock on") and !Global.locked_on:
+		Global.locked_on = true
+		
+		# Iterate over all nodes in the scene tree
+		for node in get_tree().get_nodes_in_group("lockOnPoints"):
+			if node and node is Node3D:  # Ensure the node exists and is a 3D node
+				var targetDistance = self.global_position.distance_to(node.global_transform.origin)
+				if targetDistance <= lockOnRange and targetDistance < minTargetRange:
+					closestTarget = node
+					minTargetRange = targetDistance
 	
 	if Global.locked_on:
-		if  $"../BiGay/playerLockOn".global_position != null:
-			lock_on_position = $"../BiGay/playerLockOn".global_position
-			var lock_on_direction = Vector3(lock_on_position - cam_origin.global_position)
+		if closestTarget:
+			lockOnTarget = closestTarget.global_position
+		if self.global_position.distance_to(lockOnTarget) <= 30:  # Ensure the node exists and is a 3D node and that it is within range.
+			print(lockOnTarget)
+			var lock_on_direction = Vector3(lockOnTarget - cam_origin.global_position)
 			lock_on_direction = lock_on_direction.normalized()
 			var target_rotation = atan2(-lock_on_direction.x, -lock_on_direction.z)
 			cam_origin.rotation.y = lerp_angle(cam_origin.rotation.y, target_rotation, 0.5)
 		else:
 			Global.locked_on = false
-
+			print("No target to lock on to")
 
 
 	# Attack logic

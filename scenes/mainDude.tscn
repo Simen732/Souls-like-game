@@ -147,7 +147,7 @@ _data = {
 "menuClose": SubResource("Animation_x8p6e")
 }
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_5ft5w")
 
 [node name="Player3" type="CollisionShape3D" parent="."]

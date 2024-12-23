@@ -871,6 +871,9 @@ transform = Transform3D(1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 0, 0, 0)
 transform = Transform3D(1, 5.82077e-11, 0, 5.82077e-11, 1, -7.45058e-09, 0, -7.45058e-09, 1, 0, -0.5, 0)
 shape = SubResource("CapsuleShape3D_xa0ot")
 
+[node name="lockOnPoint" type="Node3D" parent="Node/Root" groups=["lockOnPoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -41)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_ikwvo")
