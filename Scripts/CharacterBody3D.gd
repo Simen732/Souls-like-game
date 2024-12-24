@@ -109,9 +109,14 @@ func _physics_process(delta):
 		$blockbench_export.rotation.y = lerp_angle($blockbench_export.rotation.y, target_rotation_y, 0.1)
 
 #Lock on logic
-	if Input.is_action_just_pressed("lock on") and !Global.locked_on:
-		Global.locked_on = true
+	if Input.is_action_just_pressed("lock on"):
+		if Global.locked_on == false:
+			Global.locked_on = true
+			print(Global.locked_on)
 		
+		elif Global.locked_on == true:
+			Global.locked_on = false
+			print(Global.locked_on)
 		# Iterate over all nodes in the scene tree
 		for node in get_tree().get_nodes_in_group("lockOnPoints"):
 			if node and node is Node3D:  # Ensure the node exists and is a 3D node
@@ -124,7 +129,6 @@ func _physics_process(delta):
 		if closestTarget:
 			lockOnTarget = closestTarget.global_position
 		if self.global_position.distance_to(lockOnTarget) <= 30:  # Ensure the node exists and is a 3D node and that it is within range.
-			print(lockOnTarget)
 			var lock_on_direction = Vector3(lockOnTarget - cam_origin.global_position)
 			lock_on_direction = lock_on_direction.normalized()
 			var target_rotation = atan2(-lock_on_direction.x, -lock_on_direction.z)
