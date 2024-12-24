@@ -23,6 +23,7 @@ const melee_range = 3
 const ranged_range = 15 
 
 func _ready():
+	add_to_group("lockOnPoints")
 	Global.restart.connect(_on_restart)
 	Global.playerDealDamage.connect(on_playerDealDamage)
 	

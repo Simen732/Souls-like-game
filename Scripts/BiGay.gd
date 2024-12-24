@@ -92,7 +92,7 @@ func on_restart():
 	self.rotation = Vector3(0, 0, 0)
 
 
-# Move towards the player and handle animations
+
 func move_towards_player(delta):
 	var direction = Vector3(Global.enemy_lock_on_position.x - self.global_position.x, 0, Global.enemy_lock_on_position.z - self.global_position.z)
 	direction = direction.normalized()

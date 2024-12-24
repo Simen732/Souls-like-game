@@ -254,7 +254,7 @@ mesh = SubResource("BoxMesh_mvu4d")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("5_0gych")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -19.8218, 88.5117)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.753103, -61.2121)
 
 [node name="Health" type="ProgressBar" parent="CharacterBody3D"]
 modulate = Color(1, 0, 0, 1)
@@ -302,14 +302,14 @@ offset_bottom = 1.0
 text = "Biguy the Big Guy"
 
 [node name="BiGay" parent="." instance=ExtResource("7_6hhxa")]
-transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, -29.75, 105)
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 7.63698, -29.75, 105)
 
 [node name="goonSpawner" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.8505, 0, -30)
 script = ExtResource("12_6m3jj")
 
 [node name="goonSpawner2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.882, 0, -33.9666)
 script = ExtResource("12_6m3jj")
 
 [node name="goonSpawner3" type="Node3D" parent="."]
@@ -317,7 +317,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 0)
 script = ExtResource("12_6m3jj")
 
 [node name="eliteSpawner" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.6149, 0.699953, -60.1577)
 script = ExtResource("12_y01gs")
 
 [connection signal="body_entered" from="spawnPoints/spawnPoint3" to="CharacterBody3D" method="_on_spawn_point_body_entered"]

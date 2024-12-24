@@ -114,6 +114,7 @@ func _physics_process(delta):
 			Global.locked_on = true
 			print(Global.locked_on)
 		
+		
 		elif Global.locked_on == true:
 			Global.locked_on = false
 			print(Global.locked_on)
