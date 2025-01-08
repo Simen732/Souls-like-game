@@ -76,6 +76,18 @@ func _input(event):
 		cam_origin.rotation.z = 0
 
 
+func find_target():
+	var possible_targets = get_tree().get_nodes_in_group("lockOnPoints")
+	for possible_target in possible_targets:
+		if not $CamOrigin/SpringArm3D/Camera3D.is_position_in_frustum(possible_target.global_position):
+			possible_targets.erase(possible_target)
+		if $CamOrigin/SpringArm3D/Camera3D.global_position.distance_to(possible_target.global_position) > 30:
+			possible_targets.erase(possible_target)
+	if not possible_targets.is_empty():
+		return possible_targets[0]
+	return null
+	
+	
 #-----------------------------------------------------------------------------------------------------#
 
 
@@ -110,26 +122,18 @@ func _physics_process(delta):
 
 #Lock on logic
 	if Input.is_action_just_pressed("lock on"):
+		print(find_target())
 		if Global.locked_on == false:
 			Global.locked_on = true
 			print(Global.locked_on)
 		
-		
 		elif Global.locked_on == true:
 			Global.locked_on = false
 			print(Global.locked_on)
-		# Iterate over all nodes in the scene tree
-		for node in get_tree().get_nodes_in_group("lockOnPoints"):
-			if node and node is Node3D:  # Ensure the node exists and is a 3D node
-				var targetDistance = self.global_position.distance_to(node.global_transform.origin)
-				if targetDistance <= lockOnRange and targetDistance < minTargetRange:
-					closestTarget = node
-					minTargetRange = targetDistance
-	
+
 	if Global.locked_on:
-		if closestTarget:
-			lockOnTarget = closestTarget.global_position
-		if self.global_position.distance_to(lockOnTarget) <= 30:  # Ensure the node exists and is a 3D node and that it is within range.
+		lockOnTarget = find_target().global_position
+		if self.global_position.distance_to(lockOnTarget) <= 45:  # Ensure the node exists and is a 3D node and that it is within range.
 			var lock_on_direction = Vector3(lockOnTarget - cam_origin.global_position)
 			lock_on_direction = lock_on_direction.normalized()
 			var target_rotation = atan2(-lock_on_direction.x, -lock_on_direction.z)
@@ -265,6 +269,7 @@ func _physics_process(delta):
 			Global.isDodging = false
 
 #-----------------------------------------------------------------------------------------------------#
+
 
 func on_playerTakeDamage(damageTaken):
 	if Global.Iframes < 1 and !Global.playerIsDying and parryTimer < 1:
