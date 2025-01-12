@@ -76,18 +76,10 @@ func _input(event):
 		cam_origin.rotation.z = 0
 
 
-func find_target():
-	var possible_targets = get_tree().get_nodes_in_group("lockOnPoints")
-	for possible_target in possible_targets:
-		if not $CamOrigin/SpringArm3D/Camera3D.is_position_in_frustum(possible_target.global_position):
-			possible_targets.erase(possible_target)
-		if $CamOrigin/SpringArm3D/Camera3D.global_position.distance_to(possible_target.global_position) > 30:
-			possible_targets.erase(possible_target)
-	if not possible_targets.is_empty():
-		return possible_targets[0]
-	return null
-	
-	
+func position_camera_behind_character():
+	cam_origin.global_rotation = blockbench_export.global_rotation
+
+
 #-----------------------------------------------------------------------------------------------------#
 
 
@@ -100,6 +92,7 @@ func _physics_process(delta):
 	if healthbar.value < currentHealth:
 			healthbar.value += Global.maxHealth/100
 	Global.player_position = self.global_position
+
 
 	# Add gravity to the character's velocity
 	if not is_on_floor():
@@ -119,28 +112,6 @@ func _physics_process(delta):
 	if direction != Vector3.ZERO and !Global.isDodging and !Global.playerIsDying and !Global.Menu_open and $blockbench_export.rotatable:
 		var target_rotation_y = atan2(-direction.x, -direction.z)
 		$blockbench_export.rotation.y = lerp_angle($blockbench_export.rotation.y, target_rotation_y, 0.1)
-
-#Lock on logic
-	if Input.is_action_just_pressed("lock on"):
-		print(find_target())
-		if Global.locked_on == false:
-			Global.locked_on = true
-			print(Global.locked_on)
-		
-		elif Global.locked_on == true:
-			Global.locked_on = false
-			print(Global.locked_on)
-
-	if Global.locked_on:
-		lockOnTarget = find_target().global_position
-		if self.global_position.distance_to(lockOnTarget) <= 45:  # Ensure the node exists and is a 3D node and that it is within range.
-			var lock_on_direction = Vector3(lockOnTarget - cam_origin.global_position)
-			lock_on_direction = lock_on_direction.normalized()
-			var target_rotation = atan2(-lock_on_direction.x, -lock_on_direction.z)
-			cam_origin.rotation.y = lerp_angle(cam_origin.rotation.y, target_rotation, 0.5)
-		else:
-			Global.locked_on = false
-			print("No target to lock on to")
 
 
 	# Attack logic

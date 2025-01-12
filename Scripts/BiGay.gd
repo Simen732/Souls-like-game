@@ -169,13 +169,13 @@ func on_playerDealDamage(area):
 		Health -= Global.weaponDamage
 		print("Bigay hit! Health remaining: " + str(Health))
 		if Health <= 0:
+			boss_healthbar.visible = false
 			hitbox.disabled = true
 			aggro = false
 			Global.isFighting = false
 			animation_player.stop()
 			animation_player.play("dafeeted")
 			await animation_player.animation_finished
-			boss_healthbar.visible = false
 			Global.stopLockOn = true
 			Global.locked_on = false
 			queue_free()

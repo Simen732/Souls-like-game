@@ -23,7 +23,6 @@ const attack_range = 1  # Distance at which bro uses melee attacks
 
 
 func _ready():
-	add_to_group("lockOnPoints")
 	Global.restart.connect(_on_restart)
 	Global.playerDealDamage.connect(on_playerDealDamage)
 	
