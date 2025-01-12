@@ -102,8 +102,20 @@ func handle_attack(delta):
 		animation_playerTop.play("attack1")
 		var instance = TEMPLE_ARROW.instantiate()
 		$top/Node/Root/body/ArmR/ElbowR/arrowSpawner.add_child(instance)
+	
+	# Calculate direction to player's center (assuming player has a height of 2 units)
+		var player_center = Global.player_position + Vector3(0, 1, 0)
+		var spawn_position = $top/Node/Root/body/ArmR/ElbowR/arrowSpawner.global_position
+		var direction_to_player = (player_center - spawn_position).normalized()
+	
+	# Set arrow's initial direction and rotation (flipped direction)
+		instance.global_transform.basis = Basis(direction_to_player.cross(Vector3.UP), Vector3.UP, direction_to_player)
+		instance.global_position = spawn_position
+	
 		await animation_playerTop.animation_finished
 		attackCooldown = 60
+
+
 	
 	if self.global_position.distance_to(Global.player_position) <= melee_range and animation_playerTop.current_animation not in attackAnim and attackCooldown == 0:
 		var animations = ["attack2", "attack4"]

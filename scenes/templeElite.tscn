@@ -1442,7 +1442,7 @@ shape = SubResource("CapsuleShape3D_3cktu")
 disabled = true
 
 [node name="ArmR" type="Node3D" parent="top/Node/Root/body"]
-transform = Transform3D(0.0151251, 0.996195, 0.0858286, -0.172982, 0.0871512, -0.981061, -0.984809, -8.13603e-06, 0.173642, 0.53125, 0.3125, 0)
+transform = Transform3D(0.0151248, 0.996195, 0.0858282, -0.172981, 0.0871507, -0.981061, -0.984809, -8.34465e-06, 0.173641, 0.53125, 0.3125, 0)
 
 [node name="cylinder3" type="MeshInstance3D" parent="top/Node/Root/body/ArmR"]
 transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0.25, 0, 0)
@@ -1521,7 +1521,7 @@ shape = SubResource("CapsuleShape3D_3cktu")
 disabled = true
 
 [node name="arrowSpawner" type="Node3D" parent="top/Node/Root/body/ArmR/ElbowR"]
-transform = Transform3D(-0.136236, -0.0770946, 0.987672, 0.069491, 0.993768, 0.0871557, -0.988236, 0.0805081, -0.13003, 0.75, 0, -0.25)
+transform = Transform3D(-0.136236, -0.0770946, 0.987672, 0.069491, 0.993768, 0.0871557, -0.988236, 0.0805081, -0.13003, 0.75, -5.96046e-08, -0.25)
 
 [node name="lockOnPoint" type="Node3D" parent="top/Node/Root" groups=["lockOnPoints"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -41)

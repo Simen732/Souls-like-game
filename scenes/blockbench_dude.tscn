@@ -77,5 +77,8 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_yya2d")
 disabled = true
 
+[node name="Node3D" type="Node3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.868694, 0)
+
 [connection signal="area_entered" from="Node/Pelvis/Body/Rarm/Relbow/Sword/Area3D" to="." method="_on_area_3d_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
