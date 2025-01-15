@@ -27,7 +27,7 @@ offset_left = 484.0
 offset_top = 156.0
 offset_right = 626.0
 offset_bottom = 214.0
-text = "Click Me"
+text = "Back"
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
