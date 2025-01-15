@@ -19,6 +19,7 @@ var Health = 200
 var aggro = false
 var speed = 0.75
 var attackstop_distance = 0
+var attacks = ["attack1", "attack2", "attack4"]
 
 const aggro_range = 30
 const attack124_range = 3  # Distance at which bro uses 1st 2nd and 4th attack
@@ -113,10 +114,12 @@ func handle_attack(delta):
 
 #Close range attacks
 	if self.global_position.distance_to(Global.player_position) <= attack124_range and animation_player.current_animation not in attackAnim: #sjekker om den er i midten av et angrep
-		var animations = ["attack1", "attack2", "attack4"]
-		var random_animation = animations[randi() % animations.size()]
+		var random_animation = attacks[randi() % attacks.size()]
 		speed = 0
 		animation_player.play(random_animation)
+		attacks = ["attack1", "attack2", "attack4"]
+		attacks.erase(random_animation)
+		print(attacks)
 		await animation_player.animation_finished
 		speed = 0.75
 		animation_player.play("walk")

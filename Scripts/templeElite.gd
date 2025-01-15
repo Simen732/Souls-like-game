@@ -17,10 +17,11 @@ var Health = 75
 var aggro = false
 var speed = 1.5
 var attackstop_distance = 0
-var attackCooldown = 0 
+var attackCooldown = 0
 const aggro_range = 30
-const melee_range = 3  
-const ranged_range = 15 
+const melee_range = 3
+const ranged_range = 15
+var attacks = ["attack2", "attack4"]
 
 func _ready():
 	Global.restart.connect(_on_restart)
@@ -95,7 +96,7 @@ func handle_attack(delta):
 		attackCooldown -= 1
 	
 	var attackAnim = ["attack1", "attack2", "attack3", "attack4"]
-	
+
 
 	if self.global_position.distance_to(Global.player_position) <= ranged_range and self.global_position.distance_to(Global.player_position) >= melee_range and animation_playerTop.current_animation not in attackAnim and attackCooldown == 0:
 		animation_playerTop.play("attack1")
@@ -115,21 +116,22 @@ func handle_attack(delta):
 		attackCooldown = 60
 
 
-	
-	if self.global_position.distance_to(Global.player_position) <= melee_range and animation_playerTop.current_animation not in attackAnim and attackCooldown == 0:
-		var animations = ["attack2", "attack4"]
-		var random_animation = animations[randi() % animations.size()]
-		if random_animation == "attack2":
-			speed = 0
-		animation_playerTop.play(random_animation)
-		await animation_playerTop.animation_finished
-		speed = 1.5
-		attackCooldown = 60
-	
-	if self.global_position.distance_to(Global.player_position) <= ranged_range and self.global_position.distance_to(Global.player_position) <= melee_range - 1 and animation_playerTop.current_animation not in attackAnim and attackCooldown == 0:
+	if self.global_position.distance_to(Global.player_position) <= melee_range - 1.5 and animation_playerTop.current_animation not in attackAnim and attackCooldown == 0:
 		animation_playerTop.play("attack3")
 		await animation_playerTop.animation_finished
 		attackCooldown = 30
+
+
+	if self.global_position.distance_to(Global.player_position) <= melee_range and animation_playerTop.current_animation not in attackAnim and attackCooldown == 0:
+		var random_animation = attacks[randi() % attacks.size()]
+		if random_animation == "attack2":
+			speed = 0
+		animation_playerTop.play(random_animation)
+		attacks = ["attack1", "attack2"]
+		attacks.erase(random_animation)
+		await animation_playerTop.animation_finished
+		speed = 1.5
+		attackCooldown = 60
 
 
 func _on_leftHand_area_entered(area: Area3D) -> void:
