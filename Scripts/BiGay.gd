@@ -20,6 +20,7 @@ var aggro = false
 var speed = 0.75
 var attackstop_distance = 0
 var attacks = ["attack1", "attack2", "attack4"]
+var spawnpoint = Vector3(0, 0, 0)
 
 const aggro_range = 30
 const attack124_range = 3  # Distance at which bro uses 1st 2nd and 4th attack
@@ -28,6 +29,7 @@ const attack5_minrange = 8
 
 
 func _ready():
+	spawnpoint = self.position
 	Global.restart.connect(on_restart)
 	Global.playerDealDamage.connect(on_playerDealDamage)
 	$Node/Root/LegL/KneeL/FootL/Area3D2/GPUParticles3D2.emitting = false
@@ -55,6 +57,8 @@ func _physics_process(delta):
 		aggro = true
 		Global.isFighting = true
 		music.playing = true
+		boss_healthbar.max_value = Health
+		boss_healthbar.value = boss_healthbar.max_value
 		boss_healthbar.visible = true
 		boss_healthbar.value = Health
 		animation_player.play("walk")
@@ -89,7 +93,7 @@ func on_restart():
 	boss_healthbar.visible = false
 	animation_player.stop()	
 	animation_player.play("idle")
-	self.position = Vector3(0, -29.75, 105)
+	self.position = spawnpoint
 	self.rotation = Vector3(0, 0, 0)
 
 
