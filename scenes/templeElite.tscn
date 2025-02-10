@@ -1442,7 +1442,7 @@ shape = SubResource("CapsuleShape3D_3cktu")
 disabled = true
 
 [node name="ArmR" type="Node3D" parent="top/Node/Root/body"]
-transform = Transform3D(0.0151201, 0.996195, 0.0858274, -0.172979, 0.0871492, -0.981061, -0.984809, -1.25468e-05, 0.173639, 0.53125, 0.3125, 0)
+transform = Transform3D(0.0151173, 0.996195, 0.0858265, -0.172978, 0.0871478, -0.981061, -0.984809, -1.50502e-05, 0.173637, 0.53125, 0.3125, 0)
 
 [node name="cylinder3" type="MeshInstance3D" parent="top/Node/Root/body/ArmR"]
 transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0.25, 0, 0)

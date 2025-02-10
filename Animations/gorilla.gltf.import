@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://icd61c2itovh"
-path="res://.godot/imported/gorilla.gltf-40a086ed06562a8f75636f3ca8dec2cd.scn"
+path="res://.godot/imported/gorilla.gltf-f857cebe8b99dfd83cc310760b3dd796.scn"
 
 [deps]
 
-source_file="res://Models/gorilla.gltf"
-dest_files=["res://.godot/imported/gorilla.gltf-40a086ed06562a8f75636f3ca8dec2cd.scn"]
+source_file="res://Animations/gorilla.gltf"
+dest_files=["res://.godot/imported/gorilla.gltf-f857cebe8b99dfd83cc310760b3dd796.scn"]
 
 [params]
 

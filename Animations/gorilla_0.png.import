@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cans3efkdqxvr"
-path.s3tc="res://.godot/imported/gorilla_0.png-365db259bb515172fe99288eaecd7ea5.s3tc.ctex"
+path.s3tc="res://.godot/imported/gorilla_0.png-339f0c028b8a606e8777776db62b21e5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Models/gorilla_0.png"
-dest_files=["res://.godot/imported/gorilla_0.png-365db259bb515172fe99288eaecd7ea5.s3tc.ctex"]
+source_file="res://Animations/gorilla_0.png"
+dest_files=["res://.godot/imported/gorilla_0.png-339f0c028b8a606e8777776db62b21e5.s3tc.ctex"]
 
 [params]
 
