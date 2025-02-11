@@ -180,9 +180,8 @@ func on_playerDealDamage(area):
 			hitbox.disabled = true
 			aggro = false
 			Global.isFighting = false
+			Global.locked_on = false
 			animation_player.stop()
 			animation_player.play("dafeeted")
 			await animation_player.animation_finished
-			Global.stopLockOn = true
-			Global.locked_on = false
 			queue_free()

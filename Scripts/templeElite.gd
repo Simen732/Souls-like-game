@@ -159,6 +159,5 @@ func on_playerDealDamage(area):
 				animation_playerBottom.stop()
 				animation_playerBottom.play("death")
 				await animation_playerBottom.animation_finished
-				Global.stopLockOn = true
 				Global.locked_on = false
 				queue_free()

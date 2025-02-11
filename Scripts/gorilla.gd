@@ -18,7 +18,7 @@ var jump_attack_timer = randi_range(480, 720)
 var Health = 150
 var aggro = false
 var speed = 3
-var attacks = ["attack2", "attack3"]
+var attacks = ["attack2", "attack3", "attack6"]
 var spawnpoint = Vector3(0, 0, 0)
 
 const aggro_range = 45
@@ -101,18 +101,29 @@ func move_towards_player(delta):
 
 # Handle attacking logic
 func handle_attack(delta):
-	var attackAnim = ["attack1", "attack2", "attack3", "attack4"] #Array med liste av alle attacks
+	var attackAnim = ["attack1", "attack2", "attack3", "attack4", "attack5", "attack6", "attack7", "attack7interrupted"] #Array med liste av alle attacks
 	if self.global_position.distance_to(Global.player_position) > 7.5:
 		jump_attack_timer -= randi_range(3, 9)
 	else:
 		jump_attack_timer -= randi_range(1, 3)
+	print(jump_attack_timer)
 
 #Jump attack
 	if jump_attack_timer <= 0 and animation_player.current_animation not in attackAnim:
+		jump_attack_timer = 9999
 		speed = 0
 		animation_player.play("attack4")
 		attackstop_distance = 0
 		await animation_player.animation_finished
+		
+		var random_ranged_attack = randi_range(1, 5)
+		if random_ranged_attack <= 3 and animation_player.current_animation not in attackAnim:
+			animation_player.play("attack5")
+			await animation_player.animation_finished
+		else:
+			animation_player.play("attack7")
+			await animation_player.animation_finished
+		
 		speed = 3
 		attackstop_distance = 2.5
 		jump_attack_timer = randi_range(720, 1200)
@@ -127,11 +138,11 @@ func handle_attack(delta):
 		animation_player.play("walk")
 
 #Mid range attacks
-	if self.global_position.distance_to(Global.player_position) <= attack23_range and animation_player.current_animation not in attackAnim: #sjekker om den er i midten av et angrep
+	if self.global_position.distance_to(Global.player_position) <= attack23_range and animation_player.current_animation not in attackAnim:
 		var random_animation = attacks[randi() % attacks.size()]
 		speed = 0
 		animation_player.play(random_animation)
-		attacks = ["attack2", "attack3"]
+		attacks = ["attack2", "attack3", "attack6"]
 		attacks.erase(random_animation)
 		print(attacks)
 		await animation_player.animation_finished
@@ -162,6 +173,11 @@ func on_playerDealDamage(area):
 			hitbox.disabled = true
 			aggro = false
 			Global.isFighting = false
-			Global.stopLockOn = true
 			Global.locked_on = false
+			animation_player.stop()
+			animation_player.play("death")
+			await animation_player.animation_finished
 			queue_free()
+		elif animation_player.current_animation == "attack7":
+			animation_player.play("attack7interrupted")
+			await animation_player.animation_finished
