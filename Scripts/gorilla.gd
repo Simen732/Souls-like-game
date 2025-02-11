@@ -116,13 +116,15 @@ func handle_attack(delta):
 		attackstop_distance = 0
 		await animation_player.animation_finished
 		
-		var random_ranged_attack = randi_range(1, 5)
-		if random_ranged_attack <= 3 and animation_player.current_animation not in attackAnim:
-			animation_player.play("attack5")
-			await animation_player.animation_finished
-		else:
-			animation_player.play("attack7")
-			await animation_player.animation_finished
+		#kanskje han gjør follow up
+		if self.global_position.distance_to(Global.player_position) > 10:
+			var random_ranged_attack = randi_range(1, 8)
+			if random_ranged_attack <= 5 and animation_player.current_animation not in attackAnim:
+				animation_player.play("attack5")
+				await animation_player.animation_finished
+			else:
+				animation_player.play("attack7")
+				await animation_player.animation_finished
 		
 		speed = 3
 		attackstop_distance = 2.5
