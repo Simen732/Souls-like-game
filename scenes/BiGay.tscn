@@ -583,16 +583,16 @@ max_value = 180.0
 _data = [Vector2(0, 360), 0.0, 0.0, 0, 0, Vector2(1, -360), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_hyu0p"]
+[sub_resource type="CurveTexture" id="CurveTexture_1h40j"]
 curve = SubResource("Curve_mda4a")
 
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_q8l43"]
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_nhphn"]
 
 [sub_resource type="Curve" id="Curve_bs4xc"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 1.4, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_jqbr2"]
+[sub_resource type="CurveTexture" id="CurveTexture_kobeh"]
 curve = SubResource("Curve_bs4xc")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ift0s"]
@@ -605,14 +605,14 @@ emission_ring_height = 0.0
 emission_ring_radius = 1.0
 emission_ring_inner_radius = 1.0
 angle_max = 180.0
-angle_curve = SubResource("CurveTexture_hyu0p")
+angle_curve = SubResource("CurveTexture_1h40j")
 velocity_pivot = Vector3(0, -10, 0)
 direction = Vector3(1, 0, 1)
 spread = 0.0
 angular_velocity_max = 10.0
 directional_velocity_min = -1.0
 directional_velocity_max = 1.0
-directional_velocity_curve = SubResource("CurveXYZTexture_q8l43")
+directional_velocity_curve = SubResource("CurveXYZTexture_nhphn")
 orbit_velocity_max = 3.0
 radial_velocity_max = 10.0
 gravity = Vector3(0, -15, 0)
@@ -620,7 +620,7 @@ linear_accel_max = 2.0
 radial_accel_max = 5.0
 scale_min = 0.25
 scale_max = 0.5
-scale_curve = SubResource("CurveTexture_jqbr2")
+scale_curve = SubResource("CurveTexture_kobeh")
 color = Color(0.313726, 0.2, 0, 1)
 hue_variation_max = 0.25
 collision_mode = 1
@@ -732,14 +732,14 @@ min_value = 0.25
 _data = [Vector2(0, 0.25), 0.0, 1.05, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_rsmx2"]
+[sub_resource type="CurveTexture" id="CurveTexture_ar5hc"]
 curve = SubResource("Curve_e2qny")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yhmmq"]
 gravity = Vector3(0, 0, 0)
 scale_min = 2.5
 scale_max = 2.5
-scale_curve = SubResource("CurveTexture_rsmx2")
+scale_curve = SubResource("CurveTexture_ar5hc")
 
 [sub_resource type="TorusMesh" id="TorusMesh_8g8e7"]
 inner_radius = 1.0

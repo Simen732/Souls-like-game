@@ -1,7 +1,7 @@
 [gd_scene load_steps=149 format=3 uid="uid://c0geii1kobc25"]
 
 [ext_resource type="Script" path="res://scripts/gorilla.gd" id="2_8o0um"]
-[ext_resource type="Texture2D" uid="uid://cans3efkdqxvr" path="res://Animations/gorilla_0.png" id="2_pfewi"]
+[ext_resource type="Texture2D" uid="uid://cans3efkdqxvr" path="res://Models/gorilla_0.png" id="2_pfewi"]
 [ext_resource type="Animation" uid="uid://ccj13ytbqra7p" path="res://Animations/Gorilla/idle.res" id="3_2t5kb"]
 [ext_resource type="AudioStream" uid="uid://b0m7y0soydasm" path="res://Sound-Effect and music/Gothic Roguelike Game Music Pack (No Copyright) (mp3cut.net).mp3" id="3_vh1ir"]
 [ext_resource type="Animation" uid="uid://de6ju3up1ggh1" path="res://Animations/Gorilla/walk.res" id="4_qk6j3"]
@@ -2173,7 +2173,7 @@ script = ExtResource("2_8o0um")
 [node name="Node" type="Node3D" parent="."]
 
 [node name="root" type="Node3D" parent="Node"]
-transform = Transform3D(1, 0, 2.44929e-16, 0, 1, 0, -2.44929e-16, 0, 1, 0, 1.125, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.125, 0)
 
 [node name="pyramid" type="MeshInstance3D" parent="Node/root"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1875, 0)
