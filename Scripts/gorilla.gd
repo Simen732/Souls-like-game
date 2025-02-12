@@ -1,4 +1,5 @@
 extends CharacterBody3D
+const Rock = preload("res://scenes/gorillaRock.tscn")
 
 @onready var animation_player = $AnimationPlayer
 @onready var music = $AudioStreamPlayer3D
@@ -12,6 +13,7 @@ extends CharacterBody3D
 @export var rotatable = true
 @export var attackmove = 0
 @export var attackstop_distance = 2.5
+@export var interruptable = false
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var jump_attack_timer = randi_range(480, 720)
@@ -73,6 +75,7 @@ func _physics_process(delta):
 			animation_player.stop
 			animation_player.play("idle")
 
+
 func on_restart():
 	aggro = false
 	Health = boss_healthbar.max_value
@@ -90,23 +93,23 @@ func on_restart():
 func move_towards_player(delta):
 	var direction = Vector3(Global.enemy_lock_on_position.x - self.global_position.x, 0, Global.enemy_lock_on_position.z - self.global_position.z)
 	direction = direction.normalized()
+	var target_rotation_y = atan2(-direction.x, -direction.z)
 	if self.global_position.distance_to(Global.player_position) >= attackstop_distance and rotatable:
 		self.global_position += (speed + attackmove) * direction * delta
 	else:
 		global_translate(transform.basis.z * -attackmove * delta)
 	if rotatable:
-		var target_rotation_y = atan2(-direction.x, -direction.z)
 		self.rotation.y = lerp_angle(self.rotation.y, target_rotation_y, 0.05)
 
 
 # Handle attacking logic
 func handle_attack(delta):
 	var attackAnim = ["attack1", "attack2", "attack3", "attack4", "attack5", "attack6", "attack7", "attack7interrupted"] #Array med liste av alle attacks
+	$Node/root/body/chest/armRight/elbowRight/handRight/rockSpawner.look_at(-Global.player_position)
 	if self.global_position.distance_to(Global.player_position) > 7.5:
 		jump_attack_timer -= randi_range(3, 9)
 	else:
 		jump_attack_timer -= randi_range(1, 3)
-	print(jump_attack_timer)
 
 #Jump attack
 	if jump_attack_timer <= 0 and animation_player.current_animation not in attackAnim:
@@ -121,6 +124,8 @@ func handle_attack(delta):
 			var random_ranged_attack = randi_range(1, 8)
 			if random_ranged_attack <= 5 and animation_player.current_animation not in attackAnim:
 				animation_player.play("attack5")
+				var instance = Rock.instantiate()
+				$Node/root/body/chest/armRight/elbowRight/handRight/rockSpawner.add_child(instance)
 				await animation_player.animation_finished
 			else:
 				animation_player.play("attack7")
@@ -180,6 +185,6 @@ func on_playerDealDamage(area):
 			animation_player.play("death")
 			await animation_player.animation_finished
 			queue_free()
-		elif animation_player.current_animation == "attack7":
+		elif animation_player.current_animation == "attack7" and interruptable:
 			animation_player.play("attack7interrupted")
 			await animation_player.animation_finished
