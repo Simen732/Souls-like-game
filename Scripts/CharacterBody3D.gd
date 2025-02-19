@@ -30,7 +30,7 @@ var lockOnTarget = Vector3()
 var lockOnRange = 30
 var minTargetRange = INF  # Start with a very large number
 var closestTarget = null
-var jumpDamage = Global.weaponDamage * 1.25
+var motionValue = 1
 var staminaLevel = 0
 var isParrying = false
 var parryTimer = 0
@@ -203,7 +203,7 @@ func _physics_process(delta):
 		# Handle running logic
 		if Input.is_action_pressed("run") and currentStamina.value > 0 and !Global.flinch and $blockbench_export/AnimationPlayer.current_animation != "attack1":
 			if Global.isFighting:
-				currentStamina.value -= 1
+				currentStamina.value -= 2.5
 			velocity.x *= Global.runSpeed
 			velocity.z *= Global.runSpeed
 			$blockbench_export/AnimationPlayer.play("running")  # Play running animation

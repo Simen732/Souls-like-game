@@ -17,10 +17,10 @@ var Health = 75
 var aggro = false
 var speed = 1.5
 var attackstop_distance = 0
-var attackCooldown = 0
+var attackCooldown = 60
 const aggro_range = 30
 const melee_range = 3
-const ranged_range = 15
+const ranged_range = 30
 var attacks = ["attack2", "attack4"]
 
 func _ready():
@@ -91,6 +91,8 @@ func move_towards_player(delta):
 		self.global_position += (speed) * bottomDirection * delta
 	var bottomTarget_rotation_y = atan2(-bottomDirection.x, -bottomDirection.z)
 	bottom.rotation.y = bottomTarget_rotation_y
+
+
 func handle_attack(delta):
 	if attackCooldown > 0:
 		attackCooldown -= 1
@@ -98,7 +100,7 @@ func handle_attack(delta):
 	var attackAnim = ["attack1", "attack2", "attack3", "attack4"]
 
 
-	if self.global_position.distance_to(Global.player_position) <= ranged_range and self.global_position.distance_to(Global.player_position) >= melee_range and animation_playerTop.current_animation not in attackAnim and attackCooldown == 0:
+	if self.global_position.distance_to(Global.player_position) <= ranged_range and self.global_position.distance_to(Global.player_position) > melee_range and animation_playerTop.current_animation not in attackAnim and attackCooldown == 0:
 		animation_playerTop.play("attack1")
 		var instance = TEMPLE_ARROW.instantiate()
 		$top/Node/Root/body/ArmR/ElbowR/arrowSpawner.add_child(instance)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=149 format=3 uid="uid://c0geii1kobc25"]
+[gd_scene load_steps=168 format=3 uid="uid://c0geii1kobc25"]
 
 [ext_resource type="Script" path="res://scripts/gorilla.gd" id="2_8o0um"]
 [ext_resource type="Texture2D" uid="uid://cans3efkdqxvr" path="res://Models/gorilla_0.png" id="2_pfewi"]
@@ -889,6 +889,101 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_uuovr")
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_vvjbl"]
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_nhphn"]
+
+[sub_resource type="Curve" id="Curve_2tova"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 1.4, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_kobeh"]
+curve = SubResource("Curve_2tova")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qtgpv"]
+lifetime_randomness = 0.1
+particle_flag_align_y = true
+particle_flag_rotate_y = true
+emission_shape = 6
+emission_ring_axis = Vector3(1, 1, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 1.0
+angle_max = 180.0
+direction = Vector3(0, 0, 0)
+spread = 0.0
+angular_velocity_max = 10.0
+directional_velocity_min = -1.0
+directional_velocity_max = 1.0
+directional_velocity_curve = SubResource("CurveXYZTexture_nhphn")
+orbit_velocity_max = 3.0
+radial_velocity_max = 10.0
+gravity = Vector3(0, -15, 0)
+linear_accel_max = 2.0
+radial_accel_max = 5.0
+scale_min = 0.25
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_kobeh")
+color = Color(0.313726, 0.2, 0, 1)
+hue_variation_max = 0.25
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_8heyr"]
+
+[sub_resource type="Curve" id="Curve_47ltw"]
+min_value = 90.0
+max_value = 180.0
+_data = [Vector2(0, 360), 0.0, 0.0, 0, 0, Vector2(1, -360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8yxhx"]
+curve = SubResource("Curve_47ltw")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_vggxl"]
+
+[sub_resource type="Curve" id="Curve_1caau"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 1.4, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xb23j"]
+curve = SubResource("Curve_1caau")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jx6rd"]
+lifetime_randomness = 0.1
+particle_flag_align_y = true
+particle_flag_rotate_y = true
+emission_shape = 6
+emission_ring_axis = Vector3(1, 1, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 1.0
+angle_max = 180.0
+angle_curve = SubResource("CurveTexture_8yxhx")
+velocity_pivot = Vector3(0, -10, 0)
+direction = Vector3(1, 0, 1)
+spread = 0.0
+angular_velocity_max = 10.0
+directional_velocity_min = -1.0
+directional_velocity_max = 1.0
+directional_velocity_curve = SubResource("CurveXYZTexture_vggxl")
+orbit_velocity_max = 3.0
+radial_velocity_max = 10.0
+gravity = Vector3(0, -15, 0)
+linear_accel_max = 2.0
+radial_accel_max = 5.0
+scale_min = 0.25
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_xb23j")
+color = Color(0.313726, 0.2, 0, 1)
+hue_variation_max = 0.25
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_g70fr"]
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_edtsy"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2gkjn"]
@@ -1212,6 +1307,8 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_305jf")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bkvlm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mdcse"]
 
@@ -2023,6 +2120,28 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_uypmx")
 
+[sub_resource type="Curve" id="Curve_d123e"]
+min_value = 0.25
+max_value = 1.5
+_data = [Vector2(0, 0.25), 0.0, 1.05, 0, 0, Vector2(1, 1.5), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ar5hc"]
+curve = SubResource("Curve_d123e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_noaxx"]
+gravity = Vector3(0, 0, 0)
+scale_min = 1.5
+scale_max = 2.5
+scale_curve = SubResource("CurveTexture_ar5hc")
+
+[sub_resource type="TorusMesh" id="TorusMesh_4xam0"]
+inner_radius = 1.0
+outer_radius = 0.9
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ddk8u"]
+height = 0.5
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3uwoy"]
 radius = 0.804792
 
@@ -2147,6 +2266,246 @@ tracks/9/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Node/root/body/chest/armRight/elbowRight/handRight/Area3D3/CollisionShape3D2:disabled")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Node/root/body/chest/armRight/elbowRight/handRight/GPUParticles3D:emitting")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Node/GPUParticles3D:emitting")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Node/GPUParticles3D2:emitting")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Node/GPUParticles3D2:transparency")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Node/Area3D3/CollisionShape3D2:disabled")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Node/Area3D3/CollisionShape3D2:shape:radius")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Node/root/body/chest/armRight/elbowRight/handRight/GPUParticles3D2:emitting")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Node/root/body/chest/armLeft/elbowLeft/handLeft/GPUParticles3D:emitting")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Node/root/body/chest/armLeft/elbowLeft/handLeft/GPUParticles3D2:emitting")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Node/Area3D3:position")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -3)]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("Node/Area3D3:rotation")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("Node/Area3D3:scale")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.75, 1.75, 1.75)]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("Node/GPUParticles3D2:position")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.5, -3)]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("Node/GPUParticles3D2:rotation")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.30385e-08, 9.71447e-17, -7.4506e-09)]
+}
+tracks/25/type = "value"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("Node/GPUParticles3D2:process_material:scale_max")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.5]
+}
+tracks/26/type = "value"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("Node/root/body/chest/armRight/elbowRight/handRight/GPUParticles3D:amount")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [25]
+}
+tracks/27/type = "value"
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/path = NodePath("Node/root/body/chest/armLeft/elbowLeft/handLeft/GPUParticles3D:amount")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [25]
+}
+tracks/28/type = "value"
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/path = NodePath("Node/GPUParticles3D2:process_material:scale_min")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5]
+}
+tracks/29/type = "value"
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/path = NodePath("Node/root/body/chest/armLeft/elbowLeft/handLeft/Area3D3/CollisionShape3D2:disabled")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6nj4i"]
@@ -2333,18 +2692,43 @@ mesh = SubResource("ArrayMesh_mdykq")
 skeleton = NodePath("")
 
 [node name="cuboid18" type="MeshInstance3D" parent="Node/root/body/chest/armRight/elbowRight/handRight/thumbRight"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0625, 0.0625, -0.03125)
+transform = Transform3D(1, -4.47035e-08, -5.96046e-08, 1.49012e-08, 1, -4.47035e-08, 0, 0, 1, -0.0625, 0.0624999, -0.0312499)
 mesh = SubResource("ArrayMesh_remqt")
 skeleton = NodePath("")
 
 [node name="rockSpawner" type="Node3D" parent="Node/root/body/chest/armRight/elbowRight/handRight"]
 transform = Transform3D(1, -7.45058e-09, 0, 5.21541e-08, 1, 8.9407e-08, -2.98023e-08, 2.98023e-08, 1, -0.5, -0.25, -0.05)
 
+[node name="Area3D3" type="Area3D" parent="Node/root/body/chest/armRight/elbowRight/handRight"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.25, 0)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Node/root/body/chest/armRight/elbowRight/handRight/Area3D3"]
+transform = Transform3D(1, 2.98023e-08, 4.47035e-08, -2.98023e-08, 1, -2.98023e-08, -4.47035e-08, 2.98023e-08, 1, 0, 0, 0)
+shape = SubResource("SphereShape3D_vvjbl")
+disabled = true
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Node/root/body/chest/armRight/elbowRight/handRight"]
+transform = Transform3D(0.35, -3.83173e-08, 2.98023e-08, 1.34111e-07, 0.1, 1.02141e-14, -2.98023e-08, 3.44398e-16, 0.35, 0, -0.25, 0)
+emitting = false
+amount = 25
+explosiveness = 1.0
+visibility_aabb = AABB(-1, -1, -1, 2, 2, 2)
+process_material = SubResource("ParticleProcessMaterial_qtgpv")
+draw_pass_1 = SubResource("BoxMesh_8heyr")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="Node/root/body/chest/armRight/elbowRight/handRight"]
+transform = Transform3D(0.2, 0, 0, 0, 0.05, 0, 0, 0, 0.2, 0, -0.25, 0)
+emitting = false
+amount = 25
+visibility_aabb = AABB(-1, -1, -1, 2, 2, 2)
+process_material = SubResource("ParticleProcessMaterial_jx6rd")
+draw_pass_1 = SubResource("BoxMesh_g70fr")
+
 [node name="Area3D2" type="Area3D" parent="Node/root/body/chest/armRight/elbowRight"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Node/root/body/chest/armRight/elbowRight/Area3D2"]
-transform = Transform3D(1, -2.98023e-08, 0, -2.98023e-08, 1, 0, -4.47035e-08, 2.98023e-08, 1, 0, 0.5, 0)
+transform = Transform3D(1, -2.98023e-08, 0, -2.98023e-08, 1, 0, -4.47035e-08, 2.98023e-08, 1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_edtsy")
 disabled = true
 
@@ -2426,11 +2810,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0625, 0.0625, -0.03125)
 mesh = SubResource("ArrayMesh_g1pdr")
 skeleton = NodePath("")
 
+[node name="Area3D3" type="Area3D" parent="Node/root/body/chest/armLeft/elbowLeft/handLeft"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.25, 0)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Node/root/body/chest/armLeft/elbowLeft/handLeft/Area3D3"]
+shape = SubResource("SphereShape3D_bkvlm")
+disabled = true
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Node/root/body/chest/armLeft/elbowLeft/handLeft"]
+transform = Transform3D(0.35, -1.34111e-07, 2.98023e-08, 1.34111e-07, 0.35, 1.02141e-14, -2.98023e-08, 1.20539e-15, 0.35, 0, -0.25, 0)
+emitting = false
+amount = 25
+explosiveness = 1.0
+visibility_aabb = AABB(-1, -1, -1, 2, 2, 2)
+process_material = SubResource("ParticleProcessMaterial_qtgpv")
+draw_pass_1 = SubResource("BoxMesh_8heyr")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="Node/root/body/chest/armLeft/elbowLeft/handLeft"]
+transform = Transform3D(0.2, 0, 0, 0, 0.05, 0, 0, 0, 0.2, 0, -0.25, 0)
+emitting = false
+amount = 25
+visibility_aabb = AABB(-1, -1, -1, 2, 2, 2)
+process_material = SubResource("ParticleProcessMaterial_jx6rd")
+draw_pass_1 = SubResource("BoxMesh_g70fr")
+
 [node name="Area3D2" type="Area3D" parent="Node/root/body/chest/armLeft/elbowLeft"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Node/root/body/chest/armLeft/elbowLeft/Area3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_mdcse")
 disabled = true
 
@@ -2626,6 +3033,34 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.078125, -0.134375, -0.203125)
 mesh = SubResource("ArrayMesh_it0vr")
 skeleton = NodePath("")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Node"]
+transform = Transform3D(0.35, -2.98023e-08, 4.47035e-08, 1.3411e-07, 0.0875, 7.45058e-09, -2.98023e-08, 0, 0.35, 0, 0.5, -3)
+emitting = false
+amount = 35
+explosiveness = 1.0
+visibility_aabb = AABB(-1, -1, -1, 2, 2, 2)
+process_material = SubResource("ParticleProcessMaterial_qtgpv")
+draw_pass_1 = SubResource("BoxMesh_8heyr")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="Node"]
+transform = Transform3D(1, 7.4506e-09, 9.71447e-17, -7.4506e-09, 1, 1.30385e-08, -6.61744e-24, -1.30385e-08, 1, 0, 0.5, -3)
+cast_shadow = 0
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+visibility_aabb = AABB(-0.001, -4, -0.001, 0.002, 8, 0.002)
+process_material = SubResource("ParticleProcessMaterial_noaxx")
+draw_pass_1 = SubResource("TorusMesh_4xam0")
+
+[node name="Area3D3" type="Area3D" parent="Node"]
+transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, 0, 0, -3)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Node/Area3D3"]
+transform = Transform3D(1, 2.98023e-08, 4.47035e-08, -2.98023e-08, 1, -2.98023e-08, -4.47035e-08, 2.98023e-08, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_ddk8u")
+disabled = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 1.5, -0.51)

@@ -6,6 +6,9 @@ const Rock = preload("res://scenes/gorillaRock.tscn")
 @onready var handL: Area3D = $Node/root/body/chest/armLeft/elbowLeft/Area3D2
 @onready var handR: Area3D = $Node/root/body/chest/armRight/elbowRight/Area3D2
 @onready var body: Area3D = $Node/root/body/Area3D3
+@onready var handLboom = $Node/root/body/chest/armRight/elbowRight/handRight/Area3D3
+@onready var handRboom = $Node/root/body/chest/armLeft/elbowLeft/handLeft/Area3D3
+@onready var bigBoom = $Node/Area3D3
 @onready var boss_healthbar = $"../CharacterBody3D/BossHealthbar"
 @onready var hitbox = $Node/root/body/hitBox/GorillaHitbox
 @onready var hitArea = $Node/root/body/hitBox
@@ -40,8 +43,17 @@ func _ready():
 	if not handR.is_connected("area_entered", Callable(self, "_on_handR_area_entered")):
 		handR.connect("area_entered", Callable(self, "_on_handR_area_entered"))
 	
+	if not handLboom.is_connected("area_entered", Callable(self, "_on_handLboom_area_entered")):
+		handLboom.connect("area_entered", Callable(self, "_on_handLboom_area_entered"))
+	
+	if not handRboom.is_connected("area_entered", Callable(self, "_on_handRboom_area_entered")):
+		handRboom.connect("area_entered", Callable(self, "_on_handRboom_area_entered"))
+	
 	if not body.is_connected("area_entered", Callable(self, "_on_body_area_entered")):
 		body.connect("area_entered", Callable(self, "_on_body_area_entered"))
+	
+	if not bigBoom.is_connected("area_entered", Callable(self, "_on_bigBoom_area_entered")):
+		bigBoom.connect("area_entered", Callable(self, "_on_bigBoom_area_entered"))
 
 
 func _physics_process(delta):
@@ -166,10 +178,21 @@ func _on_handR_area_entered(area: Area3D) -> void:
 	if area.name == "Player" or area.get_parent().name == "Player" and !handR.disabled:
 		Global.playerTakeDamage.emit(40)
 
+func _on_handLboom_area_entered(area: Area3D) -> void:
+	if area.name == "Player" or area.get_parent().name == "Player" and !handLboom.disabled:
+		Global.playerTakeDamage.emit(20)
+
+func _on_handRboom_area_entered(area: Area3D) -> void:
+	if area.name == "Player" or area.get_parent().name == "Player" and !handRboom.disabled:
+		Global.playerTakeDamage.emit(20)
+
 func _on_body_area_entered(area: Area3D) -> void:
 	if area.name == "Player" or area.get_parent().name == "Player" and !body.disabled:
 		Global.playerTakeDamage.emit(60)
 
+func _on_bigBoom_area_entered(area: Area3D) -> void:
+	if area.name == "Player" or area.get_parent().name == "Player" and !bigBoom.disabled:
+		Global.playerTakeDamage.emit(80)
 
 func on_playerDealDamage(area):
 	if area == self.hitArea and !hitbox.disabled:

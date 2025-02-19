@@ -583,16 +583,16 @@ max_value = 180.0
 _data = [Vector2(0, 360), 0.0, 0.0, 0, 0, Vector2(1, -360), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_1h40j"]
+[sub_resource type="CurveTexture" id="CurveTexture_uaivw"]
 curve = SubResource("Curve_mda4a")
 
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_nhphn"]
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_0p5ck"]
 
 [sub_resource type="Curve" id="Curve_bs4xc"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 1.4, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_kobeh"]
+[sub_resource type="CurveTexture" id="CurveTexture_8tr6v"]
 curve = SubResource("Curve_bs4xc")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ift0s"]
@@ -605,14 +605,14 @@ emission_ring_height = 0.0
 emission_ring_radius = 1.0
 emission_ring_inner_radius = 1.0
 angle_max = 180.0
-angle_curve = SubResource("CurveTexture_1h40j")
+angle_curve = SubResource("CurveTexture_uaivw")
 velocity_pivot = Vector3(0, -10, 0)
 direction = Vector3(1, 0, 1)
 spread = 0.0
 angular_velocity_max = 10.0
 directional_velocity_min = -1.0
 directional_velocity_max = 1.0
-directional_velocity_curve = SubResource("CurveXYZTexture_nhphn")
+directional_velocity_curve = SubResource("CurveXYZTexture_0p5ck")
 orbit_velocity_max = 3.0
 radial_velocity_max = 10.0
 gravity = Vector3(0, -15, 0)
@@ -620,7 +620,7 @@ linear_accel_max = 2.0
 radial_accel_max = 5.0
 scale_min = 0.25
 scale_max = 0.5
-scale_curve = SubResource("CurveTexture_kobeh")
+scale_curve = SubResource("CurveTexture_8tr6v")
 color = Color(0.313726, 0.2, 0, 1)
 hue_variation_max = 0.25
 collision_mode = 1
@@ -732,14 +732,14 @@ min_value = 0.25
 _data = [Vector2(0, 0.25), 0.0, 1.05, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_ar5hc"]
+[sub_resource type="CurveTexture" id="CurveTexture_fwjse"]
 curve = SubResource("Curve_e2qny")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yhmmq"]
 gravity = Vector3(0, 0, 0)
 scale_min = 2.5
 scale_max = 2.5
-scale_curve = SubResource("CurveTexture_ar5hc")
+scale_curve = SubResource("CurveTexture_fwjse")
 
 [sub_resource type="TorusMesh" id="TorusMesh_8g8e7"]
 inner_radius = 1.0
@@ -859,6 +859,7 @@ _data = {
 
 [node name="BiGay" type="CharacterBody3D"]
 script = ExtResource("2_be8mv")
+rotatable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.25)
@@ -867,7 +868,7 @@ shape = SubResource("CapsuleShape3D_6mk7g")
 [node name="Node" type="Node3D" parent="."]
 
 [node name="Root" type="Node3D" parent="Node"]
-transform = Transform3D(-0.293578, 0.0650847, -0.953717, 0.21644, 0.976296, -1.49012e-08, 0.93111, -0.206422, -0.300706, 0, 1.65313, 0.26875)
+transform = Transform3D(-0.293578, 0.0650847, -0.953717, 0.21644, 0.976296, -1.49012e-08, 0.93111, -0.206422, -0.300706, 0, 1.5, 0)
 
 [node name="cuboid" type="MeshInstance3D" parent="Node/Root"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -875,7 +876,7 @@ mesh = SubResource("ArrayMesh_0ns84")
 skeleton = NodePath("")
 
 [node name="Body" type="Node3D" parent="Node/Root"]
-transform = Transform3D(0.780857, 0.159371, 0.604037, -0.179449, 0.983382, -0.0274789, -0.598379, -0.086937, 0.796482, 0, 0.1875, 0)
+transform = Transform3D(0.939691, 0, -0.34202, 0, 0.999999, 0, 0.34202, 0, 0.939692, 0, 0.1875, 0)
 
 [node name="cuboid2" type="MeshInstance3D" parent="Node/Root/Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0625, 0)
@@ -893,7 +894,7 @@ mesh = SubResource("ArrayMesh_3os7r")
 skeleton = NodePath("")
 
 [node name="Head" type="Node3D" parent="Node/Root/Body"]
-transform = Transform3D(0.890184, 0.369734, -0.266213, -0.318927, 0.922971, 0.215429, 0.325358, -0.106869, 0.939532, -0.1875, 0.875, 0)
+transform = Transform3D(0.793353, 0, 0.608761, 0, 1, 0, -0.608761, 0, 0.793353, -0.1875, 0.875, 0)
 
 [node name="cylinder3" type="MeshInstance3D" parent="Node/Root/Body/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.125, -0.25, 0)
@@ -906,7 +907,7 @@ mesh = SubResource("ArrayMesh_p3flj")
 skeleton = NodePath("")
 
 [node name="ArmL" type="Node3D" parent="Node/Root/Body"]
-transform = Transform3D(0.889026, -0.0196061, -0.457438, -0.448821, 0.1602, -0.879145, 0.0905181, 0.98689, 0.133622, 0, 0.6875, 0.4375)
+transform = Transform3D(0.185482, -0.822324, -0.53794, -0.000420571, 0.547373, -0.836889, 0.982648, 0.155454, 0.101182, 0, 0.6875, 0.4375)
 
 [node name="cylinder5" type="MeshInstance3D" parent="Node/Root/Body/ArmL"]
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0.75)
@@ -914,7 +915,7 @@ mesh = SubResource("ArrayMesh_rhleb")
 skeleton = NodePath("")
 
 [node name="ElbowL" type="Node3D" parent="Node/Root/Body/ArmL"]
-transform = Transform3D(-0.0740208, -0.187378, -0.979496, -0.982915, -0.152263, 0.103407, -0.168517, 0.970415, -0.172906, 0, 0, 0.8125)
+transform = Transform3D(0.649161, 0.226006, -0.7263, -0.127943, 0.973678, 0.18863, 0.749813, -0.0295265, 0.660991, 0, 0, 0.8125)
 
 [node name="cylinder6" type="MeshInstance3D" parent="Node/Root/Body/ArmL/ElbowL"]
 transform = Transform3D(0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0.09375)
@@ -922,7 +923,7 @@ mesh = SubResource("ArrayMesh_305mh")
 skeleton = NodePath("")
 
 [node name="HandL" type="Node3D" parent="Node/Root/Body/ArmL/ElbowL"]
-transform = Transform3D(0.183947, -0.96858, 0.167374, 0.812662, 0.0540724, -0.580219, 0.552939, 0.242749, 0.797077, 0, 0, 0.875)
+transform = Transform3D(0.336144, -0.935926, -0.10511, 0.940511, 0.339441, -0.0146953, 0.0494324, -0.0939175, 0.994352, 0, 0, 0.875)
 
 [node name="cylinder7" type="MeshInstance3D" parent="Node/Root/Body/ArmL/ElbowL/HandL"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0625, 0.125)
@@ -938,7 +939,7 @@ shape = SubResource("SphereShape3D_el6w0")
 disabled = true
 
 [node name="ArmR" type="Node3D" parent="Node/Root/Body"]
-transform = Transform3D(-0.0847948, 0.112914, 0.989979, 0.0605522, -0.991139, 0.118232, 0.994558, 0.0699709, 0.0772061, 0, 0.6875, -0.4375)
+transform = Transform3D(0.308054, 0.949232, 0.0637446, -0.295851, 0.0319002, 0.9547, 0.9042, -0.312958, 0.290657, 0, 0.6875, -0.4375)
 
 [node name="cylinder8" type="MeshInstance3D" parent="Node/Root/Body/ArmR"]
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
@@ -946,7 +947,7 @@ mesh = SubResource("ArrayMesh_gisnn")
 skeleton = NodePath("")
 
 [node name="ElbowR" type="Node3D" parent="Node/Root/Body/ArmR"]
-transform = Transform3D(0.487845, 0.160663, -0.858018, 0.813764, -0.439408, 0.380405, -0.315903, -0.883802, -0.345105, 0, 0, -0.8125)
+transform = Transform3D(0.777556, -0.627022, 0.0474248, 0.444297, 0.601199, 0.664198, -0.444979, -0.49538, 0.746051, 0, 0, -0.8125)
 
 [node name="cylinder9" type="MeshInstance3D" parent="Node/Root/Body/ArmR/ElbowR"]
 transform = Transform3D(0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, -0.59375)
@@ -954,7 +955,7 @@ mesh = SubResource("ArrayMesh_ec288")
 skeleton = NodePath("")
 
 [node name="HandR" type="Node3D" parent="Node/Root/Body/ArmR/ElbowR"]
-transform = Transform3D(-0.785606, -0.493661, 0.37299, -0.535465, 0.844496, -0.010107, -0.309999, -0.207663, -0.927781, 0, 0, -0.875)
+transform = Transform3D(0.134702, 0.988839, 0.0636459, 0.990699, -0.133153, -0.0279953, -0.0192082, 0.066825, -0.99758, 0, 0, -0.875)
 
 [node name="cylinder10" type="MeshInstance3D" parent="Node/Root/Body/ArmR/ElbowR/HandR"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0625, 0.125)
@@ -962,7 +963,7 @@ mesh = SubResource("ArrayMesh_5jb51")
 skeleton = NodePath("")
 
 [node name="Sword" type="Node3D" parent="Node/Root/Body/ArmR/ElbowR/HandR"]
-transform = Transform3D(0.99908, -0.00661397, 0.0423612, 0.0428716, 0.165459, -0.985285, -0.000492409, 0.986194, 0.165591, -0.25, -0.046875, 0.125)
+transform = Transform3D(0.99908, -0.0428744, 4.24519e-06, 0.0428716, 0.999015, 0.0113868, -0.000492442, -0.0113761, 0.999936, -0.25, -0.046875, 0.125)
 
 [node name="cylinder11" type="MeshInstance3D" parent="Node/Root/Body/ArmR/ElbowR/HandR/Sword"]
 transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, -0.09375, 0, 0)
@@ -1007,7 +1008,7 @@ process_material = SubResource("ParticleProcessMaterial_ift0s")
 draw_pass_1 = SubResource("BoxMesh_3p5d5")
 
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="Node/Root/Body/ArmR/ElbowR/HandR/Sword/Area3D"]
-transform = Transform3D(-8.74228e-09, -0.05, 8.74228e-09, 0, -2.18557e-09, -0.2, 0.2, -2.18557e-09, 3.82137e-16, 2, 0, 0)
+transform = Transform3D(-8.74228e-09, -0.05, 8.74228e-09, 0, -2.18557e-09, -0.2, 0.2, -2.18557e-09, 3.82137e-16, 2.75, 0, 0)
 emitting = false
 amount = 25
 visibility_aabb = AABB(-1, -1, -1, 2, 2, 2)
@@ -1023,7 +1024,7 @@ shape = SubResource("CapsuleShape3D_kb1e4")
 disabled = true
 
 [node name="LegL" type="Node3D" parent="Node/Root"]
-transform = Transform3D(0.219279, 0.975662, 0, -0.975662, 0.219279, 0, 0, 0, 1, 0, 0, 0.3125)
+transform = Transform3D(0.573576, 0.819152, 0, -0.819152, 0.573576, 0, 0, 0, 1, 0, 0, 0.3125)
 
 [node name="cylinder13" type="MeshInstance3D" parent="Node/Root/LegL"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5625, 0)
@@ -1031,7 +1032,7 @@ mesh = SubResource("ArrayMesh_m7qy8")
 skeleton = NodePath("")
 
 [node name="KneeL" type="Node3D" parent="Node/Root/LegL"]
-transform = Transform3D(0.972041, -0.234807, 0, 0.234807, 0.972041, 0, 0, 0, 1, 0, -0.6875, 0)
+transform = Transform3D(0.766044, -0.642787, 0, 0.642787, 0.766044, 0, 0, 0, 1, 0, -0.6875, 0)
 
 [node name="cylinder14" type="MeshInstance3D" parent="Node/Root/LegL/KneeL"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.625, 0)
@@ -1039,7 +1040,7 @@ mesh = SubResource("ArrayMesh_x243r")
 skeleton = NodePath("")
 
 [node name="FootL" type="Node3D" parent="Node/Root/LegL/KneeL"]
-transform = Transform3D(0.98258, 0.185836, 0, -0.185836, 0.98258, 0, 0, 0, 1, 0, -0.84375, 0)
+transform = Transform3D(0.999047, -0.0436193, 0, 0.0436193, 0.999047, 0, 0, 0, 1, 0, -0.84375, 0)
 
 [node name="cylinder15" type="MeshInstance3D" parent="Node/Root/LegL/KneeL/FootL"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.125, -0.15625, 0)
@@ -1076,7 +1077,7 @@ process_material = SubResource("ParticleProcessMaterial_yhmmq")
 draw_pass_1 = SubResource("TorusMesh_8g8e7")
 
 [node name="LegR" type="Node3D" parent="Node/Root"]
-transform = Transform3D(0.935991, 0.0127146, -0.351793, -0.0150774, 0.999878, -0.00397754, 0.351699, 0.00902708, 0.936069, 0, 0, -0.3125)
+transform = Transform3D(0.907673, -0.229041, -0.351666, 0.24321, 0.969965, -0.00399849, 0.34202, -0.0818996, 0.936117, 0, 0, -0.3125)
 
 [node name="cylinder16" type="MeshInstance3D" parent="Node/Root/LegR"]
 transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 0, -0.5625, 0)
@@ -1084,7 +1085,7 @@ mesh = SubResource("ArrayMesh_nrl3y")
 skeleton = NodePath("")
 
 [node name="KneeR" type="Node3D" parent="Node/Root/LegR"]
-transform = Transform3D(0.999914, -0.0130819, 0, 0.0130819, 0.999914, 0, 0, 0, 1, 0, -0.6875, 0)
+transform = Transform3D(0.999048, -0.0436194, 0, 0.0436194, 0.999048, 0, 0, 0, 1, 0, -0.6875, 0)
 
 [node name="cylinder17" type="MeshInstance3D" parent="Node/Root/LegR/KneeR"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.625, 0)
@@ -1092,7 +1093,7 @@ mesh = SubResource("ArrayMesh_mywkw")
 skeleton = NodePath("")
 
 [node name="FootR" type="Node3D" parent="Node/Root/LegR/KneeR"]
-transform = Transform3D(0.965923, 0.18323, 0.182814, -0.187346, 0.982279, 0.00535194, -0.178593, -0.0394189, 0.983133, 0, -0.84375, 0)
+transform = Transform3D(0.764373, 0.443457, -0.468061, -0.356433, 0.89554, 0.266389, 0.5373, -0.0367882, 0.842589, 0, -0.84375, 0)
 
 [node name="cylinder18" type="MeshInstance3D" parent="Node/Root/LegR/KneeR/FootR"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.125, -0.15625, 0)
