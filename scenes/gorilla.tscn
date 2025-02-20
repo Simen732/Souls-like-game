@@ -2532,7 +2532,7 @@ script = ExtResource("2_8o0um")
 [node name="Node" type="Node3D" parent="."]
 
 [node name="root" type="Node3D" parent="Node"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.125, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 1.125, 0)
 
 [node name="pyramid" type="MeshInstance3D" parent="Node/root"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1875, 0)
@@ -3044,7 +3044,7 @@ process_material = SubResource("ParticleProcessMaterial_qtgpv")
 draw_pass_1 = SubResource("BoxMesh_8heyr")
 
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="Node"]
-transform = Transform3D(1, 7.4506e-09, 9.71447e-17, -7.4506e-09, 1, 1.30385e-08, -6.61744e-24, -1.30385e-08, 1, 0, 0.5, -3)
+transform = Transform3D(1, 7.4506e-09, 9.71447e-17, -7.4506e-09, 1, 1.30385e-08, -5.29396e-23, -1.30385e-08, 1, 0, 0.5, -3)
 cast_shadow = 0
 emitting = false
 amount = 1

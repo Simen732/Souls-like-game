@@ -14,6 +14,7 @@ const Rock = preload("res://scenes/gorillaRock.tscn")
 @onready var hitArea = $Node/root/body/hitBox
 
 @export var rotatable = true
+@export var rotationSpeed = 0.1
 @export var attackmove = 0
 @export var attackstop_distance = 2.5
 @export var interruptable = false
@@ -111,7 +112,7 @@ func move_towards_player(delta):
 	else:
 		global_translate(transform.basis.z * -attackmove * delta)
 	if rotatable:
-		self.rotation.y = lerp_angle(self.rotation.y, target_rotation_y, 0.05)
+		self.rotation.y = lerp_angle(self.rotation.y, target_rotation_y, rotationSpeed)
 
 
 # Handle attacking logic
