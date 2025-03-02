@@ -507,21 +507,147 @@ size = Vector3(20.9765, 1, 8.33885)
 material = SubResource("StandardMaterial3D_ap0yy")
 
 [node name="CSGBox3D53" type="CSGBox3D" parent="Terrain"]
-transform = Transform3D(-2.28105e-10, -0.00521844, -0.999986, 1, -4.37114e-08, -3.10588e-22, -4.37108e-08, -0.999986, 0.00521844, -20.2773, 3.36385, -224.857)
+transform = Transform3D(-2.28105e-10, -0.00521844, -0.999986, 1, -4.37114e-08, -3.10588e-22, -4.37108e-08, -0.999986, 0.00521844, -22.7433, 3.36385, -224.844)
 layers = 15
 use_collision = true
 collision_layer = 15
 collision_mask = 15
-size = Vector3(8.25911, 1, 16.4902)
+size = Vector3(8.25911, 1, 21.4224)
 material = SubResource("StandardMaterial3D_ap0yy")
 
 [node name="CSGBox3D54" type="CSGBox3D" parent="Terrain"]
-transform = Transform3D(-2.28105e-10, -0.00521844, -0.999986, 1, -4.37114e-08, -3.10588e-22, -4.37108e-08, -0.999986, 0.00521844, -20.2366, 3.36385, -217.065)
+transform = Transform3D(-2.28105e-10, -0.00521844, -0.999986, 1, -4.37114e-08, -3.10588e-22, -4.37108e-08, -0.999986, 0.00521844, -26.3836, 3.36385, -217.033)
 layers = 15
 use_collision = true
 collision_layer = 15
 collision_mask = 15
-size = Vector3(8.25911, 1, 16.4902)
+size = Vector3(8.25911, 1, 28.7843)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D208" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -40.3056, 3.36385, -237.275)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.25911, 1, 41.8453)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D213" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -42.8436, 3.36385, -267.956)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.25911, 1, 21.8439)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D226" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -42.8436, 3.36385, -301.616)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.25911, 1, 18.0191)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D227" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -29.9131, 3.36385, -301.735)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.25911, 1, 18.2579)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D214" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -29.7912, 3.36385, -268.255)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.25911, 1, 22.443)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D216" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -31.5809, 3.36385, -257.771)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.25911, 1, 3.76494)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D217" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -41.7043, 3.36385, -257.771)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.25911, 1, 3.76494)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D218" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -41.7043, 3.36385, -279.085)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.25911, 1, 3.76494)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D224" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -41.7043, 3.36385, -292.963)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.25911, 1, 3.76494)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D229" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -45.6882, 3.36385, -310.251)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.25911, 1, 6.66487)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D219" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -31.1824, 3.36385, -279.069)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.25911, 1, 3.76494)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D225" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -31.1824, 3.36385, -293.036)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.25911, 1, 3.76494)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D228" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -31.1824, 3.36385, -310.369)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.25911, 1, 3.76494)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D209" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -32.9853, 3.45685, -241.405)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.44511, 1, 33.6483)
 material = SubResource("StandardMaterial3D_ap0yy")
 
 [node name="CSGBox3D55" type="CSGBox3D" parent="Terrain"]
@@ -543,21 +669,165 @@ size = Vector3(8.27461, 1, 4.97116)
 material = SubResource("StandardMaterial3D_ap0yy")
 
 [node name="CSGBox3D57" type="CSGBox3D" parent="Terrain"]
-transform = Transform3D(-0.999986, 0, -0.00521839, 0, 1, 0, 0.00521839, 0, -0.999986, -17.9732, 7.24817, -220.985)
+transform = Transform3D(-0.999986, 0, -0.00521839, 0, 1, 0, 0.00521839, 0, -0.999986, -24.2124, 7.24817, -220.952)
 layers = 15
 use_collision = true
 collision_layer = 15
 collision_mask = 15
-size = Vector3(20.9765, 1, 8.33885)
+size = Vector3(33.4552, 1, 8.33885)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D210" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -36.7189, 7.24817, -238.219)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(39.9698, 1, 8.33885)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D215" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -36.3298, 7.24817, -268.251)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(22.6205, 1, 13.948)
 material = SubResource("StandardMaterial3D_ap0yy")
 
 [node name="CSGBox3D58" type="CSGBox3D" parent="Terrain"]
-transform = Transform3D(-0.999986, 0, -0.00521839, 0, 1, 0, 0.00521839, 0, -0.999986, -17.9732, -0.496529, -220.985)
+transform = Transform3D(-0.999986, 0, -0.00521839, 0, 1, 0, 0.00521839, 0, -0.999986, -24.1391, -0.496529, -220.953)
 layers = 15
 use_collision = true
 collision_layer = 15
 collision_mask = 15
-size = Vector3(20.9765, 1, 8.33885)
+size = Vector3(33.3086, 1, 8.33885)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D211" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -36.5319, -0.496529, -241.531)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(33.0635, 1, 8.33885)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D220" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -40.3056, 3.36385, -285.935)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.25911, 1, 14.7178)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D221" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -32.9853, 3.45685, -286.019)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.44511, 1, 14.899)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D222" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -36.7189, 7.24817, -286.443)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(13.976, 1, 8.33885)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D231" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -36.3154, 7.24817, -301.786)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(17.5632, 1, 12.8552)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D223" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -36.5319, -0.496529, -286.442)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(13.997, 1, 8.33885)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D233" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -32.9853, 3.45685, -314.904)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.44511, 1, 9.94259)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D236" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -37.7268, 3.45685, -319.571)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.44511, 1, 9.85948)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D234" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -40.6249, 7.24817, -315.086)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(9.55332, 1, 16.1509)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D240" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.4427, 7.24817, -326.105)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(6.95781, 1, 12.82)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D235" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -37.14, -0.496529, -315.123)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(9.65073, 1, 9.55517)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D239" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -45.3952, -0.496529, -321.309)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(22.0225, 1, 7.4215)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D230" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -36.2133, -0.496529, -301.871)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(17.3047, 1, 12.5601)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D212" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -36.3487, -0.496529, -268.23)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(22.5552, 1, 14.0323)
 material = SubResource("StandardMaterial3D_ap0yy")
 
 [node name="CSGBox3D47" type="CSGBox3D" parent="Terrain"]
@@ -848,6 +1118,78 @@ collision_mask = 15
 size = Vector3(9.1543, 1, 17.4358)
 material = SubResource("StandardMaterial3D_ap0yy")
 
+[node name="CSGBox3D184" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -40.6436, 3.70662, -400.232)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(7.75696, 1, 26.8662)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D186" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.6099, -0.51236, -400.482)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(9.1543, 1, 26.3674)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D187" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.6099, 7.75437, -400.48)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(9.1543, 2.32532, 26.3701)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D185" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -48.3507, 3.66481, -400.18)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(7.67334, 1, 26.9703)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D204" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -40.7544, 3.6809, -361.352)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(7.75696, 1, 11.8691)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D205" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.7207, -0.53808, -361.099)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(9.1543, 1, 12.3745)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D206" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.7207, 7.08652, -361.673)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(9.1543, 1.39064, 11.2268)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D207" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -48.4615, 3.63909, -361.513)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(7.67334, 1, 11.5464)
+material = SubResource("StandardMaterial3D_ap0yy")
+
 [node name="CSGBox3D182" type="CSGBox3D" parent="Terrain"]
 transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -44.4528, 4.40529, -454.874)
 layers = 15
@@ -1055,6 +1397,96 @@ collision_mask = 15
 size = Vector3(35.5117, 1, 18.9111)
 material = SubResource("StandardMaterial3D_ap0yy")
 
+[node name="CSGBox3D196" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.4372, 7.31026, -344.277)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(18.5479, 1, 23.7516)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D197" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -51.5028, 3.69576, -332.911)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(7.73523, 1, 7.71924)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D198" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -54.9398, 3.55654, -344.177)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(7.45679, 1, 23.6156)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D237" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -48.6254, 3.55654, -321.451)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(7.45679, 1, 23.108)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D238" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -42.2086, 3.55654, -326.063)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(7.45679, 1, 13.8844)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D199" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -36.0486, 3.35488, -344.157)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(7.05347, 1, 23.6557)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D200" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -39.106, 3.59005, -332.917)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(7.52381, 1, 7.2489)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D201" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -51.6491, 3.74337, -355.4)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(7.83045, 1, 7.42664)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D202" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -38.2974, 3.44423, -355.4)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(7.23218, 1, 5.63172)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D203" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -45.3295, -0.505595, -344.066)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(23.7681, 1, 18.9111)
+material = SubResource("StandardMaterial3D_ap0yy")
+
 [node name="CSGBox3D145" type="CSGBox3D" parent="Terrain"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.67073, 5.90283, -336.404)
 layers = 15
@@ -1075,6 +1507,78 @@ material = SubResource("StandardMaterial3D_ap0yy")
 
 [node name="CSGBox3D133" type="CSGBox3D" parent="Terrain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.4195, 0.00491989, -336.469)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(20.9765, 0.001, 16.4902)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D188" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(2.05984e-10, 0.00471237, 0.999989, 1, -4.37114e-08, 0, 4.37109e-08, 0.999989, -0.00471237, -50.7235, 3.40577, -387.202)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.27461, 1, 4.43956)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D189" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(2.05984e-10, 0.00471237, 0.999989, 1, -4.37114e-08, 0, 4.37109e-08, 0.999989, -0.00471237, -38.4136, 3.40577, -387.26)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.27461, 1, 4.04076)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D190" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(4.37109e-08, 0.999989, -0.00471241, 1, -4.37114e-08, 0, -2.05986e-10, -0.00471241, -0.999989, -52.3724, 3.40577, -377.198)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.27461, 1, 20.2206)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D191" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(4.37109e-08, 0.999989, -0.00471241, 1, -4.37114e-08, 0, -2.05986e-10, -0.00471241, -0.999989, -36.8545, 3.40577, -377.272)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.27461, 1, 20.2206)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D192" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-0.00471237, 0, 0.999989, 0, 1, 0, -0.999989, 0, -0.00471237, -44.6608, 7.04391, -377.317)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(20.9765, 1, 16.4902)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D193" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.34085e-10, -0.00993063, -0.99995, 1, -4.37114e-08, 1.38776e-17, -4.37092e-08, -0.99995, 0.00993063, -38.7547, 3.40577, -367.505)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.27461, 1, 4.93285)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D194" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.34085e-10, -0.00993063, -0.99995, 1, -4.37114e-08, 1.38776e-17, -4.37092e-08, -0.99995, 0.00993063, -50.3911, 3.40577, -367.389)
+layers = 15
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+size = Vector3(8.27461, 1, 4.89294)
+material = SubResource("StandardMaterial3D_ap0yy")
+
+[node name="CSGBox3D195" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-0.00471237, 0, 0.999989, 0, 1, 0, -0.999989, 0, -0.00471237, -44.6608, 0.039093, -377.317)
 layers = 15
 use_collision = true
 collision_layer = 15
