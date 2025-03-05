@@ -94,6 +94,10 @@ func _physics_process(delta):
 	Global.player_position = self.global_position
 
 
+	if self.global_position.y <= -1000:
+		Global.playerTakeDamage.emit(42069)
+
+
 	# Add gravity to the character's velocity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -316,7 +320,6 @@ func _on_skill_tree_health_up():
 	currentHealth += currentHealth.max_value/10 
 	print(currentHealth)
 	print(healthbar.max_value)
-
 
 
 func fixCamera():
