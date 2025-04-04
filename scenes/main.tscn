@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cnijba7hn7opy"]
+[gd_scene load_steps=19 format=3 uid="uid://cnijba7hn7opy"]
 
 [ext_resource type="Texture2D" uid="uid://ccq8rwy18sim3" path="res://Textures/696.jpg" id="1_m2yxv"]
 [ext_resource type="Shader" path="res://addons/simplegrasstextured/shaders/grass.gdshader" id="2_08o17"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cavmi5jt8bvd0" path="res://scenes/BiGay.tscn" id="7_6hhxa"]
 [ext_resource type="PackedScene" uid="uid://c0geii1kobc25" path="res://scenes/gorilla.tscn" id="11_6cm0c"]
 [ext_resource type="Script" path="res://scripts/goonSpawner.gd" id="12_6m3jj"]
+[ext_resource type="PackedScene" uid="uid://bkgi8rplye30q" path="res://scenes/plant.tscn" id="12_wfn8m"]
 [ext_resource type="Script" path="res://scripts/eliteSpawner.gd" id="12_y01gs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ap0yy"]
@@ -2582,6 +2583,9 @@ script = ExtResource("12_y01gs")
 
 [node name="Gorilla" parent="." instance=ExtResource("11_6cm0c")]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -3, 0, -408)
+
+[node name="Plant" parent="." instance=ExtResource("12_wfn8m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 0, -442)
 
 [connection signal="body_entered" from="spawnPoints/spawnPoint3" to="CharacterBody3D" method="_on_spawn_point_body_entered"]
 [connection signal="playerDamage" from="CharacterBody3D" to="BiGay" method="_on_character_body_3d_player_damage"]
