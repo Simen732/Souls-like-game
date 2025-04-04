@@ -80,9 +80,10 @@ func _physics_process(delta):
 	if aggro:
 		bossHealthbar.value = Health
 		if backBossHealthbar.value > Health:
-			backBossHealthbar.value -= backBossHealthbar.max_value/100
+			backBossHealthbar.value -= backBossHealthbar.max_value/500
+			backBossHealthbar.value -= backBossHealthbar.max_value/bossHealthbar.max_value
 		if backBossHealthbar.value < Health:
-			backBossHealthbar.value += backBossHealthbar.max_value/100
+			backBossHealthbar.value += backBossHealthbar.max_value/500
 		if typeof(Global.enemy_lock_on_position) == TYPE_VECTOR3:
 			move_towards_player(delta)
 		handle_attack(delta)

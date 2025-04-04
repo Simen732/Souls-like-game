@@ -6,7 +6,8 @@ extends CharacterBody3D
 @onready var biGayHilt: Area3D = $Node/Root/Body/ArmR/ElbowR/HandR/Area3D2
 @onready var biGayFoot: Area3D = $Node/Root/LegL/KneeL/FootL/Area3D2
 @onready var biGayHand: Area3D = $Node/Root/Body/ArmL/ElbowL/HandL/Area3D2
-@onready var boss_healthbar = $"../CharacterBody3D/BossHealthbar"
+@onready var bossHealthbar = $"../CharacterBody3D/BossHealthbar"
+@onready var backBossHealthbar = $"../CharacterBody3D/BackBossHealthbar"
 @onready var hitbox = $Node/BiGay/BiguyHitbox
 @onready var hitArea = $Node/BiGay
 
@@ -33,8 +34,10 @@ func _ready():
 	Global.restart.connect(on_restart)
 	Global.playerDealDamage.connect(on_playerDealDamage)
 	$Node/Root/LegL/KneeL/FootL/Area3D2/GPUParticles3D2.emitting = false
-	boss_healthbar.max_value = Health
-	boss_healthbar.value = boss_healthbar.max_value
+	bossHealthbar.max_value = Health
+	backBossHealthbar.max_value = Health
+	bossHealthbar.value = bossHealthbar.max_value
+	backBossHealthbar.value = backBossHealthbar.max_value
 	
 	if not biGaySword.is_connected("area_entered", Callable(self, "_on_sword_area_entered")):
 		biGaySword.connect("area_entered", Callable(self, "_on_sword_area_entered"))
@@ -57,28 +60,34 @@ func _physics_process(delta):
 		aggro = true
 		Global.isFighting = true
 		music.playing = true
-		boss_healthbar.max_value = Health
-		boss_healthbar.value = boss_healthbar.max_value
+		bossHealthbar.max_value = Health
+		backBossHealthbar.max_value = Health
+		bossHealthbar.value = bossHealthbar.max_value
+		backBossHealthbar.value = backBossHealthbar.max_value
 		$"../CharacterBody3D/BossHealthbar/RichTextLabel".clear
 		$"../CharacterBody3D/BossHealthbar/RichTextLabel".add_text("Biguy, the Big Guy")
-		boss_healthbar.visible = true
-		boss_healthbar.value = Health
+		bossHealthbar.visible = true
+		backBossHealthbar.visible = true
+		bossHealthbar.value = Health
 		animation_player.play("walk")
 
 	if aggro:
-		if boss_healthbar.value > Health:
-			boss_healthbar.value -= boss_healthbar.max_value/100
-		if boss_healthbar.value < Health:
-			boss_healthbar.value += boss_healthbar.max_value/100
+		bossHealthbar.value = Health
+		if backBossHealthbar.value > Health:
+			backBossHealthbar.value -= backBossHealthbar.max_value/500
+			backBossHealthbar.value -= backBossHealthbar.max_value/bossHealthbar.max_value
+		if backBossHealthbar.value < Health:
+			backBossHealthbar.value += backBossHealthbar.max_value/500
 		if typeof(Global.enemy_lock_on_position) == TYPE_VECTOR3:
 			move_towards_player(delta)
 		handle_attack(delta)
 		if self.global_position.distance_to(Global.player_position) > aggro_range or Health <= 1:
 			aggro = false
-			Health = boss_healthbar.max_value
+			Health = bossHealthbar.max_value
 			Global.isFighting = false
 			music.playing = false
-			boss_healthbar.visible = false
+			bossHealthbar.visible = false
+			backBossHealthbar.visible = false
 			if animation_player.current_animation != "walk":
 				await animation_player.animation_finished
 				animation_player.play("idle")
@@ -88,11 +97,12 @@ func _physics_process(delta):
 
 func on_restart():
 	aggro = false
-	Health = boss_healthbar.max_value
-	boss_healthbar.value = Health
+	Health = bossHealthbar.max_value
+	bossHealthbar.value = Health
 	Global.isFighting = false
 	music.playing = false
-	boss_healthbar.visible = false
+	bossHealthbar.visible = false
+	backBossHealthbar.visible = false
 	animation_player.stop()	
 	animation_player.play("idle")
 	self.position = spawnpoint
@@ -178,7 +188,8 @@ func on_playerDealDamage(area):
 		Health -= Global.weaponDamage
 		print("Bigay hit! Health remaining: " + str(Health))
 		if Health <= 0:
-			boss_healthbar.visible = false
+			bossHealthbar.visible = false
+			backBossHealthbar.visible = false
 			hitbox.disabled = true
 			aggro = false
 			Global.isFighting = false
