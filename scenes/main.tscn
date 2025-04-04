@@ -151,6 +151,7 @@ material = SubResource("StandardMaterial3D_ap0yy")
 
 [node name="SimpleGrassTextured" type="MultiMeshInstance3D" parent="Terrain/CSGBox3D20"]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, 0)
+visible = false
 multimesh = SubResource("MultiMesh_rdii8")
 script = ExtResource("4_ght80")
 texture_albedo = ExtResource("3_ck05y")
@@ -2479,11 +2480,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -125)
 
 [node name="Health" type="ProgressBar" parent="CharacterBody3D"]
 modulate = Color(1, 0, 0, 1)
-self_modulate = Color(1, 0.0980392, 0, 1)
+self_modulate = Color(1, 0, 0, 1)
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 185.0
 offset_bottom = 24.0
+max_value = 200.0
+value = 200.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="BackHealth" type="ProgressBar" parent="CharacterBody3D"]
+modulate = Color(1, 0, 0, 0.717647)
+self_modulate = Color(1, 0, 0, 0.717647)
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 185.0
+offset_bottom = 24.0
+max_value = 200.0
+value = 200.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
@@ -2494,12 +2509,26 @@ offset_left = 10.0
 offset_top = 30.0
 offset_right = 185.0
 offset_bottom = 43.0
+max_value = 300.0
+value = 100.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="BackStamina" type="ProgressBar" parent="CharacterBody3D"]
+modulate = Color(0, 0.360784, 0, 0.717647)
+self_modulate = Color(0, 0.360784, 0, 0.717647)
+offset_left = 10.0
+offset_top = 30.0
+offset_right = 185.0
+offset_bottom = 43.0
+max_value = 300.0
+value = 300.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
 [node name="BossHealthbar" type="ProgressBar" parent="CharacterBody3D"]
 visible = false
-self_modulate = Color(0.996078, 0, 0, 1)
+self_modulate = Color(1, 0, 0, 1)
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -2520,7 +2549,25 @@ offset_left = 3.0
 offset_top = -28.0
 offset_right = 927.0
 offset_bottom = 1.0
-text = "Robert, the Rampaging Gorilla"
+text = "Biguy, the Big Guy"
+
+[node name="BackBossHealthbar" type="ProgressBar" parent="CharacterBody3D"]
+visible = false
+modulate = Color(1, 0, 0, 0.717647)
+self_modulate = Color(1, 0, 0, 0.717647)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -464.0
+offset_top = -60.0
+offset_right = 464.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+value = 100.0
+show_percentage = false
 
 [node name="BiGay" parent="." instance=ExtResource("7_6hhxa")]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 7.63698, -29.75, 105)

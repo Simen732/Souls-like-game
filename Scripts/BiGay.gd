@@ -59,6 +59,8 @@ func _physics_process(delta):
 		music.playing = true
 		boss_healthbar.max_value = Health
 		boss_healthbar.value = boss_healthbar.max_value
+		$"../CharacterBody3D/BossHealthbar/RichTextLabel".clear
+		$"../CharacterBody3D/BossHealthbar/RichTextLabel".add_text("Biguy, the Big Guy")
 		boss_healthbar.visible = true
 		boss_healthbar.value = Health
 		animation_player.play("walk")

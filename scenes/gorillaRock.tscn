@@ -53,9 +53,6 @@ transform = Transform3D(1, 0, 0, 0, 0.999841, 0.0178363, 0, -0.0178363, 0.999841
 visible = false
 script = ExtResource("2_2h0b0")
 
-[node name="Node" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
 [node name="root" type="Node3D" parent="Node/root" index="1"]
 
 [node name="sphere" type="MeshInstance3D" parent="Node/root/root" index="0"]

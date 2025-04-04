@@ -4,13 +4,14 @@ extends CharacterBody3D
 
 @onready var skill_tree = $skillTree
 @onready var cam_origin = $CamOrigin
-@export var sensitivity = 0.05
 @onready var death_timer = $deathTimer
 @onready var animation_player = $AnimationPlayer
 @onready var character_body_3d = self 
 @onready var spawn_point = self.global_position
+@onready var backHealthbar = $BackHealth
 @onready var healthbar = $Health
-@onready var currentStamina = $Stamina
+@onready var staminabar = $Stamina
+@onready var backStaminabar = $BackStamina
 @onready var death_counter = $deathCounter
 @onready var menu = $Menu
 @onready var blockbench_export = $blockbench_export
@@ -21,19 +22,21 @@ extends CharacterBody3D
 
 #-----------------------------------------------------------------------------------------------------#
 
+@export var sensitivity = 0.05
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var pitch = 0.0
 
 var currentHealth = 200
+var currentStamina = 300
 var lockOnTarget = Vector3()
 var lockOnRange = 30
 var minTargetRange = INF  # Start with a very large number
 var closestTarget = null
 var motionValue = 1
 var staminaLevel = 0
-var isParrying = false
-var parryTimer = 0
+var rotationSpeed = 0.1
+var attackAnim = ["attack1", "attack2", "attack3", "dodge"]
 #-----------------------------------------------------------------------------------------------------#
 
 signal playerDamage
@@ -51,9 +54,12 @@ func _ready():
 	sword_area.connect("area_entered", Callable(self, "_on_sword_hit_area"))
 
 	menu.visible = false
-	currentStamina.max_value = Global.maxStamina
-	currentStamina.value = currentStamina.max_value
+	staminabar.max_value = Global.maxStamina
+	staminabar.value = staminabar.max_value
+	backStaminabar.max_value = Global.maxStamina
+	backStaminabar.value = backStaminabar.max_value
 	healthbar.max_value = Global.maxHealth
+	backHealthbar.max_value = Global.maxHealth
 	currentHealth = Global.maxHealth
 
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -85,12 +91,18 @@ func position_camera_behind_character():
 
 func _physics_process(delta):
 	move_and_slide()
+	healthbar.value = currentHealth
+	staminabar.value = currentStamina
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-	if healthbar.value > currentHealth:
-			healthbar.value -= Global.maxHealth/100
-	if healthbar.value < currentHealth:
-			healthbar.value += Global.maxHealth/100
+	if backHealthbar.value > currentHealth:
+			backHealthbar.value -= Global.maxHealth/100
+	if backHealthbar.value < currentHealth:
+			backHealthbar.value += Global.maxHealth/100
+	if backStaminabar.value > currentStamina:
+			backStaminabar.value -= Global.maxStamina/100
+	if backStaminabar.value < currentStamina:
+			backStaminabar.value += Global.maxStamina/100
 	Global.player_position = self.global_position
 
 
@@ -113,23 +125,20 @@ func _physics_process(delta):
 	var direction = (cam_right * input_dir.x + cam_forward * input_dir.y).normalized()
 
 
-	if direction != Vector3.ZERO and !Global.isDodging and !Global.playerIsDying and !Global.Menu_open and $blockbench_export.rotatable:
+	if direction != Vector3.ZERO and !Global.playerIsDying and !Global.Menu_open and $blockbench_export.rotatable:
 		var target_rotation_y = atan2(-direction.x, -direction.z)
 		$blockbench_export.rotation.y = lerp_angle($blockbench_export.rotation.y, target_rotation_y, 0.1)
 
 
 	# Attack logic
-	if Input.is_action_just_pressed("attack") and !Global.playerIsDying and !Global.Menu_open and !Global.isDodging and $blockbench_export/AnimationPlayer.current_animation != "attack1":
-		if currentStamina.value >= 40:
-			currentStamina.value -= 40
+	if Input.is_action_just_pressed("attack") and !Global.playerIsDying and !Global.Menu_open and $blockbench_export/AnimationPlayer.current_animation not in attackAnim:
+		if currentStamina >= 40:
+			currentStamina -= 40
 			$blockbench_export/AnimationPlayer.stop()
 			$blockbench_export/AnimationPlayer.play("attack1")
 			velocity.z = 0
 			velocity.x = 0
 
-
-	if Global.enemyIFrames > 0:
-		Global.enemyIFrames -= 1
 
 	if $blockbench_export/AnimationPlayer.current_animation == "attack1" and $blockbench_export.rotatable:
 		$blockbench_export.rotation.y = lerp_angle($blockbench_export.rotation.y, cam_origin.rotation.y, 0.25)
@@ -137,8 +146,8 @@ func _physics_process(delta):
 
 	# Jump
 	if Input.is_action_just_pressed("jump") and is_on_floor() and !Global.playerIsDying:
-		if currentStamina.value >= 20:
-			currentStamina.value -= 20
+		if currentStamina >= 20:
+			currentStamina -= 20
 			velocity.y = Global.JUMP_VELOCITY
 			$blockbench_export/AnimationPlayer.play("jump")
 
@@ -168,46 +177,37 @@ func _physics_process(delta):
 		
 	if Global.dodgeCooldown > 0:
 		Global.dodgeCooldown -= 1
-
-	if parryTimer > 0:
-		parryTimer -= 1
-		isParrying = true
 		
 		
 	if Input.is_action_just_pressed("Parry") and is_on_floor() and !Global.playerIsDying:
-		parryTimer = 30
+		$blockbench_export/AnimationPlayer.play("idle") #Replace Idle with parry when parry animation exists
 		print("parry")
 		
 
 
-	if !Global.flinch and direction == Vector3.ZERO and !Global.isDodging and !Global.playerIsDying and $blockbench_export/AnimationPlayer.current_animation != "attack1":
+	if !Global.flinch and direction == Vector3.ZERO and !Global.playerIsDying and $blockbench_export/AnimationPlayer.current_animation not in attackAnim:
 		velocity.x = 0  # Reset horizontal movement velocity
 		velocity.z = 0  # Reset forward/backward movement velocity
 		$blockbench_export/AnimationPlayer.play("idle")
 
-	if Global.Iframes > 0:
-		Global.Iframes -= 1
 
-	if Global.dashboost > 0:
-		Global.dashboost -= 1
+	if Global.isFighting == false and currentStamina < Global.maxStamina:
+		currentStamina += 1 + (staminaLevel/5)
 
-	if Global.isFighting == false and currentStamina.value < Global.maxStamina:
-		currentStamina.value += 1 + (staminaLevel/5)
-
-	if !Input.is_action_pressed("run") and is_on_floor() and !Global.isDodging and currentStamina.value < Global.maxStamina and $blockbench_export/AnimationPlayer.current_animation != "attack1":
-		currentStamina.value += 1 + (staminaLevel/5)
+	if !Input.is_action_pressed("run") and is_on_floor() and currentStamina < Global.maxStamina and $blockbench_export/AnimationPlayer.current_animation not in attackAnim:
+		currentStamina += 1 + (staminaLevel/5)
 
 
 	# Handle movement and reset sliding issues
-	if direction and !Global.Menu_open and !Global.playerIsDying and !Global.isDodging and !Global.flinch and $blockbench_export/AnimationPlayer.current_animation != "attack1":
+	if direction and !Global.Menu_open and !Global.playerIsDying and !Global.flinch and $blockbench_export/AnimationPlayer.current_animation not in attackAnim:
 		# Set velocity based on input direction and speed
 		velocity.x = direction.x * Global.SPEED
 		velocity.z = direction.z * Global.SPEED
 
 		# Handle running logic
-		if Input.is_action_pressed("run") and currentStamina.value > 0 and !Global.flinch and $blockbench_export/AnimationPlayer.current_animation != "attack1":
+		if Input.is_action_pressed("run") and currentStamina > 0 and !Global.flinch and $blockbench_export/AnimationPlayer.current_animation not in attackAnim:
 			if Global.isFighting:
-				currentStamina.value -= 2.5
+				currentStamina -= 2.5
 			velocity.x *= Global.runSpeed
 			velocity.z *= Global.runSpeed
 			$blockbench_export/AnimationPlayer.play("running")  # Play running animation
@@ -215,46 +215,24 @@ func _physics_process(delta):
 			$blockbench_export/AnimationPlayer.play("walking")  # Play walking animation
 
 	# Dodge logic
-	if Input.is_action_just_pressed("dodge") and is_on_floor() and direction and Global.dodgeCooldown < 1 and !Global.isDodging and !Global.playerIsDying and !Global.flinch and $blockbench_export/AnimationPlayer.current_animation != "attack1":
-		if currentStamina.value >= 60:  # Ensure the player has enough stamina
-			currentStamina.value -= 60
-			Global.dashDirection = direction
-			Global.dashStartTime = 0  # Reset the dash timer
-			Global.isDodging = true
-			Global.dashboost = 30
+	if Input.is_action_just_pressed("dodge") and is_on_floor() and direction and Global.dodgeCooldown < 1 and !Global.playerIsDying and !Global.flinch and $blockbench_export/AnimationPlayer.current_animation not in attackAnim:
+		if currentStamina >= 60:  # Ensure the player has enough stamina
+			currentStamina -= 60
+			rotationSpeed = 0
 			$blockbench_export/AnimationPlayer.play("dodge")  # Play dodge animation
 			Global.dodgeCooldown = 45  # Reset dodge cooldown
-
-
-		
-	# Smooth dodging
-	if Global.isDodging:
-		Global.dashStartTime += delta
-		if Global.dashStartTime < Global.dashDuration:
-			var dashProgress = Global.dashStartTime / Global.dashDuration
-			if Global.dashboost > 0:
-				velocity.x = lerp(velocity.x, Global.dashDirection.x * Global.dogdeSpeed, dashProgress)
-				velocity.z = lerp(velocity.z, Global.dashDirection.z * Global.dogdeSpeed, dashProgress)
-				Global.Iframes = 2
-			else:
-				velocity.x = lerp(velocity.x, Global.dashDirection.x * Global.SPEED * 0.25, dashProgress)
-				velocity.z = lerp(velocity.z, Global.dashDirection.z * Global.SPEED * 0.25, dashProgress)
-				Global.Iframes = 2
-		else:
-			Global.isDodging = false
 
 #-----------------------------------------------------------------------------------------------------#
 
 
 func on_playerTakeDamage(damageTaken):
-	if Global.Iframes < 1 and !Global.playerIsDying and parryTimer < 1:
+	if !blockbench_export.invulnerable and !Global.playerIsDying and !blockbench_export.parrying:
 		currentHealth -= damageTaken
 		$blockbench_export/AnimationPlayer.stop()
 		$blockbench_export/AnimationPlayer.play("hurt")
 		velocity.z = 0
 		velocity.x = 0
 		print("Player hit! Health remaining: " + str(currentHealth))
-		Global.Iframes = 10
 
 		if currentHealth <= 0:
 			Global.playerIsDying = true
@@ -267,7 +245,7 @@ func on_playerTakeDamage(damageTaken):
 			$blockbench_export/AnimationPlayer.play("death")
 			animation_player.play("deathScreen")
 			sensitivity = 0
-	elif parryTimer > 1:
+	elif blockbench_export.parrying:
 		print("Parry yiiiiipppppppppppppppiiiiiiiiiiiiiii")
 
 #-----------------------------------------------------------------------------------------------------#
@@ -310,7 +288,8 @@ func _on_sword_hit_area(area):
 func _on_skill_tree_stamina_up():
 	Global.maxStamina *= 1.1
 	staminaLevel += 1
-	currentStamina.max_value = Global.maxStamina
+	staminabar.max_value = Global.maxStamina
+	backStaminabar.max_value = Global.maxStamina
 	print("Stamina up")
 
 
@@ -319,7 +298,6 @@ func _on_skill_tree_health_up():
 	currentHealth = Global.maxHealth
 	currentHealth += currentHealth.max_value/10 
 	print(currentHealth)
-	print(healthbar.max_value)
 
 
 func fixCamera():

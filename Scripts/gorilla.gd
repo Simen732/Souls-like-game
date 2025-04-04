@@ -9,7 +9,8 @@ const Rock = preload("res://scenes/gorillaRock.tscn")
 @onready var handLboom = $Node/root/body/chest/armRight/elbowRight/handRight/Area3D3
 @onready var handRboom = $Node/root/body/chest/armLeft/elbowLeft/handLeft/Area3D3
 @onready var bigBoom = $Node/Area3D3
-@onready var boss_healthbar = $"../CharacterBody3D/BossHealthbar"
+@onready var bossHealthbar = $"../CharacterBody3D/BossHealthbar"
+@onready var backBossHealthbar = $"../CharacterBody3D/BackBossHealthbar"
 @onready var hitbox = $Node/root/body/hitBox/GorillaHitbox
 @onready var hitArea = $Node/root/body/hitBox
 
@@ -65,37 +66,46 @@ func _physics_process(delta):
 		aggro = true
 		Global.isFighting = true
 		music.playing = true
-		boss_healthbar.max_value = Health
-		boss_healthbar.value = boss_healthbar.max_value
-		boss_healthbar.visible = true
-		boss_healthbar.value = Health
+		backBossHealthbar.max_value = Health
+		bossHealthbar.max_value = Health
+		backBossHealthbar.value = backBossHealthbar.max_value
+		bossHealthbar.value = backBossHealthbar.max_value
+		$"../CharacterBody3D/BossHealthbar/RichTextLabel".clear
+		$"../CharacterBody3D/BossHealthbar/RichTextLabel".add_text("Robert, the Rampaging Gorilla")
+		backBossHealthbar.visible = true
+		bossHealthbar.visible = true
+		backBossHealthbar.value = Health
 		animation_player.play("walk")
 
 	if aggro:
-		if boss_healthbar.value > Health:
-			boss_healthbar.value -= boss_healthbar.max_value/100
-		if boss_healthbar.value < Health:
-			boss_healthbar.value += boss_healthbar.max_value/100
+		bossHealthbar.value = Health
+		if backBossHealthbar.value > Health:
+			backBossHealthbar.value -= backBossHealthbar.max_value/100
+		if backBossHealthbar.value < Health:
+			backBossHealthbar.value += backBossHealthbar.max_value/100
 		if typeof(Global.enemy_lock_on_position) == TYPE_VECTOR3:
 			move_towards_player(delta)
 		handle_attack(delta)
 		if self.global_position.distance_to(Global.player_position) > aggro_range:
 			aggro = false
-			Health = boss_healthbar.max_value
+			Health = bossHealthbar.max_value
 			Global.isFighting = false
 			music.playing = false
-			boss_healthbar.visible = false
+			backBossHealthbar.visible = false
+			bossHealthbar.visible = false
 			animation_player.stop
 			animation_player.play("idle")
 
 
 func on_restart():
 	aggro = false
-	Health = boss_healthbar.max_value
-	boss_healthbar.value = Health
+	Health = bossHealthbar.max_value
+	backBossHealthbar.value = Health
+	bossHealthbar.value = Health
 	Global.isFighting = false
 	music.playing = false
-	boss_healthbar.visible = false
+	backBossHealthbar.visible = false
+	bossHealthbar.visible = false
 	animation_player.stop()	
 	animation_player.play("idle")
 	jump_attack_timer = randi_range(480, 720)
@@ -200,7 +210,8 @@ func on_playerDealDamage(area):
 		Health -= Global.weaponDamage
 		print("Robert hit! Health remaining: " + str(Health))
 		if Health <= 0:
-			boss_healthbar.visible = false
+			backBossHealthbar.visible = false
+			bossHealthbar.visible = false
 			hitbox.disabled = true
 			aggro = false
 			Global.isFighting = false

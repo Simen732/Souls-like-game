@@ -6,7 +6,6 @@ signal FixMouse
 
 func _on_play_pressed():
 	emit_signal("FixMouse")
-	Global.Iframes = 60
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 
